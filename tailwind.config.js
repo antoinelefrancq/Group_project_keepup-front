@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'home': "url('/src/assets/photo_acceuil.svg')",
+        'home': "url('/src/assets/photo_accueil.svg')",
       },
       backgroundSize: {
         'auto': 'auto',
@@ -33,7 +33,7 @@ module.exports = {
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
-    },
+    }
   },
   plugins: [],
 }
