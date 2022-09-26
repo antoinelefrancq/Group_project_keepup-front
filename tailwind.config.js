@@ -7,6 +7,14 @@ module.exports = {
     extend: {
       backgroundImage: {
         'home': "url('/src/assets/photo_acceuil.svg')",
+      },
+      backgroundSize: {
+        'auto': 'auto',
+        'cover': 'cover',
+        'contain': 'contain',
+        '50%': '50%',
+        '80%': '80%',
+        '16': '4rem',
       }
     },
     screens: {
@@ -20,6 +28,7 @@ module.exports = {
       'red': '#F22259',
       'orange': '#F25C05',
       'white': '#F2EFEB',
+      'black': 'rgb(0 0 0)',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
