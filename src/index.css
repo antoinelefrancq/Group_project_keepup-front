@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body{
+        @apply bg-pink-500
+    }
+}
+
+@layer components{
+    .signup{
+        @apply bg-whiteCustom;
+        margin:12px;
+        border-radius:10px;
+        width:calc(100% - 24px);
+    }
+
+    .signup-p{
+        font-size:20px;
+        font-weight:400px;
+        line-height:24px;
+        text-align:right;
+        @apply text-blueCustom;
+    }
+
+    .signup-title{
+        font-size:24px;
+        line-height: 28,8px;
+        text-align:right;
+        @apply text-blueCustom;
+        font-weight:400px;
+    }
+
+}
