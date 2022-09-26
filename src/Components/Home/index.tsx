@@ -1,11 +1,8 @@
+
 function Home() {
     return (
-        <div>
-            <div className="border-black">Keep'Up </div>
-        <div>
-            <img src="./img/illustration_suscribe.svg" />
-            <img src='./img/photo_acceuil.svg' />
-        </div> 
+        <div className="bg-cover bg-no-repeat bg-center bg-home w-screen min-h-screen">
+
         </div>
     );
 }
