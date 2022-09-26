@@ -1,7 +1,7 @@
 import Header from '../Globals/Header';
 import InputElement from '../Globals/Input';
 
-function Signup() {
+const Signup:React.FC = () => {
   return (
     <>
       <div>Signup</div>
@@ -9,11 +9,14 @@ function Signup() {
         <h1 className='text-blueCustom signup-title '>
                 C’est partie ! Commence d’abord par te créer un compte 
         </h1>
-        <form className='flex flex-col'>
+        <form className='flex flex-col items-end'>
           <InputElement />
           <InputElement />
           <InputElement />
           <InputElement />
+          <p className='signup-p signup-p-birth'>
+            Date de naissance
+          </p>
           <fieldset className='flex flex-row'>
             <InputElement />
             <InputElement />
@@ -53,8 +56,8 @@ function Signup() {
             <select>
               <option value="first">first</option>
             </select>
-            <button type='submit'>
-                mon bouton
+            <button type='submit' className='border border-blueCustom rounded-full w-9 h-9'>
+                +
             </button>
           </form>
           <p className='signup-p'>Peux-tu nous en dire plus ?</p>
@@ -64,6 +67,6 @@ function Signup() {
       </section>
     </>
   );
-}
+};
 
 export default Signup;
