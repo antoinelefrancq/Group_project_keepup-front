@@ -7,6 +7,9 @@ module.exports = {
     extend: {
       backgroundImage: {
         'home': "url('/src/assets/photo_accueil.svg')",
+        'vector': "url('/src/assets/Vector.svg')",
+        'arrow': "url('/src/assets/Arrow.svg')",
+        'rectangle': "url('/src/assets/Rectangle.svg')",
       },
       backgroundSize: {
         'auto': 'auto',
@@ -31,8 +34,7 @@ module.exports = {
       'black': 'rgb(0 0 0)',
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
+      pangram: ['PANGRAM', 'sans-serif'],
     }
   },
   plugins: [],
