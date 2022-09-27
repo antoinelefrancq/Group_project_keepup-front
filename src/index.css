@@ -19,3 +19,78 @@
         @apply m-0 p-0
     }
 }
+@layer base {
+    main{
+        background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
+        
+    }
+}
+
+@layer components{
+    .root{
+        overflow:hidden;
+        background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
+        height:100vh
+    }
+    .signup{
+        @apply bg-whiteCustom;
+        border-radius:10px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        height:80vh;
+        padding: 9px;
+    }
+
+    .signup-p{
+        font-size:20px;
+        font-weight:400px;
+        line-height:24px;
+        text-align:right;
+        @apply text-blueCustom;
+        letter-spacing:-0.25px
+    }
+
+    .signup-p-birth{
+        font-size:15px;
+        line-height:18px;
+
+    }
+
+    .signup-title{
+        font-size:24px;
+        line-height: 28,8px;
+        text-align:right;
+        @apply text-blueCustom;
+        font-weight:400px;
+        margin: 14px 0 35px; 
+    }
+
+    .textInput{
+        height:36px;
+        width:85%;
+        radius:3px;
+        background-color: #E9E9E9;
+        margin-bottom: 10px;
+        text-align:right;
+        color: #A5A5A5;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .borderCustom{
+        @apply border-blueCustom rounded-full border w-10 h-10;
+        font-size: 2rem;
+        text-align:center;
+        margin:2rem;
+        padding:2px;
+        box-sizing: content-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .tag{
+        @apply w-[140px] h-[40px] bg-blueCustom rounded-full text-white flex justify-center items-center;
+    }
+}

@@ -9,15 +9,15 @@ const App = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <main className='p-[12px]'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
-      </div>
+      </main>
     </>
   );
-}
+};
 
 export default App;
