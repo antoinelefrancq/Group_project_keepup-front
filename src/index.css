@@ -1,7 +1,24 @@
+@import-normalize;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: "PANGRAM";
+    src: url("../public/fonts/PPPangramSansRounded-Semibold.otf");
+}
+
+@layer base{
+    html{
+        @apply w-screen h-screen
+    }
+    body{
+        @apply w-full h-full
+    }
+    .root{
+        @apply m-0 p-0
+    }
+}
 @layer base {
     main{
         background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
