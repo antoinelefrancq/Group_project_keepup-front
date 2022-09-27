@@ -4,7 +4,7 @@ import InputElement from '../Globals/Input';
 const Signup:React.FC = () => {
   return (
     <>
-      <div>Signup</div>
+
       <section className="signup flex flex-col">
         <h1 className='text-blueCustom signup-title '>
                 C’est partie ! Commence d’abord par te créer un compte 
@@ -44,20 +44,22 @@ const Signup:React.FC = () => {
           <p className='signup-p'>
             Quels sont les sports que tu pratiques ?
           </p>
-          <div className='flex flex-row'>
-            <p>musculation</p>
-            <p>débutant</p>
-            <button>delete</button>
+          <div className='flex flex-row w-full justify-end'>
+            <div className='tag'><p>Musculation</p></div>
+            <div className='tag mx-1 m'><p>Débutant</p></div>            
+            <button type='submit' className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'>
+              <img src="./img/Vector_red.svg" alt="+" />
+            </button>
           </div>
-          <form className='flex flex-row'>
-            <select>
+          <form className='flex flex-row w-full justify-end'>
+            <select className='textInput w-1/3'>
               <option value="first">first</option>
             </select>
-            <select>
+            <select className='textInput mx-2 w-1/3'>
               <option value="first">first</option>
             </select>
-            <button type='submit' className='border border-blueCustom rounded-full w-9 h-9'>
-                +
+            <button type='submit' className='flex border-[1.8px] justify-center items-center border-blueCustom rounded-full w-9 h-9 leading-9'>
+              <img src="./img/Vector.svg" alt="+" />
             </button>
           </form>
           <p className='signup-p'>Peux-tu nous en dire plus ?</p>

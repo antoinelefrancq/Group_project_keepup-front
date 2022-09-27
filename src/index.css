@@ -5,23 +5,23 @@
 @layer base {
     main{
         background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
-        height:90vh
+        
     }
 }
 
 @layer components{
     .root{
-        overflow:hidden
+        overflow:hidden;
+        background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
+        height:100vh
     }
     .signup{
         @apply bg-whiteCustom;
-        margin:12px;
         border-radius:10px;
-        width:calc(100% - 24px);
         overflow-y:auto;
         overflow-x:hidden;
         height:80vh;
-        padding:0 9px;
+        padding: 9px;
     }
 
     .signup-p{
@@ -30,6 +30,7 @@
         line-height:24px;
         text-align:right;
         @apply text-blueCustom;
+        letter-spacing:-0.25px
     }
 
     .signup-p-birth{
@@ -61,9 +62,18 @@
         line-height: 24px;
     }
 
-    .addSport{
-        @apply rounded-full;
-        @apply border-blueCustom;
-
+    .borderCustom{
+        @apply border-blueCustom rounded-full border w-10 h-10;
+        font-size: 2rem;
+        text-align:center;
+        margin:2rem;
+        padding:2px;
+        box-sizing: content-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .tag{
+        @apply w-[140px] h-[40px] bg-blueCustom rounded-full text-white flex justify-center items-center;
     }
 }

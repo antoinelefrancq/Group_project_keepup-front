@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <div>Header</div>
+    <div className="h-[20px] m-5">Header</div>
   );
 }
 
