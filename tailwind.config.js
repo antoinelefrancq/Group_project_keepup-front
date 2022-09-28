@@ -4,14 +4,13 @@ module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
   ],
-<<<<<<< HEAD
   theme: {
     extend: {
       backgroundImage: {
-        'home': "url('/src/assets/photo_accueil.svg')",
-        'vector': "url('/src/assets/Vector.svg')",
-        'arrow': "url('/src/assets/Arrow.svg')",
-        'rectangle': "url('/src/assets/Rectangle.svg')",
+        'home': 'url(\'/src/assets/photo_accueil.svg\')',
+        'vector': 'url(\'/src/assets/Vector.svg\')',
+        'arrow': 'url(\'/src/assets/Arrow.svg\')',
+        'rectangle': 'url(\'/src/assets/Rectangle.svg\')',
       },
       backgroundSize: {
         'auto': 'auto',
@@ -34,21 +33,14 @@ module.exports = {
       'orange': '#F25C05',
       'white': '#F2EFEB',
       'black': 'rgb(0 0 0)',
+      'blueCustom':'#0a6abf',
+      'pinkCustom': '#f22259',
+      'whiteCustom':'#f2efeb',
+      'brownCustom': '#f25c05',
     },
     fontFamily: {
       pangram: ['PANGRAM', 'sans-serif'],
-    }
-=======
-  theme: {    
-    extend: {
-      colors:{
-        'blueCustom':'#0a6abf',
-        'pinkCustom': '#f22259',
-        'whiteCustom':'#f2efeb',
-        'brownCustom': '#f25c05',
-      },
     },
->>>>>>> develop
+    plugins: [],
   },
-  plugins: [],
 };

@@ -5,6 +5,7 @@ function Events() {
     <div className="flex flex-col gap-5 absolute -top-28">
       <Event />
       <Event />
+      <Event />
     </div>
   );
 }
