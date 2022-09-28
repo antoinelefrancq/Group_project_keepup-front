@@ -5,7 +5,7 @@ import InputText from '../Globals/Input/Text';
 
 //Typescript interface
 interface sportNode{
-  sport:string,
+  sportName:string,
   level:string
 }
 type sportArray = sportNode[];
@@ -17,21 +17,29 @@ const Signup:React.FC = () => {
   const [email, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [phoneNumber, setPhone] = useState<number|null>(null);
-  const [birthDate, setDate] = useState<Date>(new Date(11/11/1111));
+  const [birthDate, setDate] = useState<Date>(new Date());
   const [gender, setGender] = useState<'male'|'female'|'non-binary'>('non-binary');
   const [city, setCity] = useState<string>('');
   const [zip, setZip] = useState<number|null>(null);
   const [disability, setDisability] = useState<boolean>(false);
-  const [sports, setSports] = useState<sportArray>([{sport:'', level:''}]);
+  const [sports, setSports] = useState<sportArray>([{sportName:'musculation', level:'débutant'},{sportName:'badminton', level:'expert'}]);
   const [moreInformations, setInformations] = useState<string>('');
 
+  //fonction pour add un sport
+  const addSport = (sportId:string, leveId:string) =>{
+    console.log('hello');
+  };
+  //fonction pour delete un sport
+  const deleteSport = (sportId:string) => {
+    setSports(sports.filter((sport)=>sport.sportName!==sportId));
+  };
   //Components
   return (
     <>
 
       <section className="signup flex flex-col">
         <h1 className='text-blueCustom signup-title '>
-                C’est partie ! Commence d’abord par te créer un compte 
+                C’est parti ! Commence d’abord par te créer un compte 
         </h1>
         <form className='flex flex-col items-end'>
           <InputText value={name} name='text' placeholder='Nom complet' changeField={setName} />
@@ -41,49 +49,45 @@ const Signup:React.FC = () => {
           <p className='signup-p signup-p-birth'>
             Date de naissance
           </p>
-          <fieldset className='flex flex-row'>
-            <InputText value={0} name='number' placeholder='jour' changeField={setDate} />
-            <InputText value={0} name='number' placeholder='mois' changeField={setDate} />
-            <InputText value={0} name='number' placeholder='année' changeField={setDate} />
-          </fieldset>
-          <fieldset className='flex flex-row'>
-            <InputRadio value={'t'} name='radio' id='male' />
-            <label htmlFor='male'>
+          <InputText value={birthDate} name='date' changeField={setDate} />
+          <fieldset className='flex flex-row justify-around w-full'>
+            <div className='flex flex-row items-center text-sm text-blueCustom'>
+              <InputText value='male' name='radio' id='male' radioState={gender} changeField={setGender}/>
+              <label className='whitespace-nowrap mb-3 ml-1' htmlFor='male'>
               Homme
-            </label>
-            <InputRadio value={'f'} name='radio' id='female' />
-            <label htmlFor='female'>
-              femme
-            </label>
-            <InputRadio value={'f'} name='radio' id='non-binary' />
-            <label htmlFor='non-binary'>
-              non binaire
-            </label>
+              </label>
+            </div>
+            <div className=' flex flex-row items-center text-sm text-blueCustom'>
+              <InputText value='female' name='radio' id='female' radioState={gender} changeField={setGender} />
+              <label className='whitespace-nowrap mb-3 ml-1' htmlFor='female'>
+              Femme
+              </label>
+            </div>
+            <div className=' flex flex-row items-center text-sm text-blueCustom'>
+              <InputText value='non-binary' name='radio' id='non-binary' radioState={gender} changeField={setGender} />
+              <label className='whitespace-nowrap mb-3 ml-1' htmlFor='non-binary'>
+              Non Binaire
+              </label>
+            </div>            
           </fieldset>
           <InputText value={city} name='text' placeholder='Ville' changeField={setCity}/>
           <InputText value={zip} name='number' placeholder='Code postal' changeField={setZip}/>
-          <p className='signup-p'>As-tu un ou plusieurs handicap(s) ?</p>
-          <fieldset className='flex flex-row'>
-            <InputRadio value='t' name='radio' id='yes' />
-            <label htmlFor='yes'>
-              oui
-            </label>
-            <InputRadio value='f' name='radio' id='no'/>
-            <label htmlFor='no'>
-              non
-            </label>
-          </fieldset>
           <p className='signup-p'>
             Quels sont les sports que tu pratiques ?
           </p>
-          <div className='flex flex-row w-full justify-end'>
-            <div className='tag'><p>Musculation</p></div>
-            <div className='tag mx-1 m'><p>Débutant</p></div>            
-            <button type='submit' className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'>
-              <img src="./img/Vector_red.svg" alt="+" />
-            </button>
-          </div>
-          <form className='flex flex-row w-full justify-end'>
+          <ul>
+            {sports.map((sport)=>(
+              <li key={sport?.sportName} className='flex flex-row w-full justify-end mt-1'>
+                <div className='tag'><p>{sport?.sportName}</p></div>
+                <div className='tag mx-1 m'><p>{sport?.level}</p></div>
+                <button type='button' id={sport.sportName} 
+                  onClick={(event)=>(deleteSport(event.currentTarget.id))}
+                  className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'>
+                  <img src="./img/Vector_red.svg" alt="+" />
+                </button>
+              </li>))}
+          </ul>
+          <form className='flex flex-row w-full justify-end my-2'>
             <select className='textInput w-1/3'>
               <option value="first">first</option>
             </select>
@@ -95,9 +99,13 @@ const Signup:React.FC = () => {
             </button>
           </form>
           <p className='signup-p'>Peux-tu nous en dire plus ?</p>
-          <textarea>j'ai un gros bide</textarea>
-          <button type='submit'>Tout est bon !</button>
+          <textarea className='placeholder-greyPlaceholder textInput text-sm my-1' placeholder="Commentaires..." onChange={(event)=>{setInformations(event.target.value);}}>{moreInformations}</textarea>
+          <button type='submit' className='tag tag-button self-center my-8'>Tout est bon !</button> 
         </form>
+        <div className=''>
+          <img src='./img/Frame_8.svg' alt="homme_en_sport"/>
+        </div>
+        
       </section>
     </>
   );
