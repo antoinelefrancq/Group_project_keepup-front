@@ -47,6 +47,15 @@
         height:80vh;
         padding: 9px;
     }
+    .login{
+        @apply placeholder-greyPlaceholder;
+        background-color:#fff;
+        border-radius:10px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        height: 100vh;
+        padding: 9px;
+    }
 
     .signup-p{
         font-size:20px;
