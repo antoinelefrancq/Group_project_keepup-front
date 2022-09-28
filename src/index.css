@@ -15,12 +15,10 @@
     body{
         @apply w-full h-full
     }
-
     textarea{
         resize:none;
         width:85%;
     }
-
     .root{
         @apply m-0 p-0
     }
@@ -32,6 +30,7 @@
 @layer base {
     main{
         background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
+        height: 82.6vh;
     }
 }
 
@@ -48,6 +47,15 @@
         overflow-y:auto;
         overflow-x:hidden;
         height:80vh;
+        padding: 9px;
+    }
+    .login{
+        @apply placeholder-greyPlaceholder;
+        background-color:#fff;
+        border-radius:10px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        height: 60vh;
         padding: 9px;
     }
 
