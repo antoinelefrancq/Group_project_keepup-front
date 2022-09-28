@@ -14,7 +14,7 @@ function Home() {
       </section> 
       <section className="flex flex-col text-center pt-40 pb-24">
         <Link to="/signup"><button type="button" className="rounded-full py-3 px-8 text-2xl bg-gradient-to-b from-red to-blue hover:from-pink-500 hover:to-yellow-500 text-white">Lance toi</button></Link>
-        <Link to="/login" className="pt-3 text-white">déjà inscrit ?</Link>
+        <Link to="/login" className="pt-3 text-white hover:underline">déjà inscrit ?</Link>
       </section>
       <div className="flex align-center justify-center sm:hidden">
         <p className="pt-48 pl-6 pr-6 text-2xl font-pangram text-white absolute">C'est super simple tu vas voir,</p>
