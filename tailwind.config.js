@@ -40,10 +40,12 @@ module.exports = {
       'pinkCustom': '#f22259',
       'whiteCustom':'#f2efeb',
       'brownCustom': '#f25c05',
+      'transparent': 'rgba(0,0,0,0)',
       'greyPlaceholder':'#A5A5A5'
     },
     fontFamily: {
       pangram: ['PANGRAM', 'sans-serif'],
     },
-  }
+    plugins: [],
+  },
 };
