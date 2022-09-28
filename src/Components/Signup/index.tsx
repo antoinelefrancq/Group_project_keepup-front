@@ -5,7 +5,7 @@ import InputText from '../Globals/Input/Text';
 
 //Typescript interface
 interface sportNode{
-  sport:string,
+  sportName:string,
   level:string
 }
 type sportArray = sportNode[];
@@ -17,14 +17,22 @@ const Signup:React.FC = () => {
   const [email, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [phoneNumber, setPhone] = useState<number|null>(null);
-  const [birthDate, setDate] = useState<Date>(new Date(11/11/1111));
+  const [birthDate, setDate] = useState<Date>(new Date());
   const [gender, setGender] = useState<'male'|'female'|'non-binary'>('non-binary');
   const [city, setCity] = useState<string>('');
   const [zip, setZip] = useState<number|null>(null);
   const [disability, setDisability] = useState<boolean>(false);
-  const [sports, setSports] = useState<sportArray>([{sport:'', level:''}]);
-  const [moreInformations, setInformations] = useState<string>('');
+  const [sports, setSports] = useState<sportArray>([{sportName:'musculation', level:'débutant'},{sportName:'badminton', level:'expert'}]);
+  const [moreInformations, setInformations] = useState<string>('J\'ai un gros ventre...');
 
+  //fonction pour add un sport
+  const addSport = (sportId:string, leveId:string) =>{
+    console.log('hello');
+  };
+  //fonction pour delete un sport
+  const deleteSport = (sportId:string) => {
+    setSports(sports.filter((sport)=>sport.sportName!==sportId));
+  };
   //Components
   return (
     <>
@@ -41,21 +49,17 @@ const Signup:React.FC = () => {
           <p className='signup-p signup-p-birth'>
             Date de naissance
           </p>
+          <InputText value={birthDate} name='date' changeField={setDate} />
           <fieldset className='flex flex-row'>
-            <InputText value={0} name='number' placeholder='jour' changeField={setDate} />
-            <InputText value={0} name='number' placeholder='mois' changeField={setDate} />
-            <InputText value={0} name='number' placeholder='année' changeField={setDate} />
-          </fieldset>
-          <fieldset className='flex flex-row'>
-            <InputRadio value={'t'} name='radio' id='male' />
+            <InputText value='male' name='radio' id='male' radioState={gender} changeField={setGender}/>
             <label htmlFor='male'>
               Homme
             </label>
-            <InputRadio value={'f'} name='radio' id='female' />
+            <InputText value='female' name='radio' id='female' radioState={gender} changeField={setGender} />
             <label htmlFor='female'>
               femme
             </label>
-            <InputRadio value={'f'} name='radio' id='non-binary' />
+            <InputText value='non-binary' name='radio' id='non-binary' radioState={gender} changeField={setGender} />
             <label htmlFor='non-binary'>
               non binaire
             </label>
@@ -64,11 +68,11 @@ const Signup:React.FC = () => {
           <InputText value={zip} name='number' placeholder='Code postal' changeField={setZip}/>
           <p className='signup-p'>As-tu un ou plusieurs handicap(s) ?</p>
           <fieldset className='flex flex-row'>
-            <InputRadio value='t' name='radio' id='yes' />
+            <InputText value='true' name='radio' id='yes' radioState={disability} changeField={setDisability} />
             <label htmlFor='yes'>
               oui
             </label>
-            <InputRadio value='f' name='radio' id='no'/>
+            <InputText value='false' name='radio' id='no' radioState={disability} changeField={setDisability} />
             <label htmlFor='no'>
               non
             </label>
@@ -76,13 +80,18 @@ const Signup:React.FC = () => {
           <p className='signup-p'>
             Quels sont les sports que tu pratiques ?
           </p>
-          <div className='flex flex-row w-full justify-end'>
-            <div className='tag'><p>Musculation</p></div>
-            <div className='tag mx-1 m'><p>Débutant</p></div>            
-            <button type='submit' className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'>
-              <img src="./img/Vector_red.svg" alt="+" />
-            </button>
-          </div>
+          <ul>
+            {sports.map((sport)=>(
+              <li key={sport?.sportName} className='flex flex-row w-full justify-end mt-1'>
+                <div className='tag'><p>{sport?.sportName}</p></div>
+                <div className='tag mx-1 m'><p>{sport?.level}</p></div>
+                <button type='button' id={sport.sportName} 
+                  onClick={(event)=>(deleteSport(event.currentTarget.id))}
+                  className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'>
+                  <img src="./img/Vector_red.svg" alt="+" />
+                </button>
+              </li>))}
+          </ul>
           <form className='flex flex-row w-full justify-end'>
             <select className='textInput w-1/3'>
               <option value="first">first</option>
@@ -95,7 +104,7 @@ const Signup:React.FC = () => {
             </button>
           </form>
           <p className='signup-p'>Peux-tu nous en dire plus ?</p>
-          <textarea>j'ai un gros bide</textarea>
+          <textarea onChange={(event)=>{setInformations(event.target.value);}}>{moreInformations}</textarea>
           <button type='submit'>Tout est bon !</button>
         </form>
       </section>

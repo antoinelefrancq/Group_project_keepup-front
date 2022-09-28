@@ -15,6 +15,12 @@
     body{
         @apply w-full h-full
     }
+
+    textarea{
+        resize:none;
+        width:85%;
+    }
+
     .root{
         @apply m-0 p-0
     }
@@ -33,7 +39,8 @@
         height:100vh
     }
     .signup{
-        @apply bg-whiteCustom;
+        @apply placeholder-greyPlaceholder;
+        background-color:#fff;
         border-radius:10px;
         overflow-y:auto;
         overflow-x:hidden;
@@ -46,7 +53,7 @@
         font-weight:400px;
         line-height:24px;
         text-align:right;
-        @apply text-blueCustom;
+        @apply text-blueCustom pr-5;
         letter-spacing:-0.25px
     }
 
@@ -66,13 +73,13 @@
     }
 
     .textInput{
+        @apply text-blueCustom;
         height:36px;
         width:85%;
         radius:3px;
         background-color: #E9E9E9;
         margin-bottom: 10px;
         text-align:right;
-        color: #A5A5A5;
         font-style: normal;
         font-weight: 400;
         font-size: 20px;

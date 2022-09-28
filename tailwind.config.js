@@ -1,15 +1,16 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
       backgroundImage: {
-        'home': "url('/src/assets/photo_accueil.svg')",
-        'vector': "url('/src/assets/Vector.svg')",
-        'arrow': "url('/src/assets/Arrow.svg')",
-        'rectangle': "url('/src/assets/Rectangle.svg')",
+        'home': 'url(\'/src/assets/photo_accueil.svg\')',
+        'vector': 'url(\'/src/assets/Vector.svg\')',
+        'arrow': 'url(\'/src/assets/Arrow.svg\')',
+        'rectangle': 'url(\'/src/assets/Rectangle.svg\')',
       },
       backgroundSize: {
         'auto': 'auto',
@@ -35,10 +36,11 @@ module.exports = {
       'blueCustom':'#0a6abf',
       'pinkCustom': '#f22259',
       'whiteCustom':'#f2efeb',
-      'brownCustom': '#f25c05'
+      'brownCustom': '#f25c05',
+      'greyPlaceholder':'#A5A5A5'
     },
     fontFamily: {
       pangram: ['PANGRAM', 'sans-serif'],
     },
   }
-}
+};
