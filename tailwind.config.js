@@ -22,7 +22,7 @@ module.exports = {
       }
     },
     screens: {
-      sm: '480px',
+      sm: '380px',
       md: '768px',
       lg: '976px',
       xl: '1440px',
@@ -37,6 +37,7 @@ module.exports = {
       'pinkCustom': '#f22259',
       'whiteCustom':'#f2efeb',
       'brownCustom': '#f25c05',
+      'transparent': 'rgba(0,0,0,0)',
     },
     fontFamily: {
       pangram: ['PANGRAM', 'sans-serif'],

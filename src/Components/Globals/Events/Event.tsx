@@ -1,7 +1,7 @@
 function Event() {
   return (
     <div className="bg-white rounded-lg w-full p-0.5 h-auto flex">
-      <div className="bg-blue rounded-l-lg flex">
+      <div className="bg-blue rounded-l-lg flex items-center">
         <div className="flex flex-col align-center justify-center w-[66px]">
           <div className="text-white border-b-2 w-full text-center text-[15px]">Date</div>
           <div className="text-white text-center text-[15px]">Sport Logo</div>
