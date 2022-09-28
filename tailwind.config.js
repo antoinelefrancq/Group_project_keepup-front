@@ -19,6 +19,9 @@ module.exports = {
         '50%': '50%',
         '80%': '80%',
         '16': '4rem',
+      },
+      boxShadow: {
+        'ButtonBox': '0 4px 4px rgba(0, 0, 0, 0.25)',
       }
     },
     screens: {
@@ -38,6 +41,7 @@ module.exports = {
       'whiteCustom':'#f2efeb',
       'brownCustom': '#f25c05',
       'transparent': 'rgba(0,0,0,0)',
+      'greyPlaceholder':'#A5A5A5'
     },
     fontFamily: {
       pangram: ['PANGRAM', 'sans-serif'],

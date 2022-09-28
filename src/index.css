@@ -15,14 +15,22 @@
     body{
         @apply w-full h-full
     }
+    textarea{
+        resize:none;
+        width:85%;
+    }
     .root{
         @apply m-0 p-0
+    }
+
+    label{
+       @apply inline-block box-content;
     }
 }
 @layer base {
     main{
         background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
-        
+        height: 82.6vh;
     }
 }
 
@@ -33,11 +41,21 @@
         height:100vh
     }
     .signup{
-        @apply bg-whiteCustom;
+        @apply placeholder-greyPlaceholder;
+        background-color:#fff;
         border-radius:10px;
         overflow-y:auto;
         overflow-x:hidden;
         height:80vh;
+        padding: 9px;
+    }
+    .login{
+        @apply placeholder-greyPlaceholder;
+        background-color:#fff;
+        border-radius:10px;
+        overflow-y:auto;
+        overflow-x:hidden;
+        height: 60vh;
         padding: 9px;
     }
 
@@ -66,17 +84,18 @@
     }
 
     .textInput{
+        @apply text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder;
         height:36px;
         width:85%;
         radius:3px;
         background-color: #E9E9E9;
         margin-bottom: 10px;
         text-align:right;
-        color: #A5A5A5;
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
         line-height: 24px;
+
     }
 
     .borderCustom{
@@ -93,4 +112,18 @@
     .tag{
         @apply w-[140px] h-[40px] bg-blueCustom rounded-full text-white flex justify-center items-center;
     }
+    .tag-button{
+        background: linear-gradient(176.59deg, #F22259 -83.57%, #0A6ABF 258.62%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+    }
+    .date::-webkit-calendar-picker-indicator{
+       filter:invert(64.7%)
+    }
+    .date{
+        @apply placeholder-greyPlaceholder;
+    }
+}
+
+.test{
+    color:#0a69bd
 }
