@@ -4,8 +4,7 @@ import Events from '../Globals/Events';
 
 function Home() {
   return (
-
-    <div className="bg-[length:1300px_650px] sm:bg-cover bg-no-repeat bg-top bg-home w-screen h-screen -m-[12px] relative">
+    <div className="bg-[length:1300px_650px] bg-no-repeat bg-top bg-home w-screen h-screen -m-[12px] relative  sm:bg-cover">
       <section className="bg-opacity-20 bg-black text-white pb-6 mb-15 sm:bg-transparent sm:pt-0">
         <h3 className="text-3xl pt-7 pb-1 pl-6 font-pangram tracking-wide"><p>Besoin de</p><p>Motivation ?</p></h3>
         <div className="pl-6 text-xl font-pangram">

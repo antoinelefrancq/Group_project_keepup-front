@@ -10,6 +10,7 @@
 
 @layer base{
     html{
+        overflow-x: hidden;
         @apply w-screen h-screen
     }
     body{
