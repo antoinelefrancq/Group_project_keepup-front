@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'home': 'url(\'/src/assets/photo_accueil.svg\')',
+        'home_mobile': 'url(\'/src/assets/home_mobile.svg\')',
+        'home_desk': 'url(\'/src/assets/home_desk.svg\')',        
         'vector': 'url(\'/src/assets/Vector.svg\')',
         'arrow': 'url(\'/src/assets/Arrow.svg\')',
         'rectangle': 'url(\'/src/assets/Rectangle.svg\')',
@@ -25,6 +26,7 @@ module.exports = {
       }
     },
     screens: {
+      vsm: '380px',
       sm: '480px',
       md: '768px',
       lg: '976px',
