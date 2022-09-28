@@ -12,7 +12,7 @@ interface Props{
 const InputText:React.FC<Props> = ({name, value, placeholder, id, radioState, changeField}) => {
   console.log(value);
   return (
-    <input className='textInput' id={id?id:undefined} type={name} value={value} placeholder={placeholder} onChange={(event)=>{changeField(event.target.value);}} checked={radioState===value?true:false} />
+    <input className={name==='date'?'textInput date':'textInput'} id={id?id:undefined} type={name} value={value} placeholder={placeholder} onChange={(event)=>{changeField(event.target.value);}} checked={radioState===value?true:false} />
   ); 
 }; 
 

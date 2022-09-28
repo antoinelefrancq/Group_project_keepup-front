@@ -22,6 +22,10 @@
     .root{
         @apply m-0 p-0
     }
+
+    label{
+       @apply inline-block box-content;
+    }
 }
 @layer base {
     main{
@@ -60,7 +64,7 @@
         font-weight:400px;
         line-height:24px;
         text-align:right;
-        @apply text-blueCustom pr-5;
+        @apply text-blueCustom;
         letter-spacing:-0.25px
     }
 
@@ -80,7 +84,7 @@
     }
 
     .textInput{
-        @apply text-blueCustom;
+        @apply text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder;
         height:36px;
         width:85%;
         radius:3px;
@@ -91,6 +95,7 @@
         font-weight: 400;
         font-size: 20px;
         line-height: 24px;
+
     }
 
     .borderCustom{
@@ -107,4 +112,18 @@
     .tag{
         @apply w-[140px] h-[40px] bg-blueCustom rounded-full text-white flex justify-center items-center;
     }
+    .tag-button{
+        background: linear-gradient(176.59deg, #F22259 -83.57%, #0A6ABF 258.62%);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+    }
+    .date::-webkit-calendar-picker-indicator{
+       filter:invert(64.7%)
+    }
+    .date{
+        @apply placeholder-greyPlaceholder;
+    }
+}
+
+.test{
+    color:#0a69bd
 }
