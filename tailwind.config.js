@@ -19,6 +19,9 @@ module.exports = {
         '50%': '50%',
         '80%': '80%',
         '16': '4rem',
+      },
+      boxShadow: {
+        'ButtonBox': '0 4px 4px rgba(0, 0, 0, 0.25)',
       }
     },
     screens: {
