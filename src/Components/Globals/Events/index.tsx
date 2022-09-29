@@ -4,6 +4,9 @@ function Events() {
   return (
     <div className="flex flex-col gap-5">
       <Event />
+      <Event />
+      <Event />
+      <Event />
     </div>
   );
 }

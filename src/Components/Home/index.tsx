@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Footer from '../Globals/Footer';
-import Events from '../Globals/Events';
 import EventsExample from '../Globals/EventsExample';
 
 function Home() {
@@ -23,7 +22,7 @@ function Home() {
       <div className="bg-rectangle bg-no-repeat flex flex-col items-center gap-10 py-10 vsm:hidden">
         <EventsExample />
       </div>
-      <img src='./img/Motif.svg' alt="motif_point" className="w-screen vsm:hidden"/>
+      <img src='./img/Motif.svg' alt="motif_point" className="w-screen vsm:hidden "/>
       <Footer />
     </div>
         
