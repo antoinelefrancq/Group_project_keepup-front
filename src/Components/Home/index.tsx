@@ -12,7 +12,7 @@ function Home() {
         </div> 
       </section> 
       <section className="flex flex-col text-center pt-56 pb-24 vsm:pt-60">
-        <Link to="/signup"><button type="button" className="rounded-full py-3 px-8 text-2xl bg-gradient-to-b from-red to-blue hover:from-pink-500 hover:to-yellow-500 text-white">Lance toi</button></Link>
+        <Link to="/signup"><button type="button" className="focus:outline-none rounded-full py-3 px-8 text-2xl bg-gradient-to-b from-red to-blue hover:from-pink-500 hover:to-yellow-500 text-white">Lance toi</button></Link>
         <Link to="/login" className="pt-[11px] text-white hover:underline">déjà inscrit ?</Link>
       </section>
       <div className="flex align-center justify-center vsm:hidden">

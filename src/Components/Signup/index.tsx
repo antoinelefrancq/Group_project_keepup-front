@@ -239,10 +239,11 @@ const Signup:React.FC = () => {
             </textarea>
             <button
               type='submit'
-              className='tag tag-button self-center my-8'
+              className='tag tag-button focus:outline-blueCustom self-center my-8'
             >
               Tout est bon !
             </button> 
+
           </form>
         </div>
         <div className='flex block mx-auto flex-1'>
