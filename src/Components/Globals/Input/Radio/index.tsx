@@ -7,7 +7,6 @@ interface Props{
 }
 
 const InputRadio:React.FC<Props> = ({name, value,id}) => {
-  console.log(value);
   return (
     <input className='textInput' type={name} value={value} id={id?id:undefined} />
   ); 
