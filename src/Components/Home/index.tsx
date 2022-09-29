@@ -4,28 +4,26 @@ import Events from '../Globals/Events';
 
 function Home() {
   return (
-
-    <div className="bg-[length:1300px_650px] sm:bg-cover bg-no-repeat bg-top bg-home w-screen h-screen -m-[12px] relative">
-      <section className="bg-opacity-20 bg-black text-white pb-6 mb-15 sm:bg-transparent sm:pt-0">
-        <h3 className="text-3xl pt-7 pb-1 pl-6 font-pangram tracking-wide"><p>Besoin de</p><p>Motivation ?</p></h3>
-        <div className="pl-6 text-xl font-pangram">
-          <p>Trouve-toi le partenaire</p>
-          <p>sportif idéal to <span className="text-blue">Keep</span><span className="text-red">'Up</span> !</p>
+    <div className="bg-cover bg-no-repeat bg-top bg-home_mobile w-screen h-screen -m-[12px] relative sm:bg-home_desk">
+      <section className="bg-opacity-20 bg-black text-white pb-6 mb-15 sm:bg-transparent md:pt-48 lg:pl-36">
+        <h3 className="text-3xl pt-7 pb-1 pl-6 pr-24 font-pangram font-bold tracking-wide lg:text-5xl"><p>Besoin de Motivation ?</p></h3>
+        <div className="pl-6 pr-20 text-xl font-pangram lg:text-4xl">
+          <p>Trouve-toi le partenaire sportif idéal to <span className="text-blue">Keep</span><span className="text-red">'Up</span> !</p>
         </div> 
       </section> 
-      <section className="flex flex-col text-center pt-40 pb-24">
+      <section className="flex flex-col text-center pt-56 pb-24 vsm:pt-60">
         <Link to="/signup"><button type="button" className="rounded-full py-3 px-8 text-2xl bg-gradient-to-b from-red to-blue hover:from-pink-500 hover:to-yellow-500 text-white">Lance toi</button></Link>
-        <Link to="/login" className="pt-3 text-white">déjà inscrit ?</Link>
+        <Link to="/login" className="pt-[11px] text-white hover:underline">déjà inscrit ?</Link>
       </section>
-      <div className="flex align-center justify-center sm:hidden">
-        <p className="pt-48 pl-6 pr-6 text-2xl font-pangram text-white absolute">C'est super simple tu vas voir,</p>
+      <div className="flex align-center justify-center vsm:hidden">
+        <p className="pt-60 pl-6 pr-6 text-2xl font-pangram text-white absolute">C'est super simple tu vas voir,</p>
       </div>
-      <div className="flex align-center justify-center sm:hidden">
-        <svg width="19" height="30" viewBox="0 0 19 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce w-5 h-20 bottom-28 absolute">
+      <div className="flex align-center justify-center vsm:hidden">
+        <svg width="19" height="30" viewBox="0 0 19 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce w-5 h-20 bottom-5 absolute">
           <path fillRule="evenodd" clipRule="evenodd" d="M9.5 0.425293C9.77991 0.425293 10.0484 0.534049 10.2463 0.727637C10.4442 0.921225 10.5554 1.18379 10.5554 1.45756V25.8046L17.196 19.3075C17.3942 19.1137 17.663 19.0048 17.9433 19.0048C18.2235 19.0048 18.4923 19.1137 18.6905 19.3075C18.8887 19.5014 19 19.7643 19 20.0384C19 20.3125 18.8887 20.5754 18.6905 20.7692L10.2472 29.0274C10.1492 29.1235 10.0327 29.1998 9.9045 29.2518C9.77628 29.3039 9.63882 29.3307 9.5 29.3307C9.36118 29.3307 9.22372 29.3039 9.0955 29.2518C8.96728 29.1998 8.85081 29.1235 8.75277 29.0274L0.309512 20.7692C0.111335 20.5754 -6.60327e-09 20.3125 0 20.0384C6.60327e-09 19.7643 0.111335 19.5014 0.309512 19.3075C0.507689 19.1137 0.776476 19.0048 1.05674 19.0048C1.33701 19.0048 1.60579 19.1137 1.80397 19.3075L8.44459 25.8046V1.45756C8.44459 1.18379 8.55579 0.921225 8.75372 0.727637C8.95164 0.534049 9.22009 0.425293 9.5 0.425293Z" fill="white"/>
         </svg>
       </div>
-      <svg width="379" height="363" viewBox="0 0 379 363" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-screen sm:hidden">
+      <svg width="379" height="363" viewBox="0 0 379 363" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-screen vsm:hidden">
         <path d="M202.133 49.211C89.065 -38.6012 20.266 12.6226 0 49.211V362.541H379V77.1512C367.156 104.426 315.202 137.023 202.133 49.211Z" fill="url(#paint0_linear_12_2532)"/>
         <defs>
           <linearGradient id="paint0_linear_12_2532" x1="189.5" y1="0.725342" x2="189.5" y2="362.541" gradientUnits="userSpaceOnUse">
@@ -35,8 +33,8 @@ function Home() {
           </linearGradient>
         </defs>
       </svg>
-      <div className="relative flex flex-col items-center sm:hidden">
-        <div className="flex flex-col gap-5 absolute -top-24">
+      <div className="relative flex flex-col items-center vsm:hidden">
+        <div className="flex flex-col gap-5 absolute -top-8">
           <div className="bg-white rounded-lg w-full p-0.5 h-auto flex">
             <div className="bg-blue rounded-l-lg flex items-center">
               <div className="flex flex-col align-center justify-center w-[66px]">
