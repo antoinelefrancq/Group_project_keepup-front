@@ -36,14 +36,14 @@ const Signup:React.FC = () => {
   const [moreInformations, setInformations] = useState<string>('');
 
 
-  // useEffect(() => {
-  //   // call api via le fichier api.routes.js
-  //   fetchSignup().then((response) => {
+  useEffect(() => {
+    // call api via le fichier api.routes.js
+    fetchSignup().then((response) => {
 
-  //     console.log(response);
-  //   });
+      console.log(response);
+    });
     
-  // }, []);
+  }, []);
   
 
   // const [formData, setFormData] = useState(INITIAL_STATE);
