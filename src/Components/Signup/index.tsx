@@ -101,7 +101,7 @@ const Signup:React.FC = () => {
             </form>
             <p className='signup-p'>Peux-tu nous en dire plus ?</p>
             <textarea className='placeholder-greyPlaceholder textInput text-sm my-1' placeholder="Commentaires..." onChange={(event)=>{setInformations(event.target.value);}}>{moreInformations}</textarea>
-            <button type='submit' className='tag tag-button self-center my-8'>Tout est bon !</button> 
+            <button type='submit' className='focus:outline-none tag tag-button self-center my-8'>Tout est bon !</button> 
           </form>
         </div>
         <div className='flex block mx-auto flex-1'>
