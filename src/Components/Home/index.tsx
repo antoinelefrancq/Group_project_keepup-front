@@ -6,8 +6,8 @@ function Home() {
   return (
     <div className="bg-cover bg-no-repeat bg-top bg-home_mobile w-screen h-screen -m-[12px] relative sm:bg-home_desk">
       <section className="bg-opacity-20 bg-black text-white pb-6 mb-15 sm:bg-transparent md:pt-48 lg:pl-36">
-        <h3 className="text-3xl pt-7 pb-1 pl-6 pr-24 font-pangram tracking-wide"><p>Besoin de Motivation ?</p></h3>
-        <div className="pl-6 pr-20 text-xl font-pangram">
+        <h3 className="text-3xl pt-7 pb-1 pl-6 pr-24 font-pangram font-bold tracking-wide lg:text-5xl"><p>Besoin de Motivation ?</p></h3>
+        <div className="pl-6 pr-20 text-xl font-pangram lg:text-4xl">
           <p>Trouve-toi le partenaire sportif idéal to <span className="text-blue">Keep</span><span className="text-red">'Up</span> !</p>
         </div> 
       </section> 
