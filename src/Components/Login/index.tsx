@@ -12,7 +12,7 @@ const Login:React.FC = () => {
   //Components
   return (
     <>
-      <section className="login flex flex-col drop-shadow-2xl shadow-lg shadow-blue">
+      <section className="login flex flex-col drop-shadow-2xl shadow-lg shadow-blue block max-w-sm ">
         <h1 className='text-blueCustom signup-title flex flex-col items-center'>
                 Te Revoilà !
         </h1>
