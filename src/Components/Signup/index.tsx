@@ -243,7 +243,6 @@ const Signup:React.FC = () => {
             >
               Tout est bon !
             </button> 
-
           </form>
         </div>
         <div className='flex block mx-auto flex-1'>
