@@ -23,7 +23,6 @@ const Login:React.FC = () => {
           <Link to='/' className='text-blue hover:underline md:pb-20'>Mot de passe oublié ?</Link>
         </form>
       </section>
-     
     </>
   );
 };
