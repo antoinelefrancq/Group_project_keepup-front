@@ -10,7 +10,7 @@ interface Props{
 const InputText:React.FC<Props> = ({name, value, placeholder, changeField}) => {
   return (
     <input 
-      className='textInput'
+      className={name==='date'?'textInput date':'textInput'}
       type={name} 
       value={value} 
       placeholder={placeholder} 
