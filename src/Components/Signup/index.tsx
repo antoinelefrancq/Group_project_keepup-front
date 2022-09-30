@@ -246,7 +246,7 @@ const Signup:React.FC = () => {
 
           </form>
         </div>
-        <div className='flex block mx-auto flex-1'>
+        <div className='flex mx-auto flex-1'>
           <img src='./img/Frame_8.svg' alt="homme_en_sport"/>
         </div>       
       </section>
