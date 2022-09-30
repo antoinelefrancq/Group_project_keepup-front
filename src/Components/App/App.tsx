@@ -5,6 +5,7 @@ import Login from '../Login';
 import Signup from '../Signup';
 import Header from '../Globals/Header';
 import Myprofil from '../Myprofil';
+import Events from '../Globals/Events';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/myprofil" element={<Myprofil />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
       </main>
     </>
