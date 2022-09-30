@@ -3,22 +3,50 @@ import { useState, useEffect } from 'react';
 import Header from '../Globals/Header';
 import InputRadio from '../Globals/Input/Radio';
 import InputText from '../Globals/Input/Text';
+import InputNumber from '../Globals/Input/Number';
 import {fetchSignup} from '../../api/routes';
 import * as constant from '../../constant';
-
 
 //Typescript interface
 interface sportNode{
   sportName:string,
   level:string
 }
-type sportArray = sportNode[];
 
-// const INITIAL_STATE = {
-//   name: "",
-//   email: "",
-//   ...
-// }
+interface State{
+  name:string,
+  email:string,
+  password:string,
+  phoneNumber:string,
+  birthDate:string,
+  gender:string,
+  city:string,
+  zip:number|undefined,
+  sports:sportNode[]|[],
+  sportSelect:sportNode,
+  moreInformations:string,
+  genderValue:string[]|[],
+  sportlist:[]|{_id:string, sport:string}[],
+  levelList:[]|string[],
+}
+
+// Initial State
+const INITIAL_STATE:State = {
+  name: '',
+  email: '',
+  password:'',
+  phoneNumber:'',
+  birthDate:'',
+  gender:'non-binary',
+  city:'',
+  zip:undefined,
+  sports:[{sportName:'musculation', level:'débutant'},{sportName:'badminton', level:'expert'}],
+  sportSelect:{sportName:'',level:''},
+  moreInformations:'',
+  genderValue:[],
+  sportlist:[],
+  levelList:[],
+};
 
 //Function component
 const Signup:React.FC = () => {
@@ -26,27 +54,27 @@ const Signup:React.FC = () => {
   const [name, setName] = useState<string>('');
   const [email, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [phoneNumber, setPhone] = useState<number|null>(null);
-  const [birthDate, setDate] = useState<Date>(new Date());
-  const [gender, setGender] = useState<'male'|'female'|'non-binary'>('non-binary');
+  const [phoneNumber, setPhone] = useState<string>('');
+  const [birthDate, setDate] = useState<string>('1990-01-01');
+  const [gender, setGender] = useState<string>('non-binary');
   const [city, setCity] = useState<string>('');
-  const [zip, setZip] = useState<number|null>(null);
-  const [sports, setSports] = useState<sportArray>([{sportName:'musculation', level:'débutant'},{sportName:'badminton', level:'expert'}]);
+  const [zip, setZip] = useState<number|undefined>(undefined);
+  const [sports, setSports] = useState<sportNode[]>([]);
   const [sportSelect,setSelect]=useState<sportNode>({sportName:'',level:''});
   const [moreInformations, setInformations] = useState<string>('');
 
+  const [formData, setFormData] = useState(INITIAL_STATE);
+  console.log(formData);
 
   useEffect(() => {
     // call api via le fichier api.routes.js
     fetchSignup().then((response) => {
-
+      setFormData({...formData,genderValue:response.data.gender, sportlist:response.data.sports, levelList:response.data.level});
+      setSelect({sportName:response.data.sports[0].sport, level:response.data.level[0]});
       console.log(response);
     });
     
   }, []);
-  
-
-  // const [formData, setFormData] = useState(INITIAL_STATE);
 
   //fonction pour add un sport
   const addSport = () =>{
@@ -116,57 +144,28 @@ const Signup:React.FC = () => {
               changeField={setPhone}
             />
             <p className='signup-p signup-p-birth'>Date de naissance</p>
-            <InputText 
+            <InputText
               value={birthDate} 
               name='date' 
               changeField={setDate} 
             />
             <fieldset className='flex flex-row justify-around w-full'>
-              <div className='flex flex-row items-center text-sm text-blueCustom'>
-                <InputText
-                  value='male'
-                  name='radio'
-                  id='male'
-                  radioState={gender}
-                  changeField={setGender}
-                />
-                <label
-                  className='whitespace-nowrap mb-3 ml-1'
-                  htmlFor='male'
-                >
-                Homme
-                </label>
-              </div>
-              <div className=' flex flex-row items-center text-sm text-blueCustom'>
-                <InputText
-                  value='female'
-                  name='radio'
-                  id='female'
-                  radioState={gender}
-                  changeField={setGender}
-                />
-                <label 
-                  className='whitespace-nowrap mb-3 ml-1' 
-                  htmlFor='female'
-                >
-                Femme
-                </label>
-              </div>
-              <div className=' flex flex-row items-center text-sm text-blueCustom'>
-                <InputText
-                  value='non-binary'
-                  name='radio'
-                  id='non-binary'
-                  radioState={gender}
-                  changeField={setGender}
-                />
-                <label 
-                  className='whitespace-nowrap mb-3 ml-1'
-                  htmlFor='non-binary'
-                >
-                Non Binaire
-                </label>
-              </div>            
+              {formData.genderValue.map((genderData)=>(
+                <div key={genderData} className='flex flex-row items-center text-sm text-blueCustom'>
+                  <InputRadio
+                    value={genderData}
+                    id={genderData}
+                    radioState={gender}
+                    changeField={setGender}
+                  />
+                  <label
+                    className='whitespace-nowrap mb-3 ml-1'
+                    htmlFor={genderData}
+                  >
+                    {genderData}
+                  </label>
+                </div>
+              ))}            
             </fieldset>
             <InputText
               value={city}
@@ -174,13 +173,12 @@ const Signup:React.FC = () => {
               placeholder='Ville'
               changeField={setCity}
             />
-            <InputText
+            <InputNumber
               value={zip}
-              name='number'
               placeholder='Code postal'
               changeField={setZip}
             />
-            <p className='signup-p'>
+            <p className='signup-p mb-4'>
               Quels sont les sports que tu pratiques ?
             </p>
             <ul>
@@ -206,22 +204,22 @@ const Signup:React.FC = () => {
             </ul>
             <div className='flex flex-row w-full justify-end my-2'>
               <select
-                className='textInput w-1/3'
+                className='textInput w-1/2'
                 name="sportName"
                 onChange={(event) => handleChange(event)}
               >
-                <option value="first">first</option>
-                <option value="second">second</option>
-                <option value="thrid">third</option>
+                {formData.sportlist.map((sport)=>(
+                  <option key={sport._id} value={sport.sport}>{sport.sport}</option>
+                ))}
               </select>
               <select
                 name='level'
                 className='textInput mx-2 w-1/3'
                 onChange={(event) => handleChange(event)}
               >
-                <option value="first">first</option>
-                <option value="second">second</option>
-                <option value="thrid">third</option>
+                {formData.levelList.map((level)=>(
+                  <option key={level} value={level}>{level}</option>
+                ))}
               </select>
               <button
                 onClick={()=>addSport()}
@@ -232,11 +230,9 @@ const Signup:React.FC = () => {
             </div>
             <p className='signup-p'>Peux-tu nous en dire plus ?</p>
             <textarea
-              className='placeholder-greyPlaceholder textInput text-sm my-1' placeholder="Commentaires..."
+              className='placeholder-greyPlaceholder textInput h-48 text-sm my-1' placeholder="Commentaires..."
               onChange={(event)=>{setInformations(event.target.value);}}
-            >
-              {moreInformations}
-            </textarea>
+              value={moreInformations} />
             <button
               type='submit'
               className='tag tag-button focus:outline-blueCustom self-center my-8'
@@ -245,7 +241,7 @@ const Signup:React.FC = () => {
             </button> 
           </form>
         </div>
-        <div className='flex block mx-auto flex-1'>
+        <div className='flex mx-auto flex-1'>
           <img src='./img/Frame_8.svg' alt="homme_en_sport"/>
         </div>       
       </section>

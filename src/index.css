@@ -97,8 +97,21 @@
         font-weight: 400;
         font-size: 20px;
         line-height: 24px;
-
     }
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  @apply  focus:outline-blueCustom;
+  -webkit-text-fill-color: rgba(10, 106, 191, 0.8);
+  transition: background-color #E9E9E9;
+}
+
 
     .borderCustom{
         @apply border-blueCustom rounded-full border w-10 h-10;
