@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { login } from '../../constant';
 import InputText from '../Globals/Input/Text';
 
 
@@ -13,8 +15,7 @@ const Login:React.FC = () => {
     email: '',
     password: ''
   });
-  // console.log(form);
-    
+
   //Components
   // localStorage.setItem('Test123', JSON.stringify({refresh: 'ajkezjapziejazpe'}));
 
@@ -26,30 +27,49 @@ const Login:React.FC = () => {
   };
   
   const handleSubmit = (event) => {
-    // preventDefault
-    if(verif()){
-      
-      // api call /auth/login
+    event.preventDefault();
+    // if(verif()){
+    // api call /auth/login
+    /**
+     * 
+     *  {
+          email: 'test@testo.com',
+          password: 'password123'
+        }
+     * 
+     */
+    console.log(form);
+        
+    axios.post('http://ptsaxcy.cluster030.hosting.ovh.net/api/v1/auth/login', {
+      email: form.email,
+      password: form.password
+    })
+      .then((reponse) => {
+        console.log('reponse', reponse);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
 
-      // status !== 200 => erreur 
+    // status !== 200 => erreur 
 
-      // si c'est ok refresh tu store dans localstorage
-      // {refresh: "ajkezjapziejazpe"}
+    // si c'est ok refresh tu store dans localstorage
+    // {refresh: "ajkezjapziejazpe"}
       
-    }else{
-      // renvoie ton erreur
-    }
+    // }else{
+    // renvoie ton erreur
+    // }
   };
 
-  const verif = () => {
+  // const verif = () => {
 
 
-    // si mon mdp est trop petit tu renvoie une erreur => return false
+  //   // si mon mdp est trop petit tu renvoie une erreur => return false
 
-    // etc ;..
+  //   // etc ;..
 
-    return true;
-  };
+  //   return true;
+  // };
 
   return (
     <>
@@ -58,10 +78,10 @@ const Login:React.FC = () => {
                 Te Revoilà !
         </h1>
         <form onSubmit={handleSubmit} className='flex flex-col items-center gap-5'>
-          <InputText value={form.email} name='email' placeholder='E-mail' changeField={handleChange} />
-          <InputText value={form.password} name='password' placeholder='Mot de passe' changeField={handleChange} />
-          {/* <input name='email'  onChange={handleChange} />
-          <input name='password' onChange={handleChange} /> */}
+          {/* <InputText value={form.email} name='email' placeholder='E-mail' changeField={handleChange} />
+          <InputText value={form.password} name='password' placeholder='Mot de passe' changeField={handleChange} /> */}
+          <input name='email'  onChange={handleChange} />
+          <input name='password' onChange={handleChange} />
           <button type="submit" className="rounded-full py-3 px-8 text-2xl bg-gradient-to-b from-red to-blue hover:from-pink-500 hover:to-yellow-500 text-white transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 duration-300">Connexion</button>
           <Link to='/' className='text-blue hover:underline md:pb-20'>Mot de passe oublié ?</Link>
         </form>
