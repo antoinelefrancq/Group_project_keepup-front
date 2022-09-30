@@ -136,6 +136,9 @@ select:-webkit-autofill:focus {
     .date{
         @apply placeholder-greyPlaceholder;
     }
+    .infos {
+        @apply bg-[#FFFFFF] m-2 pr-2
+    }
 }
 
 .test{
