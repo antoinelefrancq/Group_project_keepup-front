@@ -4,7 +4,7 @@ interface Props{
   name:string,
   value:string,
   placeholder?:string,
-  changeField:(param:string)=>void
+  changeField:(param:any)=>any,
 }
 
 const InputText:React.FC<Props> = ({name, value, placeholder, changeField}) => {
@@ -12,9 +12,9 @@ const InputText:React.FC<Props> = ({name, value, placeholder, changeField}) => {
     <input 
       className={name==='date'?'textInput date':'textInput'}
       type={name} 
-      value={value} 
+      // value={value} 
       placeholder={placeholder} 
-      onChange={(event)=>{changeField(event.target.value);}} 
+      onChange={(event)=>{changeField(event);}} 
     />
   ); 
 }; 
