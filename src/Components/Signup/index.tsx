@@ -24,7 +24,10 @@ interface State{
   zip:number|undefined,
   sports:sportNode[]|[],
   sportSelect:sportNode,
-  moreInformations:string
+  moreInformations:string,
+  genderValue:string[]|[],
+  sportlist:[]|{_id:string, sport:string}[],
+  levelList:[]|string[],
 }
 
 // Initial State
@@ -39,7 +42,10 @@ const INITIAL_STATE:State = {
   zip:undefined,
   sports:[{sportName:'musculation', level:'débutant'},{sportName:'badminton', level:'expert'}],
   sportSelect:{sportName:'',level:''},
-  moreInformations:''
+  moreInformations:'',
+  genderValue:[],
+  sportlist:[],
+  levelList:[],
 };
 
 //Function component
@@ -53,7 +59,7 @@ const Signup:React.FC = () => {
   const [gender, setGender] = useState<string>('non-binary');
   const [city, setCity] = useState<string>('');
   const [zip, setZip] = useState<number|undefined>(undefined);
-  const [sports, setSports] = useState<sportNode[]>([{sportName:'musculation', level:'débutant'},{sportName:'badminton', level:'expert'}]);
+  const [sports, setSports] = useState<sportNode[]>([]);
   const [sportSelect,setSelect]=useState<sportNode>({sportName:'',level:''});
   const [moreInformations, setInformations] = useState<string>('');
 
@@ -63,14 +69,12 @@ const Signup:React.FC = () => {
   useEffect(() => {
     // call api via le fichier api.routes.js
     fetchSignup().then((response) => {
-
+      setFormData({...formData,genderValue:response.data.gender, sportlist:response.data.sports, levelList:response.data.level});
+      setSelect({sportName:response.data.sports[0].sport, level:response.data.level[0]});
       console.log(response);
     });
     
   }, []);
-  
-
-  
 
   //fonction pour add un sport
   const addSport = () =>{
@@ -146,48 +150,22 @@ const Signup:React.FC = () => {
               changeField={setDate} 
             />
             <fieldset className='flex flex-row justify-around w-full'>
-              <div className='flex flex-row items-center text-sm text-blueCustom'>
-                <InputRadio
-                  value='male'
-                  id='male'
-                  radioState={gender}
-                  changeField={setGender}
-                />
-                <label
-                  className='whitespace-nowrap mb-3 ml-1'
-                  htmlFor='male'
-                >
-                Homme
-                </label>
-              </div>
-              <div className=' flex flex-row items-center text-sm text-blueCustom'>
-                <InputRadio
-                  value='female'
-                  id='female'
-                  radioState={gender}
-                  changeField={setGender}
-                />
-                <label 
-                  className='whitespace-nowrap mb-3 ml-1' 
-                  htmlFor='female'
-                >
-                Femme
-                </label>
-              </div>
-              <div className=' flex flex-row items-center text-sm text-blueCustom'>
-                <InputRadio
-                  value='non-binary'
-                  id='non-binary'
-                  radioState={gender}
-                  changeField={setGender}
-                />
-                <label 
-                  className='whitespace-nowrap mb-3 ml-1'
-                  htmlFor='non-binary'
-                >
-                Non Binaire
-                </label>
-              </div>            
+              {formData.genderValue.map((genderData)=>(
+                <div key={genderData} className='flex flex-row items-center text-sm text-blueCustom'>
+                  <InputRadio
+                    value={genderData}
+                    id={genderData}
+                    radioState={gender}
+                    changeField={setGender}
+                  />
+                  <label
+                    className='whitespace-nowrap mb-3 ml-1'
+                    htmlFor={genderData}
+                  >
+                    {genderData}
+                  </label>
+                </div>
+              ))}            
             </fieldset>
             <InputText
               value={city}
@@ -200,7 +178,7 @@ const Signup:React.FC = () => {
               placeholder='Code postal'
               changeField={setZip}
             />
-            <p className='signup-p'>
+            <p className='signup-p mb-4'>
               Quels sont les sports que tu pratiques ?
             </p>
             <ul>
@@ -226,22 +204,22 @@ const Signup:React.FC = () => {
             </ul>
             <div className='flex flex-row w-full justify-end my-2'>
               <select
-                className='textInput w-1/3'
+                className='textInput w-1/2'
                 name="sportName"
                 onChange={(event) => handleChange(event)}
               >
-                <option value="first">first</option>
-                <option value="second">second</option>
-                <option value="thrid">third</option>
+                {formData.sportlist.map((sport)=>(
+                  <option key={sport._id} value={sport.sport}>{sport.sport}</option>
+                ))}
               </select>
               <select
                 name='level'
                 className='textInput mx-2 w-1/3'
                 onChange={(event) => handleChange(event)}
               >
-                <option value="first">first</option>
-                <option value="second">second</option>
-                <option value="thrid">third</option>
+                {formData.levelList.map((level)=>(
+                  <option key={level} value={level}>{level}</option>
+                ))}
               </select>
               <button
                 onClick={()=>addSport()}
@@ -252,7 +230,7 @@ const Signup:React.FC = () => {
             </div>
             <p className='signup-p'>Peux-tu nous en dire plus ?</p>
             <textarea
-              className='placeholder-greyPlaceholder textInput text-sm my-1' placeholder="Commentaires..."
+              className='placeholder-greyPlaceholder textInput h-48 text-sm my-1' placeholder="Commentaires..."
               onChange={(event)=>{setInformations(event.target.value);}}
               value={moreInformations} />
             <button
