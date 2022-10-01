@@ -151,7 +151,10 @@ const Signup:React.FC = () => {
             />
             <fieldset className='flex flex-row justify-around w-full'>
               {formData.genderValue.map((genderData)=>(
-                <div key={genderData} className='flex flex-row items-center text-sm text-blueCustom'>
+                <div
+                  key={genderData}
+                  className='flex flex-row items-center text-sm text-blueCustom'
+                >
                   <InputRadio
                     value={genderData}
                     id={genderData}
@@ -183,8 +186,8 @@ const Signup:React.FC = () => {
             </p>
             <ul>
               {sports.map((sport, index)=>(
-                <li
-                  key={sport.sportName}
+                <li 
+                  key={sport.sportName} 
                   className='flex flex-row w-full justify-end mt-1'
                 >
                   <div className='tag'>
@@ -197,7 +200,8 @@ const Signup:React.FC = () => {
                     type='button' 
                     id={sport.sportName} 
                     onClick={(event)=>(deleteSport(event.currentTarget.id))}
-                    className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'>
+                    className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'
+                  >
                     <img src="./img/Vector_red.svg" alt="+"/>
                   </button>
                 </li>))}
@@ -209,30 +213,43 @@ const Signup:React.FC = () => {
                 onChange={(event) => handleChange(event)}
               >
                 {formData.sportlist.map((sport)=>(
-                  <option key={sport._id} value={sport.sport}>{sport.sport}</option>
+                  <option 
+                    key={sport._id} 
+                    value={sport.sport}
+                  >
+                    {sport.sport}
+                  </option>
                 ))}
               </select>
               <select
                 name='level'
-                className='textInput mx-2 w-1/3'
                 onChange={(event) => handleChange(event)}
+                className='textInput mx-2 w-1/3'
               >
                 {formData.levelList.map((level)=>(
-                  <option key={level} value={level}>{level}</option>
+                  <option
+                    key={level}
+                    value={level}
+                  >
+                    {level}
+                  </option>
                 ))}
               </select>
               <button
                 onClick={()=>addSport()}
                 type='button'
-                className='flex border-[1.8px] justify-center items-center border-blueCustom rounded-full w-9 h-9 leading-9'>
+                className='flex border-[1.8px] justify-center items-center border-blueCustom rounded-full w-9 h-9 leading-9'
+              >
                 <img src="./img/Vector.svg" alt="+" />
               </button>
             </div>
             <p className='signup-p'>Peux-tu nous en dire plus ?</p>
             <textarea
-              className='placeholder-greyPlaceholder textInput h-48 text-sm my-1' placeholder="Commentaires..."
+              className='placeholder-greyPlaceholder textInput h-48 text-sm my-1' 
+              placeholder="Commentaires..."
               onChange={(event)=>{setInformations(event.target.value);}}
-              value={moreInformations} />
+              value={moreInformations}
+            />
             <button
               type='submit'
               className='tag tag-button focus:outline-blueCustom self-center my-8'
