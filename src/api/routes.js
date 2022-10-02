@@ -13,5 +13,13 @@ export const fetchSignup = async (data) => {
 };
 
 export const getEventById = async (id) => {
-  return await api.get(`${constant.event}/${id}`).then((response) => response);
+  return await api.get(constant.eventById(id)).then((response) => response);
+};
+
+export const getMessageFromEventById = async (id) => {
+  return await api.get(constant.chatMessages(id));
+};
+
+export const deleteOneMessageById = async (id) => {
+  return await api.delete(constant.deleteOneMessage(id));
 };

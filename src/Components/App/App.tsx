@@ -4,7 +4,7 @@ import Home from '../Home';
 import Login from '../Login';
 import Signup from '../Signup';
 import Header from '../Globals/Header';
-import Chat from '../Globals/Events/Chat/Messages';
+import Chat from '../Globals/Events/Chat/Chat';
 
 const App = () => {
   return (
