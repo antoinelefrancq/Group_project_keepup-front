@@ -27,58 +27,56 @@ const myProfil:React.FC = () => {
         </div>
         <div className="p-2 border-t-2 border-[#E3E3E3] w-full">
         </div>
-        <div className="">
-          <ul className="flex flex-col justify-center items-center">
-            <li className="flex gap-3 pb-2">
-              <div className="flex gap-2">
-                <select name="Activity" className="w-full h-9 p-2 text-greyPlaceholder rounded-sm">
-                  <option value="Activity">Activité</option>
-                </select>
-                <select name="level" className="w-full h-9 p-2 text-greyPlaceholder rounded-sm">
-                  <option value="level">Niveau</option>
-                </select>
-              </div>
-              <div>
-                <button
-                  type='button' 
-                  // id={} 
-                  // onClick={
-                  className='flex w-28'
-                >
-                  <img src="./img/ep_circle-plus-filled.svg" alt="+" />
-                </button>
-              </div>
-            </li>
-            <li className="flex gap-3 pb-2">
-              <div className="flex gap-2">
-                <select name="Activity" className="w-full h-9 p-2 text-greyPlaceholder rounded-sm">
-                  <option value="Activity">Musculation</option>
-                </select>
-                <select name="level" className="w-full h-9 p-2 text-greyPlaceholder rounded-sm">
-                  <option value="level">Amateur</option>
-                </select>
-              </div>
-              <div>
-                <button
-                  type='button' 
-                  // id={} 
-                  // onClick={
-                  className='flex w-28'
-                >
-                  <img src="./img/ep_circle-plus-filled.svg" alt="+"/>
-                </button>
-                <button
-                  type='button' 
-                  // id={} 
-                  // onClick={
-                  className='flex w-28'
-                >
-                  <img src="./img/Croix_pleine_rouge.svg" alt="+"/>
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <ul className="flex flex-col justify-center items-center">
+          <li className="flex justify-between items-center gap-3 pb-2 w-full">
+            <div className="w-[250px] flex gap-2">
+              <select name="Activity" className="w-1/2 h-9 p-2 text-greyPlaceholder rounded-sm">
+                <option value="Activity">Activité</option>
+              </select>
+              <select name="level" className="w-1/2 h-9 p-2 text-greyPlaceholder rounded-sm">
+                <option value="level">Niveau</option>
+              </select>
+            </div>
+            <div className="w-[60px] flex justify-start">
+              <button
+                type='button' 
+                // id={} 
+                // onClick={
+                className=""
+              >
+                <img src="./img/ep_circle-plus-filled.svg" alt="+" className="w-7 h-7"/>
+              </button>
+            </div>
+          </li>
+          <li className="flex justify-between items-center gap-3 pb-2 w-full">
+            <div className="w-[250px] flex gap-2">
+              <select name="Activity" className="w-1/2 h-9 p-2 text-greyPlaceholder rounded-sm">
+                <option value="Activity">Musculation</option>
+              </select>
+              <select name="level" className="w-1/2 h-9 p-2 text-greyPlaceholder rounded-sm">
+                <option value="level">Amateur</option>
+              </select>
+            </div>
+            <div className="w-[60px] flex justify-start">
+              <button
+                type='button' 
+                // id={} 
+                // onClick={
+                className=""
+              >
+                <img src="./img/ep_circle-plus-filled.svg" alt="+" className="w-7 h-7"/>
+              </button>
+              <button
+                type='button' 
+                // id={} 
+                // onClick={
+                className=""
+              >
+                <img src="./img/Croix_pleine_rouge.svg" alt="+"  className="w-7 h-7"/>
+              </button>
+            </div>
+          </li>
+        </ul>
         <div className="flex gap-3 p-6">
           <article>
             <div className="bg-blueCustom rounded-lg flex items-center">
