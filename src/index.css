@@ -52,6 +52,11 @@
         height:80vh;
         padding: 9px;
     }
+
+    .session{
+        @apply bg-[#F2EFEB] rounded-[10px];
+    }
+
     .login{
         @apply placeholder-greyPlaceholder;
         background-color:#fff;

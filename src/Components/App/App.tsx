@@ -7,6 +7,7 @@ import Header from '../Globals/Header';
 import Chat from '../Globals/Events/Chat/Chat';
 import Myprofil from '../Myprofil';
 import Events from '../Globals/Events';
+import CreateEvent from '../CreateEvent';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/event/:id/chat' element={<Chat />} />
           <Route path="/myprofil" element={<Myprofil />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/create-event" element={<CreateEvent />} />
         </Routes>
       </main>
     </>
