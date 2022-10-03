@@ -21,7 +21,7 @@ function EventsExample() {
         </div>
         <div className="text-blue">
           <h3 className="px-1">Tuesday - leg day !</h3>
-          <p className="px-1 text-[15px]">Keeper: Mizuki</p>
+          <p className="px-1 text-[15px]">Keeper: Arnold</p>
           <p className="px-1 text-[13px]">Activité: musculation <span className="bg-blue rounded-full text-white text-[11px] p-1">Amateur</span></p>
           <p className="flex justify-start items-end gap-4 py-2 pr-3">
             <span className="bg-blue rounded-r-full text-white text-[13px] p-2">1/2 place disponible</span>
@@ -49,8 +49,8 @@ function EventsExample() {
           <div className="text-white text-center w-[73px]"><img src="./img/photo1.svg" alt="image_profil" /></div>
         </div>
         <div className="text-blue">
-          <h3 className="px-1">Tuesday - leg day !</h3>
-          <p className="px-1 text-[15px]">Keeper: Nathan</p>
+          <h3 className="px-1">Thursday - leg day !</h3>
+          <p className="px-1 text-[15px]">Keeper: Sylvester</p>
           <p className="px-1 text-[13px]">Activité: marche rapide <span className="bg-orange rounded-full text-white text-[11px] p-1">intermédiaire</span></p>
           <p className="flex justify-start items-end gap-4 py-2 pr-3">
             <span className="bg-red rounded-r-full text-white text-[13px] p-2">complet</span>

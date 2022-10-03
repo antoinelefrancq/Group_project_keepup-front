@@ -16,7 +16,7 @@ function Event() {
               <path d="M25.2414 0.335133L19.5342 2.31262L23.4924 13.7365L29.1996 11.759L25.2414 0.335133Z" fill="white"/>
             </svg></div>
         </div>
-        <div className="text-white text-center w-[73px]"><img src="#" alt="image_profil" /></div>
+        <div className="text-white text-center w-[73px]"><img src="./img/photo2.svg" alt="image_profil" /></div>
       </div>
       <div className="text-blue">
         <h3 className="px-1">Tuesday - leg day !</h3>

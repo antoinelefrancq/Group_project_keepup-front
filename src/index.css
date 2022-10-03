@@ -10,10 +10,12 @@
 
 @layer base{
     html{
+        font-family: "PANGRAM";
         overflow-x: hidden;
         @apply w-screen h-screen
     }
     body{
+        overflow-x: hidden;
         @apply w-full h-full
     }
     textarea{
@@ -135,6 +137,9 @@ select:-webkit-autofill:focus {
     }
     .date{
         @apply placeholder-greyPlaceholder;
+    }
+    .infos {
+        @apply bg-[#FFFFFF] m-2 pr-2 text-end;
     }
 }
 
