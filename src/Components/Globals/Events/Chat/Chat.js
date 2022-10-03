@@ -10,7 +10,7 @@ import {
 } from '../../../../redux/reducer/chatReducer';
 
 import Messages from './Messages';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import * as constant from '../../../../constant';
 
 export const socket = io(constant.socketio);
@@ -81,7 +81,6 @@ const Chat = () => {
   return (
     <>
       <Messages user={jwt} event_id={event_id} socket={socket} />
-      <Toaster />
     </>
   );
 };
