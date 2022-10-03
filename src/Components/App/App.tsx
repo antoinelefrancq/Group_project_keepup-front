@@ -8,12 +8,16 @@ import Chat from '../Globals/Events/Chat/Chat';
 import Myprofil from '../Myprofil';
 import Events from '../Globals/Events';
 import CreateEvent from '../CreateEvent';
+import { useAppSelector } from '../../redux/Hooks';
+import UserModale from '../Globals/UserModale';
 
 const App = () => {
+  const {user} = useAppSelector((state)=>state);
   return (
     <>
       <Header />
-      <main className=''>
+      <main  className=''>
+        {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

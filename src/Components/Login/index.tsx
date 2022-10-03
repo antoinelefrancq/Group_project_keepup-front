@@ -21,7 +21,7 @@ const Login:React.FC = () => {
   // const token = localStorage.getItem('Test123');
   // console.log(JSON.parse(token));
   
-  const handleChange = (event: { target: { name: any; value: any; }; }) => {
+  const handleChange = (event: { target: { name: string; value: string; }; }) => {
     setForm({...form, [event.target.name]: event.target.value});
   };
   

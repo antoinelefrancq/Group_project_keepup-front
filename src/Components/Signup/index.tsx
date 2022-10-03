@@ -8,7 +8,7 @@ import InputNumber from '../Globals/Input/Number';
 import {postSignup} from '../../api/routes';
 //import de fonctions inhérentes à redux et typées par typescript
 import {fetchSport} from '../../redux/reducer/SportReducer';
-import type { RootState, AppDispatch } from '../../redux/store';
+import type { RootState } from '../../redux/store';
 import { useAppSelector, useAppDispatch } from '../../redux/Hooks';
 
 //Typescript interface
