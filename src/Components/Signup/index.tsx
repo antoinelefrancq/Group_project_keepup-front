@@ -1,116 +1,111 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
-import Header from '../Globals/Header';
+//import des composants input
 import InputRadio from '../Globals/Input/Radio';
 import InputText from '../Globals/Input/Text';
 import InputNumber from '../Globals/Input/Number';
-import {fetchSignup} from '../../api/routes';
-import * as constant from '../../constant';
+//import de la route pour post les données
+import {postSignup} from '../../api/routes';
+//import de fonctions inhérentes à redux et typées par typescript
+import {fetchSport} from '../../redux/reducer/SportReducer';
+import type { RootState, AppDispatch } from '../../redux/store';
+import { useAppSelector, useAppDispatch } from '../../redux/Hooks';
 
 //Typescript interface
 interface sportNode{
-  sportName:string,
+  sport:string,
   level:string
 }
-
-interface State{
-  name:string,
+interface postState{
+  firstname:string,
+  lastname:string,
+  handicap:boolean,
+  gender:string,
   email:string,
   password:string,
-  phoneNumber:string,
-  birthDate:string,
-  gender:string,
+  dob:string,
+  description:string,
+  sports:sportNode[]|[],  
   city:string,
-  zip:number|undefined,
-  sports:sportNode[]|[],
-  sportSelect:sportNode,
-  moreInformations:string,
-  genderValue:string[]|[],
-  sportlist:[]|{_id:string, sport:string}[],
-  levelList:[]|string[],
+  zipcode:number|'',
 }
 
 // Initial State
-const INITIAL_STATE:State = {
-  name: '',
+const INITIAL_POST_STATE:postState = {
+  firstname: '',
+  lastname:'',
+  handicap:false,  
+  gender:'non-binary',
   email: '',
   password:'',
-  phoneNumber:'',
-  birthDate:'',
-  gender:'non-binary',
+  dob:'',
+  description:'',
+  sports:[],
   city:'',
-  zip:undefined,
-  sports:[{sportName:'musculation', level:'débutant'},{sportName:'badminton', level:'expert'}],
-  sportSelect:{sportName:'',level:''},
-  moreInformations:'',
-  genderValue:[],
-  sportlist:[],
-  levelList:[],
+  zipcode:'',
 };
 
 //Function component
 const Signup:React.FC = () => {
-//State local
-  const [name, setName] = useState<string>('');
-  const [email, setMail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [phoneNumber, setPhone] = useState<string>('');
-  const [birthDate, setDate] = useState<string>('1990-01-01');
-  const [gender, setGender] = useState<string>('non-binary');
-  const [city, setCity] = useState<string>('');
-  const [zip, setZip] = useState<number|undefined>(undefined);
-  const [sports, setSports] = useState<sportNode[]>([]);
-  const [sportSelect,setSelect]=useState<sportNode>({sportName:'',level:''});
-  const [moreInformations, setInformations] = useState<string>('');
+  //import de la fonction dispatch pour TS
+  const dispatch= useAppDispatch();
+  //State local
+  const SportReducer = useAppSelector((state:RootState)=>state.SportReducer);
+  const [sportSelect,setSelect] = useState<{sports:{_id:string,sport:string},level:string}>({sports:{_id:'',sport:''},level:''});
+  const [formData, setFormData] = useState(INITIAL_POST_STATE);
 
-  const [formData, setFormData] = useState(INITIAL_STATE);
-  console.log(formData);
-
+  //UseEffect  
   useEffect(() => {
     // call api via le fichier api.routes.js
-    fetchSignup().then((response) => {
-      setFormData({...formData,genderValue:response.data.gender, sportlist:response.data.sports, levelList:response.data.level});
-      setSelect({sportName:response.data.sports[0].sport, level:response.data.level[0]});
-      console.log(response);
-    });
-    
+    dispatch(fetchSport());
   }, []);
+  useEffect(()=>{
+    setSelect(SportReducer.sportSelected);
+  },[SportReducer]);
 
   //fonction pour add un sport
   const addSport = () =>{
-    if(sports.find((sport)=>sport.sportName===sportSelect.sportName)){
+    if(formData.sports.find((sport)=>sport.sport===sportSelect.sports._id)){
       console.log('ce sport est déjà ajouté à la liste');
     } else {
-      setSports([...sports, sportSelect]);
+      setFormData({...formData,sports:[...formData.sports, {sport:sportSelect.sports._id, level:sportSelect.level}]});
     }
   };
-
   //fonction pour delete un sport
   const deleteSport = (sportId:string) => {
-    setSports(sports.filter((sport)=>sport.sportName!==sportId));
-  };
-  //Components
-
-  const handleCLick = () => {
-    // tu recupere les 2 valeurs de select 
-    // tu ajoute a un state 
+    setFormData({...formData, sports:formData.sports.filter((sport)=>sport.sport!==sportId)});
   };
 
-  // const handleChange = (event) => {
-  // const {target, value} = event
-  //   setFormData((prevState) => {...prevState, [target.name]: target.value })
-  // }
-
-  
-
-
+  const submitData = ()=> {
+    
+    const date = formData.dob.split('-');
+    const year = date[0];
+    const month = date[1];
+    const day = date[2];
+    console.log(formData);
+    postSignup({...formData, dob: `${day}/${month}/${year}`}).then((response) => console.log(response));
+  };
+ 
   const handleChange = (event: any) => {
-    const {target, value} = event;
+    const {target} = event;
     setSelect({...sportSelect, [target.name]:target.value });
   };
 
+  const handleSetChange = (event:any) => {
+    const {target} = event;
+    const newObject = JSON.parse(event.target.value);
+    setSelect({...sportSelect, sports:newObject});
+  };
+
+  const setNewData = (event:any) =>{
+    setFormData({...formData,[event.target.name]:event.target.value});    
+  };
+  const setNumberData = (event:any) => {
+    setFormData({...formData,[event.target.name]:Number(event.target.value)});
+  };
 
 
+  //Components
   return (
     <>
       <section className="signup flex flex-col md:flex-row">
@@ -118,45 +113,55 @@ const Signup:React.FC = () => {
           <h1 className='text-blueCustom signup-title '>
                   C’est parti ! Commence d’abord par te créer un compte 
           </h1>
-          <form className='flex flex-col items-end'>
-            <InputText 
-              value={name} 
-              name='text'
-              placeholder='Nom complet'
-              changeField={setName}
+          <form className='flex flex-col items-end'
+            onSubmit={(event)=>{
+              event.preventDefault();
+              submitData();
+            }}>
+            <InputText
+              name='firstname' 
+              value={formData.firstname} 
+              type='text'
+              placeholder='Prénom'
+              changeField={setNewData}
             />
-            <InputText 
-              value={email} 
-              name='email'
+            <InputText
+              name='lastname' 
+              value={formData.lastname} 
+              type='text'
+              placeholder='Nom'
+              changeField={setNewData}
+            />
+            <InputText
+              name='email' 
+              value={formData.email} 
+              type='email'
               placeholder='E-mail'
-              changeField={setMail}
+              changeField={setNewData}
             />
             <InputText 
-              value={password} 
               name='password'
+              value={formData.password} 
+              type='password'
               placeholder='Mot de passe'
-              changeField={setPassword}
-            />
-            <InputText 
-              value={phoneNumber}
-              name='tel'
-              placeholder='Numéro de mobile'
-              changeField={setPhone}
+              changeField={setNewData}
             />
             <p className='signup-p signup-p-birth'>Date de naissance</p>
             <InputText
-              value={birthDate} 
-              name='date' 
-              changeField={setDate} 
+              name='dob'
+              value={formData.dob} 
+              type='date' 
+              changeField={setNewData} 
             />
             <fieldset className='flex flex-row justify-around w-full'>
-              {formData.genderValue.map((genderData)=>(
+              {SportReducer.genderValue.map((genderData)=>(
                 <div key={genderData} className='flex flex-row items-center text-sm text-blueCustom'>
                   <InputRadio
+                    name='gender'
                     value={genderData}
                     id={genderData}
-                    radioState={gender}
-                    changeField={setGender}
+                    radioState={formData.gender}
+                    changeField={setNewData}
                   />
                   <label
                     className='whitespace-nowrap mb-3 ml-1'
@@ -168,34 +173,36 @@ const Signup:React.FC = () => {
               ))}            
             </fieldset>
             <InputText
-              value={city}
-              name='text'
+              name='city'
+              value={formData.city}
+              type='text'
               placeholder='Ville'
-              changeField={setCity}
+              changeField={setNewData}
             />
             <InputNumber
-              value={zip}
+              name='zipcode'
+              value={formData.zipcode}
               placeholder='Code postal'
-              changeField={setZip}
+              changeField={setNumberData}
             />
             <p className='signup-p mb-4'>
               Quels sont les sports que tu pratiques ?
             </p>
             <ul>
-              {sports.map((sport, index)=>(
+              {formData.sports.map((sport)=>(
                 <li
-                  key={sport.sportName}
+                  key={sport.sport}
                   className='flex flex-row w-full justify-end mt-1'
                 >
                   <div className='tag'>
-                    <p>{sport?.sportName}</p>
+                    <p>{(SportReducer.sportlist.find((sportRed)=>sportRed._id===sport.sport))?.sport}</p>
                   </div>
                   <div className='tag mx-1 m'>
                     <p>{sport?.level}</p>
                   </div>
                   <button
                     type='button' 
-                    id={sport.sportName} 
+                    id={sport.sport} 
                     onClick={(event)=>(deleteSport(event.currentTarget.id))}
                     className='flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45'>
                     <img src="./img/Vector_red.svg" alt="+"/>
@@ -205,11 +212,11 @@ const Signup:React.FC = () => {
             <div className='flex flex-row w-full justify-end my-2'>
               <select
                 className='textInput w-1/2'
-                name="sportName"
-                onChange={(event) => handleChange(event)}
+                name="sport"
+                onChange={(event) => handleSetChange(event)}
               >
-                {formData.sportlist.map((sport)=>(
-                  <option key={sport._id} value={sport.sport}>{sport.sport}</option>
+                {SportReducer.sportlist.map((sport)=>(
+                  <option key={sport._id} value={JSON.stringify({_id:sport._id,sport:sport.sport})}>{sport.sport}</option>
                 ))}
               </select>
               <select
@@ -217,7 +224,7 @@ const Signup:React.FC = () => {
                 className='textInput mx-2 w-1/3'
                 onChange={(event) => handleChange(event)}
               >
-                {formData.levelList.map((level)=>(
+                {SportReducer.levelList.map((level)=>(
                   <option key={level} value={level}>{level}</option>
                 ))}
               </select>
@@ -231,8 +238,9 @@ const Signup:React.FC = () => {
             <p className='signup-p'>Peux-tu nous en dire plus ?</p>
             <textarea
               className='placeholder-greyPlaceholder textInput h-48 text-sm my-1' placeholder="Commentaires..."
-              onChange={(event)=>{setInformations(event.target.value);}}
-              value={moreInformations} />
+              name='description'
+              onChange={(event)=>{setNewData(event);}}
+              value={formData.description} />
             <button
               type='submit'
               className='tag tag-button focus:outline-blueCustom self-center my-8'

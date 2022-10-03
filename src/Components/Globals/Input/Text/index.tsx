@@ -1,25 +1,28 @@
 import PropTypes from 'prop-types';
 
 interface Props{
+  type:string,
   name:string,
   value:string,
   placeholder?:string,
-  changeField:(param:string)=>void
+  changeField:(param:any)=>void
 }
 
-const InputText:React.FC<Props> = ({name, value, placeholder, changeField}) => {
+const InputText:React.FC<Props> = ({type, name, value, placeholder, changeField}) => {
   return (
     <input 
-      className={name==='date'?'textInput date':'textInput'}
-      type={name} 
+      className={type==='date'?'textInput date':'textInput'}
+      name={name}
+      type={type} 
       value={value} 
       placeholder={placeholder} 
-      onChange={(event)=>{changeField(event.target.value);}} 
+      onChange={(event)=>{changeField(event);}} 
     />
   ); 
 }; 
 
 InputText.propTypes ={
+  type:PropTypes.string.isRequired,
   name:PropTypes.string.isRequired,
   value:PropTypes.string.isRequired,
   placeholder:PropTypes.string,
