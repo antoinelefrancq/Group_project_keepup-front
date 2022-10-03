@@ -139,7 +139,7 @@ select:-webkit-autofill:focus {
         @apply placeholder-greyPlaceholder;
     }
     .infos {
-        @apply bg-[#FFFFFF] m-2 pr-2
+        @apply bg-[#FFFFFF] m-2 pr-2 text-end;
     }
 }
 

@@ -1,20 +1,23 @@
 import PropTypes from 'prop-types';
+import {ChangeEvent} from 'react';
 
 interface Props{
-  value:number|undefined;
+  name:string
+  value:number|'';
   placeholder:string
-  changeField:(param:number)=>void
+  changeField:(param:ChangeEvent<HTMLInputElement>)=>void
 }
 
-const InputNumber:React.FC<Props> = ({value, placeholder, changeField}) => {
+const InputNumber:React.FC<Props> = ({value, name, placeholder, changeField}) => {
   return (
-    <input className='textInput'  type='number' value={value}       placeholder={placeholder} 
-      onChange={(event)=>{changeField(Number(event.target.value));}} />
+    <input className='textInput'  name={name} type='number' value={value} placeholder={placeholder} 
+      onChange={(event)=>{changeField(event);}} />
   ); 
 }; 
 
 InputNumber.propTypes ={
-  value:PropTypes.number,
+  name:PropTypes.string.isRequired,
+  value:PropTypes.any,
   placeholder:PropTypes.string.isRequired,
   changeField:PropTypes.func.isRequired,
 };
