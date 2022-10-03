@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
-import Header from '../Globals/Header';
 import InputRadio from '../Globals/Input/Radio';
 import InputText from '../Globals/Input/Text';
 import InputNumber from '../Globals/Input/Number';
