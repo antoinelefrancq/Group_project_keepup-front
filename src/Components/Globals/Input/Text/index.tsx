@@ -2,32 +2,27 @@ import PropTypes from 'prop-types';
 
 interface Props{
   name:string,
-  value:any,
+  value:string,
   placeholder?:string,
-  id?:string
-  radioState?:any,
-  changeField:(param:any)=>void
+  changeField:(param:any)=>any,
 }
 
-const InputText:React.FC<Props> = ({name, value, placeholder, id, radioState, changeField}) => {
+const InputText:React.FC<Props> = ({name, value, placeholder, changeField}) => {
   return (
     <input 
-      className={name==='date'?'textInput date':'textInput'} 
-      id={id?id:undefined} 
+      className={name==='date'?'textInput date':'textInput'}
       type={name} 
-      value={value} 
+      // value={value} 
       placeholder={placeholder} 
-      onChange={(event)=>{changeField(event.target.value);}} 
-      checked={radioState===value?true:false} />
+      onChange={(event)=>{changeField(event);}} 
+    />
   ); 
 }; 
 
 InputText.propTypes ={
   name:PropTypes.string.isRequired,
-  value:PropTypes.any.isRequired,
+  value:PropTypes.string.isRequired,
   placeholder:PropTypes.string,
   changeField:PropTypes.func.isRequired,
-  radioState:PropTypes.any,
-  id:PropTypes.string,
 };
 export default InputText;

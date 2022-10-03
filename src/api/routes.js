@@ -23,3 +23,4 @@ export const getMessageFromEventById = async (id) => {
 export const deleteOneMessageById = async (id) => {
   return await api.delete(constant.deleteOneMessage(id));
 };
+

@@ -1,20 +1,28 @@
 import PropTypes from 'prop-types';
 
 interface Props{
-  name:string,
-  value:any;
-  id?:string;
+  value:string,
+  id:string
+  radioState:string,
+  changeField:(param:string)=>void
 }
 
-const InputRadio:React.FC<Props> = ({name, value,id}) => {
+const InputRadio:React.FC<Props> = ({value,  id, radioState, changeField}) => {
   return (
-    <input className='textInput' type={name} value={value} id={id?id:undefined} />
+    <input 
+      className={'textInput'} 
+      id={id} 
+      type='radio' 
+      value={value} 
+      onChange={(event)=>{changeField(event.target.value);}} 
+      checked={radioState===value?true:false} />
   ); 
 }; 
 
 InputRadio.propTypes ={
-  name:PropTypes.string.isRequired,
   value:PropTypes.any.isRequired,
-  id:PropTypes.string,
+  changeField:PropTypes.func.isRequired,
+  radioState:PropTypes.string.isRequired,
+  id:PropTypes.string.isRequired,
 };
 export default InputRadio;

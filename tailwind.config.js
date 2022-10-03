@@ -12,6 +12,7 @@ module.exports = {
         'vector': 'url(\'/src/assets/Vector.svg\')',
         'arrow': 'url(\'/src/assets/Arrow.svg\')',
         'rectangle': 'url(\'/src/assets/Rectangle.svg\')',
+        'wave': 'url(\'/src/assets/Wave_home.svg\')',
       },
       backgroundSize: {
         'auto': 'auto',
