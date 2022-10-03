@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { login } from '../../constant';
 import InputText from '../Globals/Input/Text';
 
 
@@ -22,11 +21,11 @@ const Login:React.FC = () => {
   // const token = localStorage.getItem('Test123');
   // console.log(JSON.parse(token));
   
-  const handleChange = (event) => {
+  const handleChange = (event: { target: { name: any; value: any; }; }) => {
     setForm({...form, [event.target.name]: event.target.value});
   };
   
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     // if(verif()){
     // api call /auth/login
