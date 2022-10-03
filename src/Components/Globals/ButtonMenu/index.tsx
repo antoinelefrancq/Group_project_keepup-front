@@ -7,14 +7,14 @@ function ButtonMenu() {
           <div onClick={(event) => {
             event.stopPropagation();
             console.log('bouton du millieu');
-          }} className="translate-x-12 p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-b">
+          }} className="translate-x-14 p-1 rounded-full from-rose-400 via-fuchsia-500 to-indigo-500 bg-gradient-to-b">
             <span className="block text-black px-3 py-4 border-none font-semibold rounded-full bg-white">
               <img src='./img/Logo_menu.svg' alt="logo_menu"/>
             </span>
           </div>
         </button>
-        <button  onClick={() => console.log('bouton de droite')} className=" bg-white shadow shadow-black hover:bg-gray-400 text-gray-800 font-bold py-2 pr-10 pl-10 rounded-r">
-          <img src='./img/Plus.svg' alt="logo_plus" className=""/>
+        <button  onClick={() => console.log('bouton de droite')} className=" bg-white shadow shadow-black hover:bg-gray-400 text-gray-800 font-bold pr-10 pl-12 rounded-r">
+          <img src='./img/Plus.svg' alt="logo_plus" className="pb-1 translate-x-3"/>
         </button>
       </div>
     </div>

@@ -79,8 +79,8 @@ const Login:React.FC = () => {
         <form onSubmit={handleSubmit} className='flex flex-col items-center gap-5'>
           {/* <InputText value={form.email} name='email' placeholder='E-mail' changeField={handleChange} />
           <InputText value={form.password} name='password' placeholder='Mot de passe' changeField={handleChange} /> */}
-          <input className='bg-white text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder' placeholder='email' name='email'  onChange={handleChange} />
-          <input className='bg-white text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder' placeholder='password' name='password' onChange={handleChange} />
+          <input className='text-right bg-white text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder' placeholder='email' name='email'  onChange={handleChange} />
+          <input className=' text-right bg-white text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder' type="password" placeholder='password' name='password' onChange={handleChange} />
           <button type="submit" className="rounded-full py-3 px-8 text-2xl bg-gradient-to-b from-red to-blue hover:from-pink-500 hover:to-yellow-500 text-white transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 duration-300">Connexion</button>
           <Link to='/' className='text-blue hover:underline md:pb-20'>Mot de passe oublié ?</Link>
         </form>

@@ -6,7 +6,6 @@ export const login = host + '/auth/login';
 export const createUser = host + '/create/user';
 export const signup = host + '/signup';
 
-export const baseUrl = 'http://ptsaxcy.cluster030.hosting.ovh.net/api/v1/';
 export const socketio = 'ws://qaonjev.cluster030.hosting.ovh.net';
 
 /**
