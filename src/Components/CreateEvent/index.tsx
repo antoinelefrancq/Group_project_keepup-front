@@ -65,7 +65,7 @@ function CreateEvent() {
               />
             </div>
             <input
-              placeholder="Participants"
+              placeholder="Nombre de participants"
               name="Participants"
               type="text"
               className="text-right px-1"
