@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     if (!isActiv) {
 
       console.log(form);
-      await api[isActiv ? 'login' : 'forgetPassword'](form).then((response) => {
+      await api.login(form).then((response) => {
         localStorage.setItem('credentials', JSON.stringify({ ...response.data }));
         axios.defaults.headers.common['authorization'] = response.data.access;
 
@@ -34,17 +34,17 @@ const Login: React.FC = () => {
         .catch((error) => {
           console.log('error', error);
         });
+
+    } else {
+      api.forgetPassword({ email: form.email }).then((reponse) => {
+        if (reponse.status === 200) {
+          toast.success(`Un email a été envoyé a ${form.email}`);
+        }
+      })
+        .catch((error) => {
+          toast.error(`${error.response.data.error}`);
+        });
     }
-    // else {
-    //   api.forgetPassword({ email: form.email }).then((reponse) => {
-    //     if (reponse.status === 200) {
-    //       toast.success(`Un email a été envoyé a ${form.email}`);
-    //     }
-    //   })
-    //     .catch((error) => {
-    //       toast.error(`${error.response.data.error}`);
-    //     });
-    // }
   };
 
   const handleClick = (event: any) => {
