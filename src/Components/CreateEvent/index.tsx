@@ -1,10 +1,10 @@
 function CreateEvent() {
   return (
     <>
-      <div className=" absolute inset-x-0 bottom-0 h-16">
-        <section className="session flex flex-col justify-center items-center bg-[#F2EFEB] pt-12">
-          <div className=" text-blueCustom absolute bottom-10">
-        créer une session
+      <div className="h-screen flex flex-col justify-end">
+        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] pt-6">
+          <div className=" text-blueCustom">
+            Créer une session
           </div>
           <form className="flex flex-col gap-2 w-full text-right px-10">
             <input
@@ -49,7 +49,7 @@ function CreateEvent() {
               className="text-right"
             />
           </form>
-          <button className="bg-blue text-white mt-24 mb-5 p-3 rounded-lg">
+          <button className="bg-blue text-white mt-16 mb-5 py-3 px-7 shadow-lg shadow-black-500/40 rounded-lg">
             <img src="./img/Arrow_right.svg" alt="Arrow_right" />
           </button>
         </section>
