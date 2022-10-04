@@ -14,7 +14,7 @@ export const fetchSignup = async () => {
 
 export const postSignup = async (data) => {
   console.log(data);
-  return await api.post(constant.createUser, data).then((response) => response);
+  return await api.post(constant.createUser, data);
 };
 
 export const getEventById = async (id) => {
@@ -29,3 +29,18 @@ export const deleteOneMessageById = async (id) => {
   return await api.delete(constant.deleteOneMessage(id));
 };
 
+export const forgetPassword = async ({ email }) => {
+  return await api.get(constant.forgetPassword(email));
+};
+
+export const confirmChangePassword = async (form, url) => {
+  return await api.post(constant.confirmChangePassword(url), form, {
+    headers: {
+      check_password_header: `Bearer ${url.token}`,
+    },
+  });
+};
+
+export const login = async (form) => {
+  return await api.post(constant.login, form);
+};

@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../reducer/userReducer';
 import SportReducer from '../reducer/SportReducer';
-
+import formReducer from '../reducer/formSignup';
 import chatReducer from '../reducer/chatReducer';
-const store = configureStore({ 
+
+const store = configureStore({
   reducer: {
     user: userReducer,
     chat: chatReducer,
+    form: formReducer,
     SportReducer,
   },
   middleware: (getDefaultMiddleware) =>
