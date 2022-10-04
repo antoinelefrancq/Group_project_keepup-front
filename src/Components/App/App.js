@@ -10,12 +10,17 @@ import Myprofil from '../Myprofil';
 import Events from '../Globals/Events';
 import { Toaster } from 'react-hot-toast';
 import CreateEvent from '../CreateEvent';
+import { useAppSelector } from '../../redux/Hooks';
+import UserModale from '../Globals/UserModale';
+import Loader from './Loader';
 
 const App = () => {
+  const {user} = useAppSelector((state)=>state);
   return (
     <>
       <Header />
-      <main className="">
+      <main  className=''>
+        {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -28,6 +33,7 @@ const App = () => {
             element={<ResetPassword />}
           />
           <Route path="/create-event" element={<CreateEvent />} />
+          <Route path='/loader' element={<Loader />} />
         </Routes>
         <Toaster />
       </main>

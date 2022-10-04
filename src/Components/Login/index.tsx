@@ -16,8 +16,10 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
+
   const handleChange = (event: { target: { name: any; value: any; }; }) => {
     setForm({ ...form, [event.target.name]: event.target.value });
+
   };
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
