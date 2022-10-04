@@ -14,7 +14,7 @@ export const fetchSignup = async () => {
 
 export const postSignup = async (data) => {
   console.log(data);
-  return await api.post(constant.createUser, data).then((response) => response);
+  return await api.post(constant.createUser, data);
 };
 
 export const getEventById = async (id) => {
