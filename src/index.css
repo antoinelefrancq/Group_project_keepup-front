@@ -52,6 +52,11 @@
         height:80vh;
         padding: 9px;
     }
+
+    .session{
+        @apply bg-[#F2EFEB] rounded-[10px];
+    }
+
     .login{
         @apply placeholder-greyPlaceholder;
         background-color:#fff;
@@ -139,7 +144,7 @@ select:-webkit-autofill:focus {
         @apply placeholder-greyPlaceholder;
     }
     .infos {
-        @apply bg-[#FFFFFF] m-2 pr-2
+        @apply bg-[#FFFFFF] m-2 pr-2 text-end;
     }
 }
 

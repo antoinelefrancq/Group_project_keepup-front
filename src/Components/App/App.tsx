@@ -9,6 +9,8 @@ import Chat from '../Globals/Events/Chat/Chat';
 import Myprofil from '../Myprofil';
 import Events from '../Globals/Events';
 import { Toaster } from 'react-hot-toast';
+import CreateEvent from '../CreateEvent';
+
 
 const App = () => {
   return (
@@ -23,6 +25,7 @@ const App = () => {
           <Route path="/profile" element={<Myprofil />} />
           <Route path="/events" element={<Events />} />
           <Route path="/account/password/reset/:id/:token" element={<ResetPassword />} />
+          <Route path="/create-event" element={<CreateEvent />} />
         </Routes>
         <Toaster />
       </main>
