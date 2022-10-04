@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../../redux/Hooks';
 import { closeModale } from '../../../redux/reducer/userReducer';
 
 const UserModale:React.FC = () => {
+  console.log('hello');
   const dispatch=useAppDispatch();
   return (
     <section id='modale' className="h-1/2 w-full fixed bottom-0 z-10 rounded-t-[10px] bg-white flex flex-col items-center">
