@@ -1,9 +1,24 @@
+import axios from 'axios';
+import { useState } from 'react';
+
 function CreateEvent() {
+  const [sports, setSports] = useState([]);
+  const [levels, setLevels] = useState([]);
+
+  axios.get('http://qaonjev.cluster030.hosting.ovh.net/api/v1/signup')
+    .then((response) => {
+      const results = response.data;
+      setSports(results.sports);
+      setLevels(results.level);
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
   return (
     <>
       <div className="h-full flex flex-col justify-end">
         <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] pt-6">
-          <div className=" text-blueCustom">
+          <div className="text-blueCustom">
             Créer une session
           </div>
           <form className="flex flex-col gap-2 w-full text-right px-10">
@@ -20,12 +35,16 @@ function CreateEvent() {
             <select
               className="bg-[#ffffff] text-greyPlaceholder p-1"
             >
-              <option selected>Activités</option>
+              {sports.map((sport) => (
+                <option key={sport.sport}>{sport.sport}</option>
+              ))}
             </select>
             <select
               className="bg-[#ffffff] text-greyPlaceholder p-1"
             >
-              <option selected>Niveau</option>
+              {levels.map((level) => (
+                <option key={level}>{level}</option>
+              ))}
             </select>
             <input
               placeholder="Date"
@@ -45,13 +64,14 @@ function CreateEvent() {
                 className="text-right w-1/2 px-1"
               />
             </div>
-            <select
-              className="bg-[#ffffff] text-greyPlaceholder p-1"
-            >
-              <option selected>Nombre de places</option>
-            </select>
+            <input
+              placeholder="Participants"
+              name="Participants"
+              type="text"
+              className="text-right px-1"
+            />
           </form>
-          <button className="bg-blue text-white mt-16 mb-5 py-3 px-7 shadow-lg shadow-black-500/40 rounded-lg">
+          <button type="submit" className="bg-blue text-white mt-16 mb-5 py-3 px-7 rounded-lg shadow-md shadow-[#808080]">
             <img src="./img/Arrow_right.svg" alt="Arrow_right" />
           </button>
         </section>
