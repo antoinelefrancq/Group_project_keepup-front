@@ -1,7 +1,7 @@
 function CreateEvent() {
   return (
     <>
-      <div className="h-screen flex flex-col justify-end">
+      <div className="h-full flex flex-col justify-end">
         <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] pt-6">
           <div className=" text-blueCustom">
             Créer une session
@@ -10,44 +10,46 @@ function CreateEvent() {
             <input
               placeholder="Titre"
               name="Titre"
-              className="text-right"
+              className="text-right px-1"
             />
             <textarea
               placeholder="Description"
               name="Description"
-              className="text-right w-full"
+              className="text-right w-full px-1"
             />
-            <input
-              placeholder="Activité"
-              name="Activité"
-              className="text-right"
-            />
-            <input
-              placeholder="Niveau"
-              name="Niveau"
-              className="text-right"
-            />
+            <select
+              className="bg-[#ffffff] text-greyPlaceholder p-1"
+            >
+              <option selected>Activités</option>
+            </select>
+            <select
+              className="bg-[#ffffff] text-greyPlaceholder p-1"
+            >
+              <option selected>Niveau</option>
+            </select>
             <input
               placeholder="Date"
               name="Date"
               type="text"
-              className="text-right"
+              className="text-right px-1"
             />
-            <input
-              placeholder="Début de session"
-              name="Début de session"
-              className="text-right"
-            />
-            <input
-              placeholder="Fin de session"
-              name="Fin de session"
-              className="text-right"
-            />
-            <input
-              placeholder="Nombre de places"
-              name="Nombre de places"
-              className="text-right"
-            />
+            <div className="flex gap-2">
+              <input
+                placeholder="Début de session"
+                name="Début de session"
+                className="text-right w-1/2 px-1"
+              />
+              <input
+                placeholder="Fin de session"
+                name="Fin de session"
+                className="text-right w-1/2 px-1"
+              />
+            </div>
+            <select
+              className="bg-[#ffffff] text-greyPlaceholder p-1"
+            >
+              <option selected>Nombre de places</option>
+            </select>
           </form>
           <button className="bg-blue text-white mt-16 mb-5 py-3 px-7 shadow-lg shadow-black-500/40 rounded-lg">
             <img src="./img/Arrow_right.svg" alt="Arrow_right" />
