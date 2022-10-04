@@ -4,12 +4,10 @@ import Event from './Event';
 
 function Events() {
   return (
-    <div className="flex flex-col gap-5 overflow-y-auto">
-
+    <div className="flex flex-col gap-3 p-2 overflow-y-auto">
       <Event />
       <Event />
       <Event />
-
       <ButtonMenu />
 
     </div>
