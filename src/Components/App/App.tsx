@@ -10,6 +10,7 @@ import Events from '../Globals/Events';
 import CreateEvent from '../CreateEvent';
 import { useAppSelector } from '../../redux/Hooks';
 import UserModale from '../Globals/UserModale';
+import Loader from './Loader';
 
 const App = () => {
   const {user} = useAppSelector((state)=>state);
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/myprofil" element={<Myprofil />} />
           <Route path="/events" element={<Events />} />
           <Route path="/create-event" element={<CreateEvent />} />
+          <Route path='/loader' element={<Loader />} />
         </Routes>
       </main>
     </>
