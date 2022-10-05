@@ -16,8 +16,10 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
+
   const handleChange = (event: { target: { name: any; value: any; }; }) => {
     setForm({ ...form, [event.target.name]: event.target.value });
+
   };
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
@@ -53,7 +55,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <section className="login flex flex-col drop-shadow-2xl shadow-lg shadow-blue md:block md:max-w-sm md:mx-auto my-20">
+    <section className=" absolute inset-x-5 top-20 login flex flex-col drop-shadow-2xl shadow-lg shadow-blue md:block md:max-w-sm md:mx-auto">
       <h1 className='text-blueCustom signup-title flex flex-col items-center md: pt-8'>
         {isActiv ? 'Mot de passe oublié' : 'Te Revoilà !'}
       </h1>

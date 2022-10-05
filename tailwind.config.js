@@ -6,6 +6,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes:{
+        slide:{
+          '0%':{transform:'translateY(-50px)'},
+          '100%':{transform:'translateY(50px)'},
+        },
+      },
       backgroundImage: {
         'home_mobile': 'url(\'/src/assets/home_mobile.svg\')',
         'home_desk': 'url(\'/src/assets/home_desk.svg\')',        
@@ -24,7 +30,7 @@ module.exports = {
       },
       boxShadow: {
         'ButtonBox': '0 4px 4px rgba(0, 0, 0, 0.25)',
-      }
+      }, 
     },
     screens: {
       vsm: '380px',
@@ -37,7 +43,7 @@ module.exports = {
       'blue': '#0A6ABF',
       'red': '#F22259',
       'orange': '#F25C05',
-      'white': '#F2EFEB',
+      'white': '#FFFFFF',
       'black': 'rgb(0 0 0)',
       'blueCustom':'#0a6abf',
       'pinkCustom': '#f22259',

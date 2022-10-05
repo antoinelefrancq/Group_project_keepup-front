@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
     font-family: "PANGRAM";
     src: url("../public/fonts/PPPangramSansRounded-Semibold.otf");
@@ -148,6 +149,19 @@ select:-webkit-autofill:focus {
     }
 }
 
-.test{
-    color:#0a69bd
-}
+
+
+@keyframes escalade {
+    0% {
+      stroke-dasharray: 0 175px;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 175px 175px;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dasharray: 175px 175px;
+      stroke-dashoffset: -(175px - 1);
+    }
+  }
