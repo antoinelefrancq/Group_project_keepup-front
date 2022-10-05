@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface UserState{
+  modaleIsOpen:boolean,
+  userConnected:boolean,
+}
+
+const initialState:UserState = {
+  modaleIsOpen:false,
   userConnected:false
 };
 
@@ -8,11 +14,14 @@ export const userSlice = createSlice({
   name:'user',
   initialState,
   reducers:{
-    testSayHello:(state,actions)=>{
-      console.group('hello');
+    openModale:(state)=>{
+      state.modaleIsOpen=true;
+    },
+    closeModale:(state)=>{
+      state.modaleIsOpen=false;
     }
   }
 });
 
 export default userSlice.reducer;
-export const {testSayHello} = userSlice.actions;
+export const { openModale, closeModale} = userSlice.actions;

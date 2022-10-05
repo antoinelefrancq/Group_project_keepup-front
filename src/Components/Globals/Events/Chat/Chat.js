@@ -10,13 +10,15 @@ import {
 } from '../../../../redux/reducer/chatReducer';
 
 import Messages from './Messages';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import * as constant from '../../../../constant';
+import jwt_decode from 'jwt-decode';
 
 export const socket = io(constant.socketio);
 
 const Chat = () => {
-  const jwt = JSON.parse(localStorage.getItem('user')); // test
+  const { refresh } = JSON.parse(localStorage.getItem('credentials')); // test
+  const jwt = jwt_decode(refresh);
 
   const dispatch = useDispatch();
   const { id: event_id } = useParams();
@@ -81,7 +83,6 @@ const Chat = () => {
   return (
     <>
       <Messages user={jwt} event_id={event_id} socket={socket} />
-      <Toaster />
     </>
   );
 };
