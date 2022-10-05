@@ -13,7 +13,6 @@ export const fetchSignup = async () => {
 };
 
 export const postSignup = async (data) => {
-  console.log(data);
   return await api.post(constant.createUser, data);
 };
 
