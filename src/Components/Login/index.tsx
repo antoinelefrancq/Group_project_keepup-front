@@ -35,6 +35,7 @@ const Login: React.FC = () => {
       })
         .catch((error) => {
           console.log('error', error);
+          toast.error(`${error.response.data.error}`);
         });
 
     } else {
