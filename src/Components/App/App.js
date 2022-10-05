@@ -16,7 +16,7 @@ import Loader from './Loader';
 import MyEvents from '../MyEvents';
 
 const App = () => {
-  const {user} = useAppSelector((state)=>state);
+  const { user } = useAppSelector((state) => state);
   return (
     <>
       <Header />
@@ -35,7 +35,7 @@ const App = () => {
             element={<ResetPassword />}
           />
           <Route path="/create-event" element={<CreateEvent />} />
-          <Route path='/loader' element={<Loader />} />
+          <Route path="/loader" element={<Loader />} />
         </Routes>
         <Toaster />
       </main>
