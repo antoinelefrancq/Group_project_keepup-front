@@ -54,7 +54,7 @@ const Signup = () => {
  * Sport, Level, Gender
  */
   useEffect(() => {
-    api.fetchSignup().then((response) => {
+    api.fetchSportsLevel().then((response) => {
       if(response.status === 200) {
         console.log(response.data);
         setData(response.data);
