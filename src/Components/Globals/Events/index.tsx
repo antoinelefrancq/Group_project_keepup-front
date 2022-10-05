@@ -12,7 +12,6 @@ function Events() {
         <Event />
         <Event />
         <Event />
-        <ButtonMenu />
       </div>
     </>
   );
