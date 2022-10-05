@@ -106,7 +106,7 @@ const Signup = () => {
   
   return (
     <>
-      <section className="signup flex flex-col md:flex-row">
+      <section className="absolute inset-x-2 top-3 signup flex flex-col md:flex-row">
         <div className="block mx-auto my-auto flex-1 justify-self-end">
           <h1 className="text-blueCustom signup-title ">
             C’est parti ! Commence d’abord par te créer un compte

@@ -20,7 +20,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <main  className=''>
+      <main  className='relative'>
         {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/" element={<Home />} />
