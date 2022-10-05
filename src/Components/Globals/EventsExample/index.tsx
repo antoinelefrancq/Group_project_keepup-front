@@ -1,3 +1,5 @@
+import DefaultMap from '../Maps/maps';
+
 function EventsExample() {
   return (
     <div className="flex flex-col gap-3 p-2 overflow-y-auto">
@@ -49,6 +51,7 @@ function EventsExample() {
           </p>
         </div>
       </div>
+      <DefaultMap />
     </div>
   );
 }
