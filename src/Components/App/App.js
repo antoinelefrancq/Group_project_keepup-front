@@ -16,11 +16,11 @@ import Loader from './Loader';
 import MyEvents from '../MyEvents';
 
 const App = () => {
-  const {user} = useAppSelector((state)=>state);
+  const { user } = useAppSelector((state) => state);
   return (
     <>
       <Header />
-      <main  className=''>
+      <main  className='relative'>
         {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -35,7 +35,7 @@ const App = () => {
             element={<ResetPassword />}
           />
           <Route path="/create-event" element={<CreateEvent />} />
-          <Route path='/loader' element={<Loader />} />
+          <Route path="/loader" element={<Loader />} />
         </Routes>
         <Toaster />
       </main>
