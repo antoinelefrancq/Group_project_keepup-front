@@ -26,7 +26,6 @@ function ButtonMenu() {
           </button>
         </button>
         <button  onClick={() => {
-          dispatch(openModale());
           console.log('bouton de droite');}} className=" bg-white shadow shadow-black hover:bg-gray-400 text-gray-800 font-bold pr-10 pl-12 rounded-r">
           <img src='./img/Plus.svg' alt="logo_plus" className="pb-1 translate-x-3"/>
         </button>
