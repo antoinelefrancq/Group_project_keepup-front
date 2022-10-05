@@ -9,7 +9,7 @@ function CreateEvent() {
 
   //================== code modifié
   useEffect(() => {
-    api.fetchSignup().then((response) => {
+    api.fetchSportsLevel().then((response) => {
       if(response.status === 200) {
         const result = response.data;
         setSports(result.sports);
