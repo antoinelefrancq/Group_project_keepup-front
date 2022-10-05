@@ -1,4 +1,4 @@
-const host = 'http://qaonjev.cluster030.hosting.ovh.net/api/v1/';
+const host = 'https://keepup-oclock.herokuapp.com/api/v1/';
 const development = 'http://localhost:8001/api/v1';
 // recupere les data du formulaire pour les selects
 
