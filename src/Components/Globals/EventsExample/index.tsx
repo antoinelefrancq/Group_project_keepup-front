@@ -45,7 +45,7 @@ function EventsExample() {
           <p className="px-1 text-[13px]">Activité: course à pied<span className="bg-orange rounded-full text-white text-[11px] p-1">Intermédiaire</span></p>
           <p className="flex justify-start items-end gap-4 py-2 pr-3">
             <span className="bg-red rounded-r-full text-white text-[13px] p-1">Complet</span>
-            <span className="bg-blue rounded-full text-white text-[11px] px-2 py-0.5">16:00</span>
+            <span className="bg-red rounded-full text-white text-[11px] px-2 py-0.5">16:00</span>
           </p>
         </div>
       </div>
