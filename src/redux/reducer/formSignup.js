@@ -11,7 +11,7 @@ const formSlice = createSlice({
   initialState,
   reducers: {
     addSport: (state, { payload }) => {
-      const levels = ['Débutant', 'Intermediare', 'Expert'];
+      const levels = ['Débutant', 'Intermediaire', 'Expert'];
       if (payload.id !== '' && payload.id !== null) {
         if (levels.includes(payload.level)) {
           console.log(payload);
