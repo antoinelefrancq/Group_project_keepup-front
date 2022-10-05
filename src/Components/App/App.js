@@ -13,27 +13,32 @@ import CreateEvent from '../CreateEvent';
 import { useAppSelector } from '../../redux/Hooks';
 import UserModale from '../Globals/UserModale';
 import Loader from './Loader';
+import ButtonMenu from '../Globals/ButtonMenu';
+import MyEvents from '../Globals/MyEvents';
+import MyEvent from '../Globals/MyEvents/MyEvent';
 
 const App = () => {
-  const {user} = useAppSelector((state)=>state);
+  const { user } = useAppSelector((state) => state);
   return (
     <>
       <Header />
-      <main  className=''>
+      <main  className='relative'>
         {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/event/:id/chat" element={<Chat />} />
-          <Route path="/profile" element={<Myprofil />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/profile" element={<><Myprofil /></>} />
+          <Route path="/profile/:userID/events" element={<MyEvents />} />
+          <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
+          <Route path="/events" element={<><Events /><ButtonMenu /></>} />
           <Route
             path="/account/password/reset/:id/:token"
             element={<ResetPassword />}
           />
           <Route path="/create-event" element={<CreateEvent />} />
-          <Route path='/loader' element={<Loader />} />
+          <Route path="/loader" element={<Loader />} />
         </Routes>
         <Toaster />
       </main>

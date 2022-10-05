@@ -1,19 +1,40 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import * as api from '../../api/routes';
+
 
 function CreateEvent() {
   const [sports, setSports] = useState([]);
   const [levels, setLevels] = useState([]);
 
-  axios.get('http://qaonjev.cluster030.hosting.ovh.net/api/v1/signup')
-    .then((response) => {
-      const results = response.data;
-      setSports(results.sports);
-      setLevels(results.level);
-    })
-    .catch((error) => {
-      console.log('error', error);
+  //================== code modifié
+  useEffect(() => {
+    api.fetchSportsLevel().then((response) => {
+      if(response.status === 200) {
+        const result = response.data;
+        setSports(result.sports);
+        setLevels(result.level);
+        console.log(response.data);
+      }
+    }).catch((error) => {
+      console.log('_______________');
+      console.log(error);
+      console.log('_______________');
     });
+  }, []);
+
+  //================== ancien code  
+  // axios.get('http://qaonjev.cluster030.hosting.ovh.net/api/v1/signup')
+  //   .then((response) => {
+  //     const results = response.data;
+  //     setSports(results.sports);
+  //     setLevels(results.level);
+  //     console.log(results.data);
+      
+  //   })
+  //   .catch((error) => {
+  //     console.log('error', error);
+  //   });
   return (
     <>
       <div className="h-full flex flex-col justify-end">

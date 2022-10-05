@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -35,6 +36,7 @@ const Login: React.FC = () => {
       })
         .catch((error) => {
           console.log('error', error);
+          toast.error(`${error.response.data.error}`);
         });
 
     } else {
@@ -55,7 +57,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <section className="login flex flex-col drop-shadow-2xl shadow-lg shadow-blue md:block md:max-w-sm md:mx-auto my-20">
+    <section className=" absolute inset-x-5 top-20 login flex flex-col drop-shadow-2xl shadow-lg shadow-blue md:block md:max-w-sm md:mx-auto">
       <h1 className='text-blueCustom signup-title flex flex-col items-center md: pt-8'>
         {isActiv ? 'Mot de passe oublié' : 'Te Revoilà !'}
       </h1>

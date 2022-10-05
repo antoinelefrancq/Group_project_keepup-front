@@ -8,12 +8,11 @@ const api = axios.create({
   baseUrl: constant.baseUrl,
 });
 // return la reponse du call api
-export const fetchSignup = async () => {
+export const fetchSportsLevel = async () => {
   return await api.get(constant.signup).then((response) => response);
 };
 
 export const postSignup = async (data) => {
-  console.log(data);
   return await api.post(constant.createUser, data);
 };
 

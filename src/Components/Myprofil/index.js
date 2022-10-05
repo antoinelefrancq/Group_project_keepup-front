@@ -3,20 +3,22 @@ import {useState, useEffect} from 'react';
 import * as api from '../../api/routes';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import toast from 'react-hot-toast';
+
+import { importLocalData } from '../../redux/reducer/userReducer';
+
 
 // Initial State
 const INITIAL_STATE = {
-  firstname: '',
-  lastname:'',
-  gender:'',
-  email: '',
-  password:'',
-  dob:'',
-  description:'',
+  firstname: 'Romain',
+  lastname:'Le Padre',
+  gender:'Male Alpha',
+  email: 'romain@lepadre.fr',
+  password:'Apero',
+  dob:'01/01/1950',
+  description:'Je ne dors pas la nuit',
   sports:[],
-  city:'',
-  zipcode:'',
+  city:'Boulogne-sur-Mer',
+  zipcode:'62200',
 };
 
 //Function Component
@@ -34,6 +36,7 @@ const Profil = () => {
   const [data, setData] = useState([]);
   const {sportList} = useSelector((state) => state.form);
   const [modalIsOpen,setModalIsOpen] = useState(false);
+  const {userData} = useSelector((state) => state.user);
 
   function dateFactorisation (dob){
     const {date} = dob.split('_');
@@ -48,7 +51,6 @@ const Profil = () => {
   useEffect(() => {
     api.fetchSportsLevel().then((response) => {
       if(response.status === 200) {
-        console.log(response.data);
         setData(response.data);
       }
     }).catch((error) => {
@@ -58,6 +60,10 @@ const Profil = () => {
     });
   }, []);
 
+
+  useEffect(() => {
+    setForm({...form, password:'', userData});
+  },[userData]);
 
 
   const handleChange = (event) => {
@@ -94,18 +100,19 @@ const Profil = () => {
 
   const buttonEdit = () => {
     setIsModifying(true);
-    console.log(isModifying);
+
   };
 
   const buttonValidator = () => {
     setIsModifying(false);
     console.log(isModifying);
+    dispatch(importLocalData({form}));
   };
 
   // Components
   return (
     <>
-      <div className="anchor"></div>
+      <div className="anchor pb-2"></div>
       <section onClick={()=>hideModale()} className="signup flex flex-col items-center pt-[9px] pb-10 px-2 md:flex-row bg-[#F2EFEB] relative">
         <button className='absolute top-3 right-4'>
           <img src="/img/bi_arrow-down-circle.svg" alt="flèche_du_bas" />
@@ -136,26 +143,37 @@ const Profil = () => {
             <button onClick={()=>buttonEdit()}><p className='p-2 w-40  hover:text-pinkCustom hover:tracking-wider transition-all'>Éditer mon profil</p></button>
           </div>
         </div>
-        {!isModifying && <div>
-          <p className="text-center">Nathan Bardi</p>
+         {!isModifying &&
+        <div>
+          <p className="text-center text-blueCustom pb-8">{userData.firstname} {userData.lastname}</p>
+          <p className='infos rounded-sm w-60 text-blueCustom'>{userData.email}</p>
+          <p className='infos rounded-sm w-60 text-blueCustom'>{userData.dob}</p>
+          <p className='infos rounded-sm w-60 text-blueCustom'>{userData.gender}</p>
+          <p className='infos rounded-sm w-60 text-blueCustom h-32'>{userData.description}</p>
+          <p className='infos rounded-sm w-60 text-blueCustom'>{userData.city}</p>
+          <p className='infos rounded-sm w-60 text-blueCustom'>{userData.zipcode}</p>
         </div>}
    
         {/** le form s'affiche uniquement si l'on a cliqué sur l'image pour modifier les informations du profil.*/}
-        {isModifying && <form className="text-blueCustom w-full text-right pt-2 px-10 flex flex-col items-center">
+        {isModifying && <form className="text-blueCustom w-auto text-right pt-2 flex flex-col items-center">
           <input 
             onChange={handleChange}
+            value={form.firstname}
             name="firstname"
             type="text"
             placeholder="Prenom" 
             className="infos rounded-sm"/>
           <input 
-            onChange={handleChange} 
+            onChange={handleChange}
+            value={form.lastname}
+
             name="lastname" 
             type="text"
             placeholder="Nom"
             className="infos rounded-sm"/>
           <input
             onChange={handleChange}
+            value={form.email}
             name="email"
             type="text"
             placeholder="email"
@@ -163,32 +181,51 @@ const Profil = () => {
           />
           <input
             onChange={handleChange}
-            name='mot de passe'
+            name='password'
             type="password"
-            placeholder='password'
+            placeholder='mot de passe'
             className="infos rounded-sm"
           />
           <input
             onChange={handleChange}
-            placeholder='gender'
+            value={form.dob}
+            name='dob'
+            placeholder="date"
+            type="date"
+            className="infos rounded-sm"
+          />
+          <input
+            onChange={handleChange}
+            value={form.gender}
+            placeholder='genre'
             name="gender"
             className="infos rounded-sm"
           />
           <textarea
             onChange={handleChange}
+            value={form.description}
             placeholder='description'
             name='description'
             className="infos rounded-sm"
           />
           <input
             onChange={handleChange}
+            value={form.city}
             type="text"
             name='city'
-            placeholder='city'
+            placeholder='ville'
             className="infos rounded-sm"
           />
+          <input
+            onChange={handleChange}
+            value={form.zipcode}
+            type="number"
+            name="zipcode"
+            className="infos rounded-sm"
+            placeholder='code postal'
+          />
         </form>}
-        <p className="text-center w-full pb-2">Sport pratiqués :</p>
+        <p className="text-center w-full pb-6 pt-6 text-blueCustom">Sport pratiqués :</p>
         <div className="p-2 border-t-2 border-[#E3E3E3] w-full">
         </div>
         <ul className="flex flex-col justify-center items-center">
