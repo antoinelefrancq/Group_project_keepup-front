@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchSignup } from '../../api/routes';
+import { fetchSportsLevel } from '../../api/routes';
 import axios from 'axios';
 import { signup } from '../../constant';
 

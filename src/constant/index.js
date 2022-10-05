@@ -19,5 +19,5 @@ export const deleteOneMessage = (id) => `${host}/message/${id}/delete`;
 export const forgetPassword = (email) => `${host}/auth/password/${email}`;
 export const confirmChangePassword = ({ id }) =>
   `${host}/auth/password/${id}/confirm`;
-export const login = `${development}/auth/login`;
+export const login = `${host}/auth/login`;
 export const baseUrl = host;

@@ -47,17 +47,16 @@ const Signup = () => {
    * Sport, Level, Gender
    */
   useEffect(() => {
-    api
-      .fetchSignup()
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response.data);
-          setData(response.data);
-        }
-      })
-      .catch((error) => {
-        toast.error('Veuillez réessayer plus tard');
-      });
+    api.fetchSportsLevel().then((response) => {
+      if(response.status === 200) {
+        console.log(response.data);
+        setData(response.data);
+      }
+    }).catch((error) => {
+      console.log('_______________');
+      console.log(error);
+      console.log('_______________');
+    });
   }, []);
 
   const onSubmit = async (data) => {
