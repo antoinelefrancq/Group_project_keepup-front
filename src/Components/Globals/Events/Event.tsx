@@ -7,11 +7,11 @@ function Event() {
             <p>Mar</p><p>20</p>
           </div>
           <div className="flex flex-col justify-center items-center pt-2">
-            <img src="./img/muscu.svg" alt="profile_picture" className="w-10 h-10"/>
+            <img src="/img/muscu.svg" alt="profile_picture" className="w-10 h-10"/>
           </div>
         </div>
         <div className="text-white text-center w-[66px]">
-          <img src="./img/photo2.svg" alt="image_profil" className="" />
+          <img src="/img/photo2.svg" alt="image_profil" className="" />
         </div>
       </div>
       <div className="text-blue">

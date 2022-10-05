@@ -31,7 +31,7 @@ const App = () => {
           <Route path="/event/:id/chat" element={<Chat />} />
           <Route path="/profile" element={<><Myprofil /></>} />
           <Route path="/profile/:userID/events" element={<MyEvents />} />
-          <Route path="/profile/:userID/events/:eventID" element={<><MyEvent /><ButtonMenu /></>} />
+          <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
           <Route path="/events" element={<><Events /><ButtonMenu /></>} />
           <Route
             path="/account/password/reset/:id/:token"

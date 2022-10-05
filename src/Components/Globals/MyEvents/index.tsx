@@ -1,3 +1,4 @@
+import ButtonMenu from '../ButtonMenu';
 import Event from '../Events/Event';
 import EventDone from '../Events/EventDone';
 
@@ -14,6 +15,7 @@ function MyEvents() {
         <EventDone />
         <EventDone />
       </div>
+      <ButtonMenu />
     </>
   );
 }
