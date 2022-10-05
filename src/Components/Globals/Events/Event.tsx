@@ -16,10 +16,10 @@ function Event() {
       </div>
       <div className="text-blue">
         <h3 className="px-1 text-[15px]">Tuesday - leg day !</h3>
-        <p className="px-1 text-[15px]">Keeper: Benoît</p>
-        <p className="px-1 text-[13px]">Activité: musculation <span className="bg-blue rounded-full text-white text-[11px] p-1">Amateur</span></p>
+        <p className="px-1 text-[12px]">Keeper: Benoît</p>
+        <p className="px-1 text-[12px]">Activité: musculation <span className="bg-blue rounded-full text-white text-[11px] p-1">Amateur</span></p>
         <p className="flex justify-start items-end gap-4 py-2 pr-3">
-          <span className="bg-blue rounded-r-full text-white text-[13px] p-1">1/2 place disponible</span>
+          <span className="bg-blue rounded-r-full text-white text-[12px] p-1">1/2 place disponible</span>
           <span className="bg-blue rounded-full text-white text-[11px] px-2 py-0.5">16:00</span>
         </p>
       </div>

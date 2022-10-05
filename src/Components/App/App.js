@@ -14,6 +14,7 @@ import { useAppSelector } from '../../redux/Hooks';
 import UserModale from '../Globals/UserModale';
 import Loader from './Loader';
 import MyEvents from '../MyEvents';
+import MyEvent from '../MyEvents/MyEvent';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/event/:id/chat" element={<Chat />} />
           <Route path="/profile" element={<Myprofil />} />
           <Route path="/profile/:userID/events" element={<MyEvents />} />
+          <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
           <Route path="/events" element={<Events />} />
           <Route
             path="/account/password/reset/:id/:token"
