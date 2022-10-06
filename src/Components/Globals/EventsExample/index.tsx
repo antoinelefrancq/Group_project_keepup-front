@@ -1,4 +1,5 @@
 import DefaultMap from '../Maps/maps';
+import PopupExample from '../Maps/Popup';
 
 function EventsExample() {
   return (
@@ -51,7 +52,8 @@ function EventsExample() {
           </p>
         </div>
       </div>
-      <DefaultMap />
+      {/* <DefaultMap /> */}
+      <PopupExample/>
     </div>
   );
 }
