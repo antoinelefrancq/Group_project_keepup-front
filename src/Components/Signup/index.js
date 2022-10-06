@@ -302,6 +302,7 @@ const Signup = () => {
                       key={sport._id}
                       value={sport.sport}
                       data-key={sport._id}
+            
                     >
                       {sport.sport}
                     </option>

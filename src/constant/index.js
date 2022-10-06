@@ -13,6 +13,7 @@ export const socketio = 'ws://qaonjev.cluster030.hosting.ovh.net';
  */
 export const createUser = host + '/create/user';
 export const signup = host + '/signup';
+export const createAnEvent = host + '/create/event';
 export const eventById = (id) => `${host}/event/${id}`;
 export const chatMessages = (id) => `${host}/event/${id}/chat`;
 export const deleteOneMessage = (id) => `${host}/message/${id}/delete`;

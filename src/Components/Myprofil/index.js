@@ -143,7 +143,7 @@ const Profil = () => {
             <button onClick={()=>buttonEdit()}><p className='p-2 w-40  hover:text-pinkCustom hover:tracking-wider transition-all'>Éditer mon profil</p></button>
           </div>
         </div>
-         {!isModifying &&
+        {!isModifying &&
         <div>
           <p className="text-center text-blueCustom pb-8">{userData.firstname} {userData.lastname}</p>
           <p className='infos rounded-sm w-60 text-blueCustom'>{userData.email}</p>
