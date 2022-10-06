@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import * as api from '../../api/routes';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+
 import { importLocalData } from '../../redux/reducer/userReducer';
 
 
@@ -34,8 +35,9 @@ const Profil = () => {
   });
   const [data, setData] = useState([]);
   const {sportList} = useSelector((state) => state.form);
+  const [modalIsOpen,setModalIsOpen] = useState(false);
   const {userData} = useSelector((state) => state.user);
-  
+
   function dateFactorisation (dob){
     const {date} = dob.split('_');
     [date[0], date[2]] = [date[2], date[0]];
@@ -58,9 +60,11 @@ const Profil = () => {
     });
   }, []);
 
+
   useEffect(() => {
     setForm({...form, password:'', userData});
   },[userData]);
+
 
   const handleChange = (event) => {
     const {target} = event;
@@ -84,12 +88,24 @@ const Profil = () => {
     setSelect((prevState) => ({...prevState, level: target.value}));
   };
 
+  const toggleModale = () =>{
+    setModalIsOpen(!modalIsOpen);
+    console.log(modalIsOpen);
+  };
+
+  const hideModale = () =>{
+    setModalIsOpen(false);
+    console.log(modalIsOpen);
+  };
+
   const buttonEdit = () => {
     setIsModifying(true);
+
   };
 
   const buttonValidator = () => {
     setIsModifying(false);
+    console.log(isModifying);
     dispatch(importLocalData({form}));
   };
 
@@ -97,25 +113,37 @@ const Profil = () => {
   return (
     <>
       <div className="anchor pb-2"></div>
-      <section className="signup flex flex-col items-center pt-[9px] pb-10 px-2 md:flex-row bg-[#F2EFEB] relative">
+      <section onClick={()=>hideModale()} className="signup flex flex-col items-center pt-[9px] pb-10 px-2 md:flex-row bg-[#F2EFEB] relative">
         <button className='absolute top-3 right-4'>
           <img src="/img/bi_arrow-down-circle.svg" alt="flèche_du_bas" />
         </button>
-        <div className="flex flex-col items-center" >        
+        <div className="relative flex flex-col items-center" >        
           <h1 className="text-blueCustom text-xl pb-2">Mon profil</h1> 
           <button
-            onClick={() => buttonEdit()}
+            onClick={(event) => {
+              event.stopPropagation();
+              toggleModale();
+            }} 
             type='button'
             name='button'
+            className='relative'
           >
+            <span className="absolute flex h-3 w-3 top-1 right-1">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-blueCustom"></span>
+            </span>
             <img
-              className="w-20 h-20 rounded-full"
+              className="w-20 h-20 rounded-full transition-all hover:brightness-75"
               src="./img/Nathan_2.png"
               alt="modifier mes coordonnées"
             />
-          </button>
+          </button>  
+          <div className={modalIsOpen? 'absolute flex flex-col items-center bg-[#fff] -bottom-16 text-xs text-blueCustom rounded-lg border-blueCustom border-solid border-2':'hidden'} >
+            <button><p className='p-2 w-40 border-b-2 border-b-blueCustom border-b-solid hover:text-pinkCustom hover:tracking-wider transition-all'>Changer mon avatar</p></button>
+            <button onClick={()=>buttonEdit()}><p className='p-2 w-40  hover:text-pinkCustom hover:tracking-wider transition-all'>Éditer mon profil</p></button>
+          </div>
         </div>
-        {!isModifying &&
+         {!isModifying &&
         <div>
           <p className="text-center text-blueCustom pb-8">{userData.firstname} {userData.lastname}</p>
           <p className='infos rounded-sm w-60 text-blueCustom'>{userData.email}</p>
@@ -138,6 +166,7 @@ const Profil = () => {
           <input 
             onChange={handleChange}
             value={form.lastname}
+
             name="lastname" 
             type="text"
             placeholder="Nom"
