@@ -108,18 +108,18 @@ function CreateEvent() {
   //================== Components
   return (
     <>
-      <div className="h-full flex flex-col justify-end">
-        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] pt-6">
+      <div className="h-full flex flex-col justify-end items-center">
+        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] pt-6 md:w-1/2">
           <div className="text-blueCustom">
             Créer une session
           </div>
           <form 
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2 w-full text-right px-10">
+            className="flex flex-col items-center gap-2 w-full text-right px-10">
             <input
               placeholder="Titre"
               {...register('name')}
-              className="text-right px-1"
+              className="text-right px-1 w-full"
             />
             <textarea
               placeholder="Description"
@@ -127,7 +127,7 @@ function CreateEvent() {
               className="text-right w-full px-1"
             />
             <select
-              className="bg-[#ffffff] text-greyPlaceholder p-1"
+              className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
               onChange={handleChangeSelectSport}
             >
               <option disabled={true}>🏈🏀⚽🏓🏐</option>
@@ -146,7 +146,7 @@ function CreateEvent() {
             </select>
             <select
               onChange={handleChangeSelectLevel}
-              className="bg-[#ffffff] text-greyPlaceholder p-1"
+              className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
             >
               <option disabled={true}>🥇🥈🥉🏅🏆</option>
               {levels?.map((level) => (
@@ -157,7 +157,7 @@ function CreateEvent() {
             </select>
             <select
               onChange={handleChangeSelectGender}
-              className="bg-[#ffffff] text-greyPlaceholder p-1"
+              className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
             >
               <option disabled={true}>👩👨👽👾</option>
               {genders?.map((gender) => (
@@ -170,9 +170,9 @@ function CreateEvent() {
               placeholder="Date"
               {...register('date')}
               type="date"
-              className="text-right px-1 text-greyPlaceholder"
+              className="text-right px-1 text-greyPlaceholder  w-full"
             />
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full">
               <input
                 placeholder="Début de session"
                 {...register('period.start')}
@@ -188,25 +188,25 @@ function CreateEvent() {
               placeholder="Nombre de participants maximum"
               {...register('max')}
               type="text"
-              className="text-right px-1"
+              className="text-right px-1 w-full"
             />
             <input
               placeholder="adresse"
               {...register('address')}
               type="text"
-              className="text-right px-1"
+              className="text-right px-1 w-full"
             />
             <input
               placeholder="Ville"
               {...register('city')}
               type="text"
-              className="text-right px-1"
+              className="text-right px-1 w-full"
             />
             <input
               placeholder="Code postal"
               {...register('zipcode')}
               type="text"
-              className="text-right px-1"
+              className="text-right px-1 w-full"
             />
             <button type="submit" className="bg-blue text-white mt-16 mb-5 py-3 w-20 rounded-lg shadow-md shadow-[#808080] flex justify-center">
               <img src="./img/Arrow_right.svg" alt="Arrow_right" className="" />
