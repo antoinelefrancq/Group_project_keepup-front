@@ -28,7 +28,9 @@ const Chat = ({ user, socket, event_id }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const local = JSON.parse(localStorage.getItem('credentials'));
     const payload = {
+      token: local,
       receiver: event_id,
       _id: null,
       sender: {

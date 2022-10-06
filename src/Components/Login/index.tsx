@@ -27,18 +27,13 @@ const Login: React.FC = () => {
     event.preventDefault();
     if (!isActiv) {
 
-      console.log(form);
-      await api.login(form).then((response) => {
-        localStorage.setItem('credentials', JSON.stringify({ ...response.data }));
-        axios.defaults.headers.common['authorization'] = response.data.access;
-
+      const response: any = await api.login(form);
+        
+      if(response.status){
         navigate('/profile');
-      })
-        .catch((error) => {
-          console.log('error', error);
-          toast.error(`${error.response.data.error}`);
-        });
-
+      }else{
+        toast.error(`${response.error.response.data.error}`);
+      }
     } else {
       api.forgetPassword({ email: form.email }).then((reponse) => {
         if (reponse.status === 200) {

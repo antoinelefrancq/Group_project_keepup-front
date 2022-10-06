@@ -64,29 +64,21 @@ const Signup = () => {
 
   const onSubmit = async (data) => {
     const dob = await dateFactorisation(data.dob);
-    await api
-      .postSignup({
-        ...data,
-        dob,
-        sports: sportToSend,
-        handicap: true,
-        zipcode: Number(data.zipcode),
-      })
-      .then((response) => {
-        localStorage.setItem(
-          'credentials',
-          JSON.stringify({ ...response.data })
-        );
-        axios.defaults.headers.common['authorization'] = response.data.access;
+    const response = await api.postSignup({
+      ...data,
+      dob,
+      sports: sportToSend,
+      handicap: true,
+      zipcode: Number(data.zipcode),
+    });
+    // if (response.status) {
+    //   navigate('/profile');
 
-        navigate('/profile');
-
-        toast.success('Votre compte a été crée');
-      })
-      .catch((error) => {
-        console.dir(error);
-        toast.error(error.response.data.error);
-      });
+    //   toast.success('Votre compte a été crée');
+    // } else {
+    //   console.dir(response.error);
+    //   toast.error(response.error.response.data.error);
+    // }
   };
 
   const handleChangeSelectSport = (event) => {
