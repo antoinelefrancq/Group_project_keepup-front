@@ -1,37 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import * as api from '../../api/routes';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { importLocalData } from '../../redux/reducer/userReducer';
-
+import { useAuth } from '../App/ProtectedRoute';
 
 // Initial State
 const INITIAL_STATE = {
   firstname: 'Romain',
-  lastname:'Le Padre',
-  gender:'Male Alpha',
+  lastname: 'Le Padre',
+  gender: 'Male Alpha',
   email: 'romain@lepadre.fr',
-  password:'Apero',
-  dob:'01/01/1950',
-  description:'Je ne dors pas la nuit',
-  sports:[],
-  city:'Boulogne-sur-Mer',
-  zipcode:'62200',
+  password: 'Apero',
+  dob: '01/01/1950',
+  description: 'Je ne dors pas la nuit',
+  sports: [],
+  city: 'Boulogne-sur-Mer',
+  zipcode: '62200',
 };
 
 //Function Component
 const Profil = () => {
+  //
+  const isAuth = useAuth();
 
-  const dispatch= useDispatch();
+  console.log('_____________');
+  console.log(isAuth);
+  console.log('_____________');
 
-  const [isModifying,setIsModifying]=useState(false);
+  const dispatch = useDispatch();
+
+  const [isModifying, setIsModifying] = useState(false);
   const [form, setForm] = useState(INITIAL_STATE);
   const [select, setSelect] = useState({
     id: '',
     sport: '',
-    level:''
+    level: '',
   });
   const [data, setData] = useState([]);
   const {sportList} = useSelector((state) => state.form);
@@ -49,30 +55,33 @@ const Profil = () => {
    * Sport, Level, Gender
    */
   useEffect(() => {
-    api.fetchSportsLevel().then((response) => {
-      if(response.status === 200) {
-        setData(response.data);
-      }
-    }).catch((error) => {
-      console.log('_____');
-      console.log(error);
-      console.log('_____');
-    });
+    api
+      .fetchSportsLevel()
+      .then((response) => {
+        if (response.status === 200) {
+          setData(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log('_____');
+        console.log(error);
+        console.log('_____');
+      });
   }, []);
 
 
   useEffect(() => {
-    setForm({...form, password:'', userData});
-  },[userData]);
+    setForm({ ...form, password: '', userData });
+  }, [userData]);
 
 
   const handleChange = (event) => {
-    const {target} = event;
-    setForm((prevState) => ({...prevState, [target.name]: target.value}));
+    const { target } = event;
+    setForm((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
   const handleSetChangeSelectSport = (event) => {
-    const {target} = event;
+    const { target } = event;
     const selectedIndex = target.options.selectedIndex;
     const id = target.options[selectedIndex].getAttribute('data-key');
 
@@ -80,12 +89,12 @@ const Profil = () => {
       id,
       sport: target.value,
     };
-    setSelect((prevState) => ({...prevState, ...newObj}));
+    setSelect((prevState) => ({ ...prevState, ...newObj }));
   };
 
   const handleChangeSelectLevel = (event) => {
-    const {target} = event;
-    setSelect((prevState) => ({...prevState, level: target.value}));
+    const { target } = event;
+    setSelect((prevState) => ({ ...prevState, level: target.value }));
   };
 
   const toggleModale = () =>{
@@ -105,8 +114,7 @@ const Profil = () => {
 
   const buttonValidator = () => {
     setIsModifying(false);
-    console.log(isModifying);
-    dispatch(importLocalData({form}));
+    dispatch(importLocalData({ form }));
   };
 
   // Components
@@ -143,7 +151,7 @@ const Profil = () => {
             <button onClick={()=>buttonEdit()}><p className='p-2 w-40  hover:text-pinkCustom hover:tracking-wider transition-all'>Éditer mon profil</p></button>
           </div>
         </div>
-         {!isModifying &&
+        {!isModifying &&
         <div>
           <p className="text-center text-blueCustom pb-8">{userData.firstname} {userData.lastname}</p>
           <p className='infos rounded-sm w-60 text-blueCustom'>{userData.email}</p>
@@ -245,7 +253,7 @@ const Profil = () => {
               </select>
             </div>
             <div className="w-[60px] flex justify-start">
-              <button type='button'>
+              <button type="button">
                 <img
                   src="./img/ep_circle-plus-filled.svg"
                   alt="+"
@@ -259,21 +267,17 @@ const Profil = () => {
           <article>
             <div className="bg-blueCustom rounded-lg flex items-center">
               <div className="flex flex-col align-center justify-center w-[77px] h-[108px]">
-                <div className="text-white border-b-2 m-1 text-center text-[15px] font-bold pb-2"
-                >
+                <div className="text-white border-b-2 m-1 text-center text-[15px] font-bold pb-2">
                   <p>Amateur</p>
                 </div>
                 <div className="flex justify-center pt-2">
-                  <img
-                    src="./img/Beginner.svg"
-                    alt="logo_beginner"
-                  />
+                  <img src="./img/Beginner.svg" alt="logo_beginner" />
                 </div>
               </div>
             </div>
           </article>
         </div>
-        <button 
+        <button
           onClick={() => buttonValidator()}
           className="bg-blueCustom text-white rounded-lg p-2"
         >
@@ -285,6 +289,3 @@ const Profil = () => {
 };
 
 export default Profil;
-
-
-
