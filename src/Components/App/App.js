@@ -15,27 +15,32 @@ import UserModale from '../Globals/UserModale';
 import Loader from './Loader';
 import MyEvents from '../MyEvents';
 
+import ProtectedRoute from './ProtectedRoute';
+
 const App = () => {
   const { user } = useAppSelector((state) => state);
   return (
     <>
       <Header />
-      <main  className='relative'>
+      <main className="relative">
         {user.modaleIsOpen && <UserModale />}
         <Routes>
+          <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/event/:id/chat" element={<Chat />} />
-          <Route path="/profile" element={<Myprofil />} />
-          <Route path="/profile/:userID/events" element={<MyEvents />} />
-          <Route path="/events" element={<Events />} />
-          <Route
-            path="/account/password/reset/:id/:token"
-            element={<ResetPassword />}
-          />
-          <Route path="/create-event" element={<CreateEvent />} />
-          <Route path="/loader" element={<Loader />} />
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="/event/:id/chat" element={<Chat />} />
+            <Route path="/profile" element={<Myprofil />} />
+            <Route path="/profile/:userID/events" element={<MyEvents />} />
+            <Route path="/events" element={<Events />} />
+            <Route
+              path="/account/password/reset/:id/:token"
+              element={<ResetPassword />}
+            />
+            <Route path="/create-event" element={<CreateEvent />} />
+          </Route>
         </Routes>
         <Toaster />
       </main>

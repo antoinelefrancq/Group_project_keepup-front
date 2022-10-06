@@ -2,8 +2,9 @@ const host = 'https://keepup-oclock.herokuapp.com/api/v1';
 const development = 'http://localhost:8001/api/v1';
 // recupere les data du formulaire pour les selects
 
-export const socketio = 'ws://qaonjev.cluster030.hosting.ovh.net';
-// export const socketio = 'ws://localhost:8001';
+// export const socketio = 'ws://qaonjev.cluster030.hosting.ovh.net';
+// export const socketio = 'ws://keepup-oclock.herokuapp.com';
+export const socketio = 'ws://localhost:8001';
 
 /**
  *  Api endpoint:
@@ -11,13 +12,14 @@ export const socketio = 'ws://qaonjev.cluster030.hosting.ovh.net';
  * @param {ObjectId} id event id
  * @returns all event's messages
  */
-export const createUser = host + '/create/user';
-export const signup = host + '/signup';
-export const eventById = (id) => `${host}/event/${id}`;
-export const chatMessages = (id) => `${host}/event/${id}/chat`;
-export const deleteOneMessage = (id) => `${host}/message/${id}/delete`;
-export const forgetPassword = (email) => `${host}/auth/password/${email}`;
+export const createUser = development + '/create/user';
+export const signup = development + '/signup';
+export const eventById = (id) => `${development}/event/${id}`;
+export const chatMessages = (id) => `${development}/event/${id}/chat`;
+export const deleteOneMessage = (id) => `${development}/message/${id}/delete`;
+export const forgetPassword = (email) =>
+  `${development}/auth/password/${email}`;
 export const confirmChangePassword = ({ id }) =>
-  `${host}/auth/password/${id}/confirm`;
-export const login = `${host}/auth/login`;
-export const baseUrl = host;
+  `${development}/auth/password/${id}/confirm`;
+export const login = `${development}/auth/login`;
+export const baseUrl = development;
