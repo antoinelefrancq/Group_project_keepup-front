@@ -145,7 +145,7 @@ select:-webkit-autofill:focus {
         @apply placeholder-greyPlaceholder;
     }
     .infos {
-        @apply bg-[#FFFFFF] m-2 pr-2 text-end;
+        @apply bg-[#FFFFFF] mt-2 mb-2 pr-2 text-end;
     }
 }
 
