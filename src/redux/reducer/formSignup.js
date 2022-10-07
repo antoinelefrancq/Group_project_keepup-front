@@ -40,3 +40,5 @@ const formSlice = createSlice({
 
 export default formSlice.reducer;
 export const { addSport, deleteSport } = formSlice.actions;
+
+// [{level:'', sport:''!!!c 'est un id'}]

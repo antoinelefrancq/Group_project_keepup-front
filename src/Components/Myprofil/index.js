@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { importLocalData } from '../../redux/reducer/userReducer';
+import { addSport } from '../../redux/reducer/formSignup';
 import { useAuth } from '../App/ProtectedRoute';
 
 // Initial State
@@ -32,6 +33,7 @@ const Profil = () => {
 
   const dispatch = useDispatch();
 
+
   const [isModifying, setIsModifying] = useState(false);
   const [form, setForm] = useState(INITIAL_STATE);
   const [select, setSelect] = useState({
@@ -40,7 +42,7 @@ const Profil = () => {
     level: '',
   });
   const [data, setData] = useState([]);
-  const {sportList} = useSelector((state) => state.form);
+  const {sportList, sportToSend} = useSelector((state) => state.form);
   const [modalIsOpen,setModalIsOpen] = useState(false);
   const {userData} = useSelector((state) => state.user);
 
@@ -80,6 +82,8 @@ const Profil = () => {
     setForm((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
+  const handleChangeSelectSport = (event) => {
+    const {target} = event;
   const handleSetChangeSelectSport = (event) => {
     const { target } = event;
     const selectedIndex = target.options.selectedIndex;
@@ -107,10 +111,11 @@ const Profil = () => {
     console.log(modalIsOpen);
   };
 
-  const buttonEdit = () => {
-    setIsModifying(true);
+  const buttonUserEdit = () => {
+    setIsModifyingUser(true);
 
   };
+
 
   const buttonValidator = () => {
     setIsModifying(false);
@@ -292,7 +297,7 @@ const Profil = () => {
           className="bg-blueCustom text-white rounded-lg p-2 md:mt-20"
         >
           Appliquer les modifications
-        </button>
+        </button>}
       </section>
     </div>
   );

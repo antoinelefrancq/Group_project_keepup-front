@@ -84,6 +84,7 @@ const Signup = () => {
   const handleChangeSelectSport = (event) => {
     const { target } = event;
     const selectedIndex = target.options.selectedIndex;
+    console.log(target.options.selectedIndex);
     const id = target.options[selectedIndex].getAttribute('data-key');
 
     const newObj = {
