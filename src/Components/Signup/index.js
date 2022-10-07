@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../App/ProtectedRoute';
 //Function component
 const Signup = () => {
   const dispatch = useDispatch();
@@ -71,14 +72,14 @@ const Signup = () => {
       handicap: true,
       zipcode: Number(data.zipcode),
     });
-    // if (response.status) {
-    //   navigate('/profile');
-
-    //   toast.success('Votre compte a été crée');
-    // } else {
-    //   console.dir(response.error);
-    //   toast.error(response.error.response.data.error);
-    // }
+    if (response.status) {
+      const id= useAuth().user._id;
+      navigate(`/profile/${id}`);
+      toast.success('Votre compte a été crée');
+    } else {
+      console.dir(response.error);
+      toast.error(response.error.response.data.error);
+    }
   };
 
   const handleChangeSelectSport = (event) => {

@@ -5,11 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import InputText from '../Globals/Input/Text';
 import * as api from '../../api/routes';
 import toast from 'react-hot-toast';
+import { useAuth } from '../App/ProtectedRoute';
 
 //Function component
-const Login: React.FC = () => {
+const Login = () => {
 
-  const [isActiv, setIsActiv] = useState<boolean>(false);
+  const [isActiv, setIsActiv] = useState(false);
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -18,19 +19,21 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
 
-  const handleChange = (event: { target: { name: any; value: any; }; }) => {
+  const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
 
   };
 
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!isActiv) {
 
-      const response: any = await api.login(form);
-        
+      const response = await api.login(form);
+
       if(response.status){
-        navigate('/profile');
+        const id= useAuth().user._id;
+        navigate(`/profile/${id}`);
+
       }else{
         toast.error(`${response.error.response.data.error}`);
       }
@@ -46,7 +49,7 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleClick = (event: any) => {
+  const handleClick = (event) => {
     event.stopPropagation();
     setIsActiv(prevState => !prevState);
   };

@@ -6,7 +6,7 @@ export const useAuth = () => {
   try {
     const currentDate = new Date();
     const token = JSON.parse(localStorage.getItem('credentials'));
-    const decodedToken = jwt_decode(token.refresh);
+    const decodedToken = jwt_decode(token?.refresh);
 
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       return { loggedIn: false, user: null };
