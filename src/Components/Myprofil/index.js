@@ -160,7 +160,7 @@ const Profil = () => {
                   </span>
                   <img
                     className="w-20 h-20 rounded-full transition-all hover:brightness-75"
-                    src="./img/Nathan_2.png"
+                    src="/img/Nathan_2.png"
                     alt="modifier mes coordonnées"
                   />
                 </button>  
@@ -275,7 +275,7 @@ const Profil = () => {
                   <div className="w-[60px] flex justify-start">
                     <button type='button'>
                       <img
-                        src="./img/ep_circle-plus-filled.svg"
+                        src="/img/ep_circle-plus-filled.svg"
                         alt="+"
                         className="w-7 h-7"
                       />
