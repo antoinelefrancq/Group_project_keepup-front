@@ -23,7 +23,7 @@ export const chatMessages = (id) => `${production}/event/${id}/chat`;
 export const deleteOneMessage = (id) => `${production}/message/${id}/delete`;
 export const forgetPassword = (email) => `${production}/auth/password/${email}`;
 export const confirmChangePassword = ({ id }) =>
-  `${development}/auth/password/${id}/confirm`;
-export const login = `${development}/auth/login`;
-export const token = `${development}/auth/token`;
-export const baseUrl = development;
+  `${production}/auth/password/${id}/confirm`;
+export const login = `${production}/auth/login`;
+export const token = `${production}/auth/token`;
+export const baseUrl = production;

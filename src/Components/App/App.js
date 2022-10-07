@@ -22,6 +22,9 @@ import GuestRoute from './GuestRoute';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
+
+  const isAuth = useAuth();
+
   return (
     <>
       <Header />
@@ -31,14 +34,17 @@ const App = () => {
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
           <Route path="/team" element={<Team />} />
-          <Route element={<GuestRoute /> }>
+          <Route element={<GuestRoute />}>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Route>
           <Route element={<ProtectedRoute />}>
             <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID" element={<Myprofil />} />
-            <Route path="/profile" element={<Navigate to={`/profile/${useAuth().user._id}`} />} />
+            <Route
+              path="/profile"
+              element={<Navigate to={`/profile/${isAuth?.user?._id}`} />}
+            />
             <Route path="/profile/:userID/events" element={<MyEvents />} />
             <Route
               path="/profile/:userID/events/:eventID"
