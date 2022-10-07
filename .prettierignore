@@ -4,3 +4,4 @@ coverage
 
 # Ignore all HTML files:
 src/Components/Signup/errorHandler.js
+src/api/routes.js

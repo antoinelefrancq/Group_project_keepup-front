@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import {
-  addMessage,
-  connectUser,
   disconnectUser,
   fetchMessages,
 } from '../../../../redux/reducer/chatReducer';
@@ -12,13 +10,18 @@ import {
 import Messages from './Messages';
 import toast from 'react-hot-toast';
 import * as constant from '../../../../constant';
-import jwt_decode from 'jwt-decode';
+import { useAuth } from '../../../App/ProtectedRoute';
 
-export const socket = io(constant.socketio);
+const local = localStorage.getItem('credentials');
+
+export const socket = io(constant.socketio, {
+  auth: {
+    token: JSON.parse(local)?.refresh,
+  },
+});
 
 const Chat = () => {
-  const { refresh } = JSON.parse(localStorage.getItem('credentials')); // test
-  const jwt = jwt_decode(refresh);
+  const { loggedIn, user } = useAuth();
 
   const dispatch = useDispatch();
   const { id: event_id } = useParams();
@@ -40,7 +43,7 @@ const Chat = () => {
 
   const notification = {
     event_id: event_id,
-    firstname: jwt.firstname,
+    firstname: user.firstname,
   };
 
   /**
@@ -82,7 +85,7 @@ const Chat = () => {
 
   return (
     <>
-      <Messages user={jwt} event_id={event_id} socket={socket} />
+      <Messages user={user} event_id={event_id} socket={socket} />
     </>
   );
 };
