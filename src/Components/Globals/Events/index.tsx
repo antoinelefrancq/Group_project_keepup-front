@@ -10,8 +10,6 @@ function Events() {
       </button>
       <div className="flex flex-col gap-3 p-2 overflow-y-auto">
         <Event />
-        <Event />
-        <Event />
       </div>
     </>
   );

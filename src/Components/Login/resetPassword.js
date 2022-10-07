@@ -7,8 +7,8 @@ import toast from 'react-hot-toast';
 
 const ResetPassword = () => {
   const [form, setForm] = useState({
-    older: '',
-    new: '',
+    password: '',
+    confirm: '',
   });
 
   const navigate = useNavigate();
@@ -47,15 +47,15 @@ const ResetPassword = () => {
       >
         <input
           className="bg-white text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder"
-          placeholder="Ancien mot de passe"
-          name="older"
+          placeholder="Nouveau mot de passe"
+          name="password"
           type="password"
           onChange={handleChange}
         />
         <input
           className="bg-white text-blueCustom pr-2 focus:outline-blueCustom placeholder-greyPlaceholder"
-          placeholder="Nouveau mot de passe"
-          name="new"
+          placeholder="Encore une fois..."
+          name="confirm"
           type="password"
           onChange={handleChange}
         />
