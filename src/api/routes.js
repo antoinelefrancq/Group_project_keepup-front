@@ -87,6 +87,10 @@ export const postSignup = async (data) => {
     });
 };
 
+export const getUserById = async (id) => {
+  return await api.get(constant.userById(id));
+};
+
 export const postEvent = async(data) => {
   return await api.post(constant.createAnEvent, data);
 };

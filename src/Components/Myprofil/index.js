@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import * as api from '../../api/routes';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-
+import { useParams} from 'react-router-dom';
 import { importLocalData } from '../../redux/reducer/userReducer';
 import { addSport } from '../../redux/reducer/formSignup';
 import { useAuth } from '../App/ProtectedRoute';
@@ -21,6 +21,7 @@ const INITIAL_STATE = {
   city: 'Boulogne-sur-Mer',
   zipcode: '62200',
 };
+
 
 //Function Component
 const Profil = () => {
@@ -56,6 +57,17 @@ const Profil = () => {
    * Fetch profil data
    * Sport, Level, Gender
    */
+  const {userID} = useParams();
+  console.log('------> ici');
+  console.log(userID);
+
+  useEffect(()=>{
+    api.getUserById(userID)
+      .then((response)=> console.log(response.data.user))
+      .catch((error) => console.log(`mon erreur => ${error}`));
+  },[]);
+  
+
   useEffect(() => {
     api
       .fetchSportsLevel()
@@ -148,7 +160,7 @@ const Profil = () => {
                   </span>
                   <img
                     className="w-20 h-20 rounded-full transition-all hover:brightness-75"
-                    src="./img/Nathan_2.png"
+                    src="/img/Nathan_2.png"
                     alt="modifier mes coordonnées"
                   />
                 </button>  
@@ -263,7 +275,7 @@ const Profil = () => {
                   <div className="w-[60px] flex justify-start">
                     <button type='button'>
                       <img
-                        src="./img/ep_circle-plus-filled.svg"
+                        src="/img/ep_circle-plus-filled.svg"
                         alt="+"
                         className="w-7 h-7"
                       />
@@ -281,7 +293,7 @@ const Profil = () => {
                       </div>
                       <div className="flex justify-center pt-2">
                         <img
-                          src="./img/Beginner.svg"
+                          src="/img/Beginner.svg"
                           alt="logo_beginner"
                         />
                       </div>
