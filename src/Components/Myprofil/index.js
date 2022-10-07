@@ -26,7 +26,7 @@ const INITIAL_STATE = {
 const Profil = () => {
   //
   const isAuth = useAuth();
-
+  console.log('pass');
   console.log('_____________');
   console.log(isAuth);
   console.log('_____________');
@@ -82,48 +82,47 @@ const Profil = () => {
     setForm((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
-  const handleChangeSelectSport = (event) => {
-    const {target} = event;
-    const handleSetChangeSelectSport = (event) => {
-      const { target } = event;
-      const selectedIndex = target.options.selectedIndex;
-      const id = target.options[selectedIndex].getAttribute('data-key');
+  const handleSetChangeSelectSport = (event) => {
+    const { target } = event;
+    const selectedIndex = target.options.selectedIndex;
+    const id = target.options[selectedIndex].getAttribute('data-key');
 
-      const newObj = {
-        id,
-        sport: target.value,
-      };
-      setSelect((prevState) => ({ ...prevState, ...newObj }));
+    const newObj = {
+      id,
+      sport: target.value,
     };
+    setSelect((prevState) => ({ ...prevState, ...newObj }));
+  };
 
-    const handleChangeSelectLevel = (event) => {
-      const { target } = event;
-      setSelect((prevState) => ({ ...prevState, level: target.value }));
-    };
+  const handleChangeSelectLevel = (event) => {
+    const { target } = event;
+    setSelect((prevState) => ({ ...prevState, level: target.value }));
+  };
 
-    const toggleModale = () =>{
-      setModalIsOpen(!modalIsOpen);
-      console.log(modalIsOpen);
-    };
+  const toggleModale = () =>{
+    setModalIsOpen(!modalIsOpen);
+    console.log(modalIsOpen);
+  };
 
-    const hideModale = () =>{
-      setModalIsOpen(false);
-      console.log(modalIsOpen);
-    };
+  const hideModale = () =>{
+    setModalIsOpen(false);
+    console.log(modalIsOpen);
+  };
 
-    const buttonEdit = () => {
-      setIsModifying(true);
+  const buttonEdit = () => {
+    setIsModifying(true);
 
-    };
+  };
 
 
-    const buttonValidator = () => {
-      setIsModifying(false);
-      dispatch(importLocalData({ form }));
-    };
+  const buttonValidator = () => {
+    setIsModifying(false);
+    dispatch(importLocalData({ form }));
+  };
 
-    // Components
-    return (
+  // Components
+  return (
+    <>
       <div className="md:flex md:flex-col md:justify-center md:items-center">
         <div className="anchor pb-2"></div>
         <section onClick={()=>hideModale()} className="signup flex flex-col  items-center pt-[9px] pb-10 px-2 md:w-5/6 lg:w-2/3 bg-[#F2EFEB] relative">
@@ -300,8 +299,8 @@ const Profil = () => {
           </button>
         </section>
       </div>
-    );
-  };
+    </>
+  );
 };
 
 export default Profil;
