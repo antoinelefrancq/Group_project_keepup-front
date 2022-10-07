@@ -7,11 +7,11 @@ import { useSelector } from 'react-redux';
 import { addSport, deleteSport } from '../../redux/reducer/formSignup';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
-import { useForm } from 'react-hook-form';
 import { errorHandler as error } from './errorHandler';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { useForm } from 'react-hook-form';
 //Function component
 const Signup = () => {
   const dispatch = useDispatch();
@@ -47,43 +47,38 @@ const Signup = () => {
    * Sport, Level, Gender
    */
   useEffect(() => {
-    api.fetchSportsLevel().then((response) => {
-      if(response.status === 200) {
-        console.log(response.data);
-        setData(response.data);
-      }
-    }).catch((error) => {
-      console.log('_______________');
-      console.log(error);
-      console.log('_______________');
-    });
+    api
+      .fetchSportsLevel()
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response.data);
+          setData(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log('_______________');
+        console.log(error);
+        console.log('_______________');
+      });
   }, []);
 
   const onSubmit = async (data) => {
     const dob = await dateFactorisation(data.dob);
-    await api
-      .postSignup({
-        ...data,
-        dob,
-        sports: sportToSend,
-        handicap: true,
-        zipcode: Number(data.zipcode),
-      })
-      .then((response) => {
-        localStorage.setItem(
-          'credentials',
-          JSON.stringify({ ...response.data })
-        );
-        axios.defaults.headers.common['authorization'] = response.data.access;
+    const response = await api.postSignup({
+      ...data,
+      dob,
+      sports: sportToSend,
+      handicap: true,
+      zipcode: Number(data.zipcode),
+    });
+    // if (response.status) {
+    //   navigate('/profile');
 
-        navigate('/profile');
-
-        toast.success('Votre compte a été crée');
-      })
-      .catch((error) => {
-        console.dir(error);
-        toast.error(error.response.data.error);
-      });
+    //   toast.success('Votre compte a été crée');
+    // } else {
+    //   console.dir(response.error);
+    //   toast.error(response.error.response.data.error);
+    // }
   };
 
   const handleChangeSelectSport = (event) => {
@@ -303,6 +298,7 @@ const Signup = () => {
                       key={sport._id}
                       value={sport.sport}
                       data-key={sport._id}
+            
                     >
                       {sport.sport}
                     </option>

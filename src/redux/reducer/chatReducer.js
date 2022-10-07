@@ -70,12 +70,12 @@ const chatSlice = createSlice({
       state.isLoading = true;
     },
     [fetchMessages.fulfilled]: (state, { payload }) => {
-      console.log(payload);
-      state.isLoading = false;
-      state.messages = [...payload.messages];
+      if (payload) {
+        state.isLoading = false;
+        state.messages = [...payload.messages];
+      }
     },
     [fetchMessages.rejected]: (state, action) => {
-      console.log(action);
       state.isLoading = false;
     },
 

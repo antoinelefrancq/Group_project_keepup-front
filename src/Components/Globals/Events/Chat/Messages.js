@@ -28,7 +28,9 @@ const Chat = ({ user, socket, event_id }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const local = JSON.parse(localStorage.getItem('credentials'));
     const payload = {
+      token: local,
       receiver: event_id,
       _id: null,
       sender: {
@@ -58,7 +60,7 @@ const Chat = ({ user, socket, event_id }) => {
       <div className="w-full h-full flex flex-col-reverse overflow-scroll">
         {chat.messages.map((item, key) => {
           let param = {};
-          switch (item.sender._id) {
+          switch (item._id) {
             case 'system':
               param.sender = 'system';
               break;
