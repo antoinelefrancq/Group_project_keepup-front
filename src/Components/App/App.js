@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Home from '../Home';
 import Login from '../Login';
@@ -17,7 +17,7 @@ import ButtonMenu from '../Globals/ButtonMenu';
 import MyEvents from '../Globals/MyEvents';
 import MyEvent from '../Globals/MyEvents/MyEvent';
 
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute, { useAuth } from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
 
 const App = () => {
@@ -37,6 +37,7 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID" element={<Myprofil />} />
+            <Route path="/profile" element={<Navigate to={`/profile/${useAuth().user._id}`} />} />
             <Route path="/profile/:userID/events" element={<MyEvents />} />
             <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
             <Route path="/events" element={<Events />} />
