@@ -87,6 +87,10 @@ export const postSignup = async (data) => {
     });
 };
 
+export const postEvent = async(data) => {
+  return await api.post(constant.createAnEvent, data);
+};
+
 export const getEventById = async (id) => {
   return await api.get(constant.eventById(id)).then((response) => response);
 };
