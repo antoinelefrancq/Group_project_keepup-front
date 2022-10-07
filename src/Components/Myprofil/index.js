@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams} from 'react-router-dom';
 import { importLocalData } from '../../redux/reducer/userReducer';
-import { addSport } from '../../redux/reducer/formSignup';
+import { addSport, deleteSport } from '../../redux/reducer/formSignup';
 import { useAuth } from '../App/ProtectedRoute';
 
 // Initial State
@@ -53,6 +53,9 @@ const Profil = () => {
     [date[0], date[2]] = [date[2], date[0]];
     return date.join('/');
   }
+
+
+  // const {sportList} = useSelector((state) => state.form);
 
   /**
    * Fetch profil data
@@ -141,11 +144,11 @@ const Profil = () => {
         <div className="anchor pb-2"></div>
         <section onClick={()=>hideModale()} className="signup flex flex-col items-center pt-[9px] pb-10 px-[10%] md:flex-row bg-[#F2EFEB] relative">
           <button className='absolute top-3 right-4'>
-            <img src="/img/bi_arrow-down-circle.svg" alt="flèche_du_bas" />
+            <img src="/img/bi_arrow-down-circle.svg" alt="flèche_du_bas"/>
           </button>
           <div className="flex flex-col w-full justify-center items-center md:flex-row md:justify-around">
             <div className="md:w-1/2">
-              <div className="relative flex flex-col items-center" >        
+              <div className="relative flex flex-col items-center">        
                 <h1 className="text-blueCustom text-xl pb-2">Mon profil</h1> 
                 <button
                   onClick={(event) => {
@@ -156,9 +159,10 @@ const Profil = () => {
                   name='button'
                   className='relative'
                 >
-                  <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10"><img className='absolute w-1/2 z-20' src="/img/pencil.svg" alt="pencil" />
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-5 w- bg-blueCustom"></span>
+                  <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10">
+                    <img className='absolute w-1/2 z-20' src="/img/pencil.svg" alt="pencil"/>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75"/>
+                    <span className="relative inline-flex rounded-full h-5 w- bg-blueCustom"/>
                   </span>
                   <img
                     className="w-20 h-20 rounded-full transition-all hover:brightness-75"
@@ -263,6 +267,36 @@ const Profil = () => {
               className="bg-blueCustom text-white rounded-lg p-2">Voulez vous modifier la liste ?</button>
             <div className="p-2 border-t-2 border-[#E3E3E3] w-full">
             </div>
+            {sportList.map((item, key) => {
+              return (
+                <ul key={key}>
+                  <li className="flex flex-row w-full justify-end mt-1">
+                    {/**
+                     * Sport name
+                     */}
+
+                    <div className="tag">
+                      <p>{item.sport}</p>
+                    </div>
+
+                    {/**
+                     * Level name
+                     */}
+
+                    <div className="tag mx-1 m">
+                      <p>{item.level}</p>
+                    </div>
+                    <button
+                      onClick={() => dispatch(deleteSport({ id: item.id }))}
+                      type="button"
+                      className="flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45"
+                    >
+                      <img src="/img/Vector_red.svg" alt="+" />
+                    </button>
+                  </li>
+                </ul>
+              );
+            })}
             <div className="flex flex-row justify-center items-center pb-2 w-full my-2">
               <div className="flex gap-2 mr-4">
                 <select
@@ -302,7 +336,7 @@ const Profil = () => {
                 </button>
               </div>
             </div>
-            <article className="relative bg-blueCustom rounded-lg flex flex-col     items-center justify-center w-[77px] h-[108px] shadow-inner shadow-whiteCustom hover:shadow-[0_0_25px_rgba(10,106,191,1)] transition-all">  
+            <article className="relative bg-blueCustom rounded-lg flex flex-col items-center justify-center w-[77px] h-[108px] shadow-inner shadow-whiteCustom hover:shadow-[0_0_25px_rgba(10,106,191,1)] transition-all">  
               <button
                 type="button"
                 className="flex border-[1.8px] justify-center items-center border-pinkCustom w-5 h-5 leading-5 rotate-45 absolute -top-1 -right-1 bg-whiteCustom rounded-full"
