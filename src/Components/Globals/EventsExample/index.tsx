@@ -52,8 +52,8 @@ function EventsExample() {
           </p>
         </div>
       </div>
-      {/* <DefaultMap /> */}
-      <PopupExample/>
+      <DefaultMap />
+      {/* <PopupExample/> */}
     </div>
   );
 }

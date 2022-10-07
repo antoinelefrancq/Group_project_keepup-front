@@ -13,15 +13,15 @@ export const socketio = 'https://keepup-oclock.herokuapp.com';
  * @param {ObjectId} id event id
  * @returns all event's messages
  */
-export const createUser = development + '/create/user';
-export const signup = development + '/signup';
-export const createAnEvent = development + '/create/event';
-export const userById = (id) => `${development}/user/${id}`;
-export const eventById = (id) => `${development}/event/${id}`;
-export const chatMessages = (id) => `${development}/event/${id}/chat`;
-export const deleteOneMessage = (id) => `${development}/message/${id}/delete`;
-export const forgetPassword = (email) =>
-  `${development}/auth/password/${email}`;
+export const createUser = production + '/create/user';
+export const signup = production + '/signup';
+export const profile = production + '/profile';
+export const createAnEvent = production + '/create/event';
+export const userById = (id) => `${production}/user/${id}`;
+export const eventById = (id) => `${production}/event/${id}`;
+export const chatMessages = (id) => `${production}/event/${id}/chat`;
+export const deleteOneMessage = (id) => `${production}/message/${id}/delete`;
+export const forgetPassword = (email) => `${production}/auth/password/${email}`;
 export const confirmChangePassword = ({ id }) =>
   `${development}/auth/password/${id}/confirm`;
 export const login = `${development}/auth/login`;
