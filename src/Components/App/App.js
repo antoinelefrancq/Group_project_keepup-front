@@ -25,15 +25,15 @@ const App = () => {
     <>
       <Header />
       <main className="relative">
-        {user.modaleIsOpen && <UserModale />}
+        {/* {user.modaleIsOpen && <UserModale />} */}
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile" element={<Myprofil />} />
+            <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID/events" element={<MyEvents />} />
             <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
             <Route path="/events" element={<Events />} />
