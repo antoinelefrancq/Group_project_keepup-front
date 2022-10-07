@@ -30,7 +30,7 @@ export const deleteOneMessage = createAsyncThunk(
     try {
       console.log('delete');
       const response = await api.deleteOneMessageById(id);
-      console.log(response);
+
       thunkAPI.dispatch(deleteMessage({ id }));
       return response.data;
     } catch (error) {
