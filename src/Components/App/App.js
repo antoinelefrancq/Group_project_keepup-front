@@ -40,7 +40,10 @@ const App = () => {
             <Route path="/profile/:userID" element={<Myprofil />} />
             <Route path="/profile" element={<Navigate to={`/profile/${useAuth().user._id}`} />} />
             <Route path="/profile/:userID/events" element={<MyEvents />} />
-            <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
+            <Route
+              path="/profile/:userID/events/:eventID"
+              element={<MyEvent />}
+            />
             <Route path="/events" element={<Events />} />
             <Route
               path="/account/password/reset/:id/:token"

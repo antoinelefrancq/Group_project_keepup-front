@@ -100,7 +100,6 @@ export const getEventById = async (id) => {
 };
 
 export const getMessageFromEventById = async (id) => {
-  console.log(api.defaults.headers);
   return await api.get(constant.chatMessages(id));
 };
 
@@ -129,8 +128,6 @@ export const login = async (form) => {
       return { status: true };
     })
     .catch((error) => {
-      console.log('error', error);
-
       return { status: false, error };
     });
 };
