@@ -18,6 +18,7 @@ import MyEvents from '../Globals/MyEvents';
 import MyEvent from '../Globals/MyEvents/MyEvent';
 
 import ProtectedRoute from './ProtectedRoute';
+import GuestRoute from './GuestRoute';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
@@ -29,8 +30,10 @@ const App = () => {
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route element={<GuestRoute /> }>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Route>
           <Route element={<ProtectedRoute />}>
             <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID" element={<Myprofil />} />
