@@ -290,60 +290,24 @@ const Profil = () => {
                 </form>
               )}
             </div>
-            <div className="flex flex-col justify-center items-center">
-              <p className="text-center w-full pb-6 pt-6 text-blueCustom">
+          <div className="flex flex-col justify-center items-center pb-6">
+            <p className="text-center w-full pb-6 pt-6 text-blueCustom">
               Sport pratiqués :
-              </p>
-              <button
-                onClick={(event) => console.log(event.target)}
-                className="bg-blueCustom text-white rounded-lg p-2"
-              >
-              Voulez vous modifier la liste ?
-              </button>
-              <div className="p-2 border-t-2 border-[#E3E3E3] w-full"></div>
-              {sportList.map((item, key) => {
-                return (
-                  <ul key={key}>
-                    <li className="flex flex-row w-full justify-end mt-1">
-                      {/**
-                     * Sport name
-                     */}
-
-                      <div className="tag">
-                        <p>{item.sport}</p>
-                      </div>
-
-                      {/**
-                     * Level name
-                     */}
-
-                      <div className="tag mx-1 m">
-                        <p>{item.level}</p>
-                      </div>
-                      <button
-                        onClick={() => dispatch(deleteSport({ id: item.id }))}
-                        type="button"
-                        className="flex border-[1.8px] justify-center items-center border-pinkCustom rounded-full w-9 h-9 leading-9 rotate-45"
-                      >
-                        <img src="/img/Vector_red.svg" alt="+" />
-                      </button>
-                    </li>
-                  </ul>
-                );
-              })}
-              <div className="flex flex-row justify-center items-center pb-2 w-full my-2">
-                <div className="flex gap-2 mr-4">
-                  <select
-                    onChange={handleChangeSelectSport}
-                    className="w-2/3 text-blueCustom rounded-sm"
-                  >
-                    <option>🏈🏀⚽🏓🏐</option>
-                    {data.sports?.map((sport) => {
-                      return (
-                        <option
-                          key={sport._id}
-                          value={sport.sport}
-                          data-key={sport._id}
+            </p>
+            <div className="flex flex-row p-2 border-t-2 border-[#E3E3E3] w-full"/>
+            <div className="flex flex-row justify-center items-center pb-2 w-full my-2">
+              <div className="flex gap-2 mr-4">
+                <select
+                  onChange={handleChangeSelectSport}
+                  className="w-2/3 text-blueCustom rounded-sm"
+                >
+                  <option>🏈🏀⚽🏓🏐</option>
+                  {data.sports?.map((sport) => {
+                    return (
+                      <option
+                        key={sport._id}
+                        value={sport.sport}
+                        data-key={sport._id}
                         >
                           {sport.sport}
                         </option>
@@ -385,11 +349,35 @@ const Profil = () => {
                 </div>
               </article>
             </div>
-            {isModifyingUser && (
-              <button
-                onClick={() => buttonUserValidator()}
-                className="bg-blueCustom text-white rounded-lg p-2 md:mt-20"
-              >
+            {sportList.map((item, key) => {
+              return (
+                <ul key={key}>
+                  <li className="flex flex-row mt-1">
+                    {/**
+                     * Sport name
+                     */}
+
+                    <div className="tagCard">
+                      <p className='border-b-2 m-2 text-center text-[15px] font-bold py-2 text-sm'>{item.level}</p>
+                      <p className='m-2 text-center text-[15px] font-bold text-sm'>{item.sport}</p>
+                    </div>
+                    <button
+                      onClick={() => dispatch(deleteSport({ id: item.id }))}
+                      type="button"
+                      className="w-5 h-5"
+                    >
+                      <img src="/img/Croix_pleine_rouge.svg" alt="+" />
+                    </button>
+                  </li>
+                </ul>
+              );
+            })}
+          </div>
+          {isModifyingUser && (
+            <button
+              onClick={() => buttonUserValidator()}
+              className="bg-blueCustom text-white rounded-lg p-2 md:mt-20"
+            >
               Appliquer les modifications
               </button>
             )}
