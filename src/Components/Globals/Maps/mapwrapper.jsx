@@ -108,6 +108,16 @@ export default function MapWrapper() {
 
     const map = useMap();
 
+    const boy = L.icon({
+      iconUrl: '/img/Boy.png',
+      shadowUrl: '',
+    
+      iconSize:     [50, 64], // size of the icon
+      shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the po
+    });
     useEffect(() => {
       map.locate().on('locationfound', function (e) {
         setPosition(e.latlng);
@@ -120,14 +130,13 @@ export default function MapWrapper() {
     }, [map]);
 
     return position === null ? null : (
-      <Marker position={position} icon={icon}>
+      <Marker position={position} icon={boy}>
         <Popup>
           Vous êtes la Mizuki !
         </Popup>
       </Marker>
     );
   }
-
   return (
     <MapContainer
       center={[47.329136016336555, 2.064689802683546]}

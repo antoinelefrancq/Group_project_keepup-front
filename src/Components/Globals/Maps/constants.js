@@ -7,3 +7,4 @@ export default L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png',
   shadowUrl: 'https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png'
 });
+
