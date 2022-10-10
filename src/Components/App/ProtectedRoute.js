@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUserData } from '../../redux/reducer/userReducer';
+import ButtonMenu from '../Globals/ButtonMenu';
 
 export const useAuth = () => {
   try {
@@ -24,14 +25,19 @@ export const useAuth = () => {
 const ProtectedRoute = () => {
   const { loggedIn, user } = useAuth();
   const dispatch = useDispatch();
-
+  console.log(loggedIn);
   useEffect(() => {
     if (loggedIn) {
       dispatch(getUserData({ id: user._id }));
     }
   }, []);
 
-  return loggedIn ? <Outlet /> : <Navigate to="/login" />;
+  return (
+    <>
+      {loggedIn && <ButtonMenu />},
+      {loggedIn ? <Outlet /> : <Navigate to="/login" />};
+    </>
+  );
 };
 
 export default ProtectedRoute;

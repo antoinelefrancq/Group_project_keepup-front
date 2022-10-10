@@ -26,11 +26,6 @@ const INITIAL_STATE = {
 const Profil = () => {
   //
   const isAuth = useAuth();
-  console.log('pass');
-  console.log('_____________');
-  console.log(isAuth);
-  console.log('_____________');
-
   const dispatch = useDispatch();
 
   const [isModifyingUser, setIsModifyingUser] = useState(false);
@@ -59,9 +54,6 @@ const Profil = () => {
    * Sport, Level, Gender
    */
   const { userID } = useParams();
-  console.log('------> ici');
-  console.log(userID);
-
   /**
    * Get user data by redux
    */
@@ -112,12 +104,10 @@ const Profil = () => {
 
   const toggleModale = () => {
     setModalIsOpen(!modalIsOpen);
-    console.log(modalIsOpen);
   };
 
   const hideModale = () => {
     setModalIsOpen(false);
-    console.log(modalIsOpen);
   };
 
   const buttonUserEdit = () => {
@@ -126,7 +116,6 @@ const Profil = () => {
 
   const buttonUserValidator = () => {
     setIsModifyingUser(false);
-    console.log(isModifyingUser);
     dispatch(importLocalData({ form }));
   };
 
