@@ -1,5 +1,5 @@
 const production = 'https://keepup-oclock.herokuapp.com/api/v1';
-const host = 'http://localhost:8001/api/v1';
+const development = 'http://localhost:8001/api/v1';
 // recupere les data du formulaire pour les selects
 
 // export const socketio = 'ws://qaonjev.cluster030.hosting.ovh.net';
@@ -15,6 +15,7 @@ export const socketio = 'https://keepup-oclock.herokuapp.com';
  */
 export const createUser = production + '/create/user';
 export const signup = production + '/signup';
+export const profile = production + '/profile';
 export const createAnEvent = production + '/create/event';
 export const userById = (id) => `${production}/user/${id}`;
 export const eventById = (id) => `${production}/event/${id}`;

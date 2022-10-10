@@ -13,7 +13,7 @@ import CreateEvent from '../CreateEvent';
 import { useAppSelector } from '../../redux/Hooks';
 import UserModale from '../Globals/UserModale';
 import Loader from './Loader';
-import ButtonMenu from '../Globals/ButtonMenu';
+import Team from '../Team';
 import MyEvents from '../Globals/MyEvents';
 import MyEvent from '../Globals/MyEvents/MyEvent';
 
@@ -23,6 +23,9 @@ import GuestRoute from './GuestRoute';
 const App = () => {
   const {loggedIn: connected} = useAuth();
   const { user } = useAppSelector((state) => state);
+
+  const isAuth = useAuth();
+
   return (
     <>
       <Header />
@@ -33,18 +36,23 @@ const App = () => {
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
-              
-         
-          <Route element={<GuestRoute /> }>
+          <Route path="/team" element={<Team />} />
+          <Route element={<GuestRoute />}>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Route>
           <Route element={<ProtectedRoute />}>
             <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID" element={<Myprofil />} />
-            <Route path="/profile" element={<Navigate to={`/profile/${useAuth().user?._id}`} />} />
+            <Route
+              path="/profile"
+              element={<Navigate to={`/profile/${isAuth?.user?._id}`} />}
+            />
             <Route path="/profile/:userID/events" element={<MyEvents />} />
-            <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
+            <Route
+              path="/profile/:userID/events/:eventID"
+              element={<MyEvent />}
+            />
             <Route path="/events" element={<Events />} />
             <Route
               path="/account/password/reset/:id/:token"

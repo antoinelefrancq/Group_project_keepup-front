@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Message from './Message';
 import Container from './Container';
 import { useSelector, useDispatch } from 'react-redux';
-import { ArrowDownChat } from '../../../../utils/icon';
 import { addMessage } from '../../../../redux/reducer/chatReducer';
 import PropTypes from 'prop-types';
+import ChatButton from '../../../../assets/chat_send_btn.svg';
 
 const Chat = ({ user, socket, event_id }) => {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ const Chat = ({ user, socket, event_id }) => {
       sender: {
         _id: user._id,
         firstname: user.firstname,
+        image_url: user.image_url,
       },
       content: form,
     };
@@ -60,7 +61,7 @@ const Chat = ({ user, socket, event_id }) => {
       <div className="w-full h-full flex flex-col-reverse overflow-scroll">
         {chat.messages.map((item, key) => {
           let param = {};
-          switch (item._id) {
+          switch (item.sender._id) {
             case 'system':
               param.sender = 'system';
               break;
@@ -71,10 +72,10 @@ const Chat = ({ user, socket, event_id }) => {
               param.sender = false;
               break;
           }
-          param.user = item.content;
+          param.content = item.content;
           return (
             <Container key={key} param={param}>
-              <Message {...item} param={param} />
+              <Message {...item} param={param} user={item.sender} />
             </Container>
           );
         })}
@@ -87,11 +88,11 @@ const Chat = ({ user, socket, event_id }) => {
           <input
             onChange={handleChange}
             type="text"
-            placeholder="Votre texto! trop relou trop relou.."
+            placeholder="Entrez votre message..."
             className="w-full h-[31px] rounded-tl-sm rounded-bl-sm"
           />
-          <button className="bg-blue p-2 h-[31px] rounded-sm drop-shadow-lg">
-            <ArrowDownChat />
+          <button className="bg-blue p-2 h-[31px] w-[60px] rounded-sm drop-shadow-lg flex justify-center">
+            <img src={ChatButton} alt="send" />
           </button>
         </form>
       </div>
