@@ -25,7 +25,7 @@ const App = () => {
   const { loggedIn: connected } = useAuth();
   const { user } = useAppSelector((state) => state);
 
-  // const isAuth = useAuth();
+  const isAuth = useAuth();
   console.log(connected);
   return (
     <>
