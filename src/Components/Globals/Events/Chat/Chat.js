@@ -21,12 +21,19 @@ export const socket = io(constant.socketio, {
 });
 
 const Chat = () => {
-  const { loggedIn, user } = useAuth();
-
   const dispatch = useDispatch();
   const { id: event_id } = useParams();
 
-  const { isLoading } = useSelector((state) => state.chat);
+  const {
+    chat: { isLoading, messages },
+    user: { user },
+  } = useSelector((state) => ({
+    chat: state.chat,
+    user: state.user,
+  }));
+
+  console.log(user);
+  console.log(messages);
 
   useEffect(() => {
     dispatch(fetchMessages({ id: event_id }));

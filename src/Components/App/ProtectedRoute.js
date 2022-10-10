@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import { Navigate, Outlet } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getUserData } from '../../redux/reducer/userReducer';
 
 export const useAuth = () => {
   try {
@@ -20,8 +22,16 @@ export const useAuth = () => {
 };
 
 const ProtectedRoute = () => {
-  const isAuth = useAuth();
-  return isAuth.loggedIn ? <Outlet /> : <Navigate to="/login" />;
+  const { loggedIn, user } = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (loggedIn) {
+      dispatch(getUserData({ id: user._id }));
+    }
+  }, []);
+
+  return loggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
