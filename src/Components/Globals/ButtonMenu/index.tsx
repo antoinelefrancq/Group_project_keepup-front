@@ -7,8 +7,9 @@ function ButtonMenu() {
   const {user} = useAppSelector((state:RootState)=>state);
   const dispatch = useAppDispatch();
 
+
   return (
-    <div className="fixed bottom-10 left-1/2 -translate-x-1/2 ">
+    <div className="fixed bottom-2 left-1/2 -translate-x-1/2 ">
       <div className="flex flex-row relative h-[56px]">
         <button onClick={() => console.log('bouton de gauche')} className="flex items-center w-[108px] bg-gradient-to-b from-red to-blue hover:from-pink-500 shadow shadow-black hover:to-yellow-500 bg-white text-gray-800 font-bold pr-6 rounded-l">
           <img src='/img/Loupe.svg' alt="logo_loupe" className="flex py-4 translate-x-6"/>
