@@ -147,6 +147,10 @@ select:-webkit-autofill:focus {
     .infos {
         @apply bg-[#FFFFFF] mt-2 mb-2 pr-2 text-end;
     }
+
+    .tagCard {
+        @apply bg-blueCustom text-center text-white p-1 rounded-lg items-center w-[110px] h-[108px] shadow-inner shadow-whiteCustom hover:shadow-[0_0_25px_rgba(10,106,191,1)] transition-all 
+    }
 }
 
 
