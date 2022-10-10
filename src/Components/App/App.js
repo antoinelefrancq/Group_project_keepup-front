@@ -22,18 +22,17 @@ import GuestRoute from './GuestRoute';
 import ButtonMenu from '../Globals/ButtonMenu';
 
 const App = () => {
-  const {loggedIn: connected} = useAuth();
+  const { loggedIn: connected } = useAuth();
   const { user } = useAppSelector((state) => state);
 
   const isAuth = useAuth();
-
+  console.log(connected);
   return (
     <>
       <Header />
-      <ButtonMenu />
       <main className="relative">
-        {/* {user.modaleIsOpen && <UserModale />} */}
-
+        {isAuth?.loggedIn && ButtonMenu}
+        {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
@@ -47,7 +46,7 @@ const App = () => {
             <Route path="/profile/:userID" element={<Myprofil />} />
             <Route
               path="/profile"
-              element={<Navigate to={`/profile/${isAuth?.user?._id}`} />}
+              element={<Navigate to={`/profile/${connected?.user?._id}`} />}
             />
             <Route path="/profile/:userID/events" element={<MyEvents />} />
             <Route
