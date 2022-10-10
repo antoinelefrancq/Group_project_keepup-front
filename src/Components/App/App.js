@@ -21,6 +21,7 @@ import ProtectedRoute, { useAuth } from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
 
 const App = () => {
+  const {loggedIn: connected} = useAuth();
   const { user } = useAppSelector((state) => state);
 
   const isAuth = useAuth();
@@ -28,8 +29,10 @@ const App = () => {
   return (
     <>
       <Header />
+      <ButtonMenu />
       <main className="relative">
         {/* {user.modaleIsOpen && <UserModale />} */}
+
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
