@@ -31,7 +31,7 @@ const App = () => {
     <>
       <Header />
       <main className="relative">
-        {/* {user.modaleIsOpen && <UserModale />} */}
+        {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
