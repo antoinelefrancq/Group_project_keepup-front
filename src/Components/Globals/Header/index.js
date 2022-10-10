@@ -39,6 +39,7 @@ function Header() {
         <div className="flex flex-col font-bold text-blue text-[14px] pb-[28px] pr-10 sm:flex-row sm:text-[24px] sm:gap-5 ">
           <Link to="/signup"><button className='group block hover:text-red focus:outline-none'><span className='group-focus:text-red group-focus:underline'>Inscription</span></button></Link>
           <Link to="/login"><button className='group block hover:text-red focus:outline-none'><span className='group-focus:text-red group-focus:underline'>Connexion</span></button></Link>
+          <Link to="/team"><button className='group block hover:text-red focus:outline-none'><span className='group-focus:text-red group-focus:underline'>Team</span></button></Link>
         </div>}
     </div>
   );

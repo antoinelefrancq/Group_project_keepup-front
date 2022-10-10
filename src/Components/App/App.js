@@ -38,7 +38,7 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID" element={<Myprofil />} />
-            <Route path="/profile" element={<Navigate to={`/profile/${useAuth().user._id}`} />} />
+            <Route path="/profile" element={<Navigate to={`/profile/${useAuth().user?._id}`} />} />
             <Route path="/profile/:userID/events" element={<MyEvents />} />
             <Route path="/profile/:userID/events/:eventID" element={<MyEvent />} />
             <Route path="/events" element={<Events />} />
