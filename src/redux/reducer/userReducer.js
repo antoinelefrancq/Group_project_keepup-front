@@ -4,6 +4,7 @@ import { getUserById } from '../../api/routes';
 const initialState = {
   modaleIsOpen: false,
   userConnected: false,
+  isLoading:false,
   user: {},
   userData: {
     firstname: 'Nathan',
@@ -46,7 +47,7 @@ export const userSlice = createSlice({
           ([key]) => key !== 'password' && key !== 'sports'
         )
       );
-      state.userData = localKeys;
+      state.user = localKeys;
     },
   },
   extraReducers: {

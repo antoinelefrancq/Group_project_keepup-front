@@ -19,6 +19,7 @@ import MyEvent from '../Globals/MyEvents/MyEvent';
 
 import ProtectedRoute, { useAuth } from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
+import ButtonMenu from '../Globals/ButtonMenu';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
@@ -29,6 +30,7 @@ const App = () => {
     <>
       <Header />
       <main className="relative">
+        {isAuth?.loggedIn && ButtonMenu}
         {/* {user.modaleIsOpen && <UserModale />} */}
         <Routes>
           <Route path="/loader" element={<Loader />} />
