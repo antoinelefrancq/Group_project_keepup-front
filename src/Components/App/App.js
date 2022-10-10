@@ -19,6 +19,7 @@ import MyEvent from '../Globals/MyEvents/MyEvent';
 
 import ProtectedRoute, { useAuth } from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
+import ButtonMenu from '../Globals/ButtonMenu';
 
 const App = () => {
   const {loggedIn: connected} = useAuth();
