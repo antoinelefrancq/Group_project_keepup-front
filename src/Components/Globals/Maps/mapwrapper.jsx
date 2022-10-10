@@ -107,7 +107,6 @@ export default function MapWrapper() {
     
 
     const map = useMap();
-
     const boy = L.icon({
       iconUrl: '/img/Boy.png',
       shadowUrl: '',
@@ -118,6 +117,7 @@ export default function MapWrapper() {
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the po
     });
+  
     useEffect(() => {
       map.locate().on('locationfound', function (e) {
         setPosition(e.latlng);
@@ -128,11 +128,11 @@ export default function MapWrapper() {
         setBbox(e.bounds.toBBoxString().split(','));
       });
     }, [map]);
-
+    
     return position === null ? null : (
       <Marker position={position} icon={boy}>
         <Popup>
-          Vous êtes la Mizuki !
+          Vous êtes la !
         </Popup>
       </Marker>
     );
@@ -151,17 +151,17 @@ export default function MapWrapper() {
       <LocationMarker />
       <Marker position={pos} icon={icon}>
         <Popup>
-          <div className="bg-white rounded-lg w-full p-0.5 flex items-center">
+          <div className="bg-white rounded-lg w-40 h-24 flex items-center">
             <div className="bg-red rounded-l-lg flex items-center pr-[6px] h-[110px]">
-              <div className="flex flex-col align-center justify-center w-[66px] px-2">
-                <div className="text-white border-b-2 w-full text-center text-[15px] font-bold pb-1">
-                  <p>Mar</p><p>20</p>
+              <div className="flex flex-col align-center justify-center w-[33px] px-2">
+                <div className="text-white border-b-2 text-center text-[10px] font-bold">
+                  <p>Mar 20</p>
                 </div>
-                <div className="flex flex-col justify-center items-center pt-2">
-                  <img src="./img/marche.svg" alt="profile_picture" className="w-10 h-10"/>
+                <div className="flex flex-col justify-center items-center pt-1">
+                  <img src="./img/marche.svg" alt="profile_picture" className="w-5 h-5"/>
                 </div>
               </div>
-              <div className="text-white text-center w-[66px]">
+              <div className="text-white text-center w-[33px]">
                 <img src="./img/photo2.svg" alt="image_profil" className="" />
               </div>
             </div>

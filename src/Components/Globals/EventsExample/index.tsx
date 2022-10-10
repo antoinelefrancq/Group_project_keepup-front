@@ -1,9 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
-import LeafletMap from '../Maps/LeafletMap';
-import DefaultMap from '../Maps/maps';
 import MapWrapper from '../Maps/mapwrapper';
-import PopupExample from '../Maps/Popup';
-
 
 function EventsExample() {
   return (
