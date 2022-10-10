@@ -32,7 +32,7 @@ const App = () => {
       <Header />
       <main className="relative">
         {isAuth?.loggedIn && ButtonMenu}
-        {/* {user.modaleIsOpen && <UserModale />} */}
+        {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />

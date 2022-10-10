@@ -31,7 +31,6 @@ function CreateEvent() {
         setSports(result.sports);
         setLevels(result.level);
         setGenders(result.gender);
-        console.log(response.data);
       }
     }).catch((error) => {
       console.log('_______________');
@@ -58,8 +57,6 @@ function CreateEvent() {
     const { target } = event;
     const selectedIndex = target.options.selectedIndex;
     const id = target.options[selectedIndex].getAttribute('data-key');
-
-
     const newObj = {
       id,
       sport: target.value,
@@ -78,7 +75,7 @@ function CreateEvent() {
   };
 
   const onSubmit = async (data) => {
-    const dateChosen = await dateFactorisation(data.dateChosen);
+    const dateChosen = dateFactorisation(data.date);
     await api
       .postEvent({
         ...data,
@@ -109,7 +106,7 @@ function CreateEvent() {
   return (
     <>
       <div className="h-full flex flex-col justify-end items-center">
-        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] pt-6 md:w-1/2">
+        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] md:w-1/2">
           <div className="text-blueCustom">
             Créer une session
           </div>
