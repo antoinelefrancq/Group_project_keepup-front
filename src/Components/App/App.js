@@ -20,7 +20,7 @@ import MyEvent from '../Globals/MyEvents/MyEvent';
 import ProtectedRoute, { useAuth } from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
 import ButtonMenu from '../Globals/ButtonMenu';
-import MapWrapper from '../Globals/Maps/mapwrapper';
+import KeepUpMap from '../Globals/Maps/KeepUpMap';
 
 const App = () => {
   const { loggedIn: connected } = useAuth();
@@ -54,8 +54,8 @@ const App = () => {
               path="/profile/:userID/events/:eventID"
               element={<MyEvent />}
             />
-            <Route path="/profile/:userID/events/:eventID/maps" element={<MapWrapper />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/events/maps" element={<KeepUpMap />} />
             <Route
               path="/account/password/reset/:id/:token"
               element={<ResetPassword />}

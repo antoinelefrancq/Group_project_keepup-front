@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
-import MapWrapper from '../Maps/mapwrapper';
+import MapExemple from '../Maps/MapExemple';
 
 function EventsExample() {
   return (
@@ -53,7 +53,7 @@ function EventsExample() {
             </p>
           </div>
         </div>
-        <MapWrapper />
+        <MapExemple />
         {/* <LeafletMap /> */}
         {/* <DefaultMap /> */}
         {/* <PopupExample/> */}
