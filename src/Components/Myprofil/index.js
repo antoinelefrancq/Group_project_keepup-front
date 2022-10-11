@@ -11,16 +11,16 @@ import Loader from '../App/Loader';
 
 // Initial State
 const INITIAL_STATE = {
-  firstname: 'Romain',
-  lastname: 'Le Padre',
-  gender: 'Male Alpha',
-  email: 'romain@lepadre.fr',
-  password: 'Apero',
-  dob: '01/01/1950',
-  description: 'Je ne dors pas la nuit',
+  firstname: '',
+  lastname: '',
+  gender: '',
+  email: '',
+  password: '',
+  dob: '',
+  description: '',
   sports: [],
-  city: 'Boulogne-sur-Mer',
-  zipcode: '62200',
+  city: '',
+  zipcode: '',
 };
 
 //Function Component
