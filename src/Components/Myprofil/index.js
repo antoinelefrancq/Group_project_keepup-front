@@ -145,7 +145,6 @@ const Profil = () => {
             className="signup flex flex-col items-center pt-[9px] pb-10 px-[10%] md:flex-row bg-[#F2EFEB] relative"
           >
             <button className="absolute top-3 right-4">
-              <img src="/img/bi_arrow-down-circle.svg" alt="flèche_du_bas" />
             </button>
             <div className="flex flex-col w-full justify-center items-center md:flex-row md:justify-around">
               <div className="md:w-1/2">
