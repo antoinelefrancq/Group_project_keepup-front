@@ -43,6 +43,7 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
           </Route>
           <Route element={<ProtectedRoute />}>
+            <Route path="/event/:id" element={<MyEvent />} />
             <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID" element={<Myprofil />} />
             <Route
