@@ -25,13 +25,13 @@ const App = () => {
   const { loggedIn: connected } = useAuth();
   const { user } = useAppSelector((state) => state);
 
-  // const isAuth = useAuth();
+  const isAuth = useAuth();
   console.log(connected);
   return (
     <>
       <Header />
       <main className="relative">
-        {isAuth?.loggedIn && ButtonMenu}
+        {/* {isAuth?.loggedIn && ButtonMenu} */}
         {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/loader" element={<Loader />} />
@@ -43,7 +43,7 @@ const App = () => {
           </Route>
           <Route element={<ProtectedRoute />}>
             <Route path="/event/:id/chat" element={<Chat />} />
-            <Route path="/profile/:userID" element={<Myprofil />} />
+            <Route path="/profile/:userID" element={<><Myprofil /><ButtonMenu /></>} />
             <Route
               path="/profile"
               element={<Navigate to={`/profile/${connected?.user?._id}`} />}
@@ -53,7 +53,7 @@ const App = () => {
               path="/profile/:userID/events/:eventID"
               element={<MyEvent />}
             />
-            <Route path="/events" element={<Events />} />
+            <Route path="/events" element={<><Events /><ButtonMenu /></>} />
             <Route
               path="/account/password/reset/:id/:token"
               element={<ResetPassword />}

@@ -290,24 +290,24 @@ const Profil = () => {
                 </form>
               )}
             </div>
-          <div className="flex flex-col justify-center items-center pb-6">
-            <p className="text-center w-full pb-6 pt-6 text-blueCustom">
-              Sport pratiqués :
-            </p>
-            <div className="flex flex-row p-2 border-t-2 border-[#E3E3E3] w-full"/>
-            <div className="flex flex-row justify-center items-center pb-2 w-full my-2">
-              <div className="flex gap-2 mr-4">
-                <select
-                  onChange={handleChangeSelectSport}
-                  className="w-2/3 text-blueCustom rounded-sm"
-                >
-                  <option>🏈🏀⚽🏓🏐</option>
-                  {data.sports?.map((sport) => {
-                    return (
-                      <option
-                        key={sport._id}
-                        value={sport.sport}
-                        data-key={sport._id}
+            <div className="flex flex-col justify-center items-center pb-6">
+              <p className="text-center w-full pb-6 pt-6 text-blueCustom">
+                Sport pratiqués :
+              </p>
+              <div className="flex flex-row p-2 border-t-2 border-[#E3E3E3] w-full"/>
+              <div className="flex flex-row justify-center items-center pb-2 w-full my-2">
+                <div className="flex gap-2 mr-4">
+                  <select
+                    onChange={handleChangeSelectSport}
+                    className="w-2/3 text-blueCustom rounded-sm"
+                  >
+                    <option>🏈🏀⚽🏓🏐</option>
+                    {data.sports?.map((sport) => {
+                      return (
+                        <option
+                          key={sport._id}
+                          value={sport.sport}
+                          data-key={sport._id}
                         >
                           {sport.sport}
                         </option>
@@ -372,13 +372,13 @@ const Profil = () => {
                 </ul>
               );
             })}
-          </div>
-          {isModifyingUser && (
-            <button
-              onClick={() => buttonUserValidator()}
-              className="bg-blueCustom text-white rounded-lg p-2 md:mt-20"
-            >
-              Appliquer les modifications
+            
+            {isModifyingUser && (
+              <button
+                onClick={() => buttonUserValidator()}
+                className="bg-blueCustom text-white rounded-lg p-2 md:mt-20"
+              >
+                Appliquer les modifications
               </button>
             )}
           </section>

@@ -34,7 +34,7 @@ const ProtectedRoute = () => {
 
   return (
     <>
-      {loggedIn && <ButtonMenu />}
+      {/* {loggedIn && <ButtonMenu />} */}
       {loggedIn ? <Outlet /> : <Navigate to="/login" />}
     </>
   );
