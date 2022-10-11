@@ -346,7 +346,6 @@ const Profil = () => {
                       {/**
                      * Sport name
                      */}
-
                       <div className="tagCard">
                         <p className='border-b-2 m-2 text-center text-[15px] font-bold py-2 text-sm'>{item.level}</p>
                         <p className='m-2 text-center text-[15px] font-bold text-sm'>{item.sport}</p>
