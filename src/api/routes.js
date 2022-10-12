@@ -91,12 +91,20 @@ export const getUserById = async (id) => {
   return await api.get(constant.userById(id));
 };
 
+export const updateUser = async (id, data) => {
+  return await api.put(constant.updateProfile(id), data);
+};
+
 export const postEvent = async(data) => {
   return await api.post(constant.createAnEvent, data);
 };
 
 export const getEventById = async (id) => {
   return await api.get(constant.eventById(id)).then((response) => response);
+};
+
+export const getEventFromUserId = async(id) =>{
+  return await api.get(constant.userEvents(id));
 };
 
 export const getMessageFromEventById = async (id) => {

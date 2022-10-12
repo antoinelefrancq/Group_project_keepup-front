@@ -4,7 +4,7 @@ import { getUserById } from '../../api/routes';
 const initialState = {
   modaleIsOpen: false,
   userConnected: false,
-  isLoading:false,
+  isLoading: false,
   user: {},
   userData: {
     firstname: 'Nathan',
@@ -38,16 +38,26 @@ export const userSlice = createSlice({
     openModale: (state) => {
       state.modaleIsOpen = true;
     },
+    toggleModale: (state) => {
+      state.modaleIsOpen = !state.modaleIsOpen;
+    },
     closeModale: (state) => {
       state.modaleIsOpen = false;
     },
     importLocalData: (state, actions) => {
+      console.log(actions.payload);
       const localKeys = Object.fromEntries(
         Object.entries(actions.payload.form).filter(
           ([key]) => key !== 'password' && key !== 'sports'
         )
       );
+      console.log('****************');
+      console.log(localKeys);
+      console.log('****************');
       state.user = localKeys;
+    },
+    changePicture: (state, actions) => {
+      state.user.image_url = actions.payload;
     },
   },
   extraReducers: {
@@ -71,4 +81,10 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { openModale, closeModale, importLocalData } = userSlice.actions;
+export const {
+  openModale,
+  toggleModale,
+  closeModale,
+  importLocalData,
+  changePicture,
+} = userSlice.actions;
