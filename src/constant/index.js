@@ -20,6 +20,7 @@ export const updateProfile = (id) => `${host}/user/${id}/update`;
 export const createAnEvent = host + '/create/event';
 export const userById = (id) => `${host}/user/${id}`;
 export const eventById = (id) => `${host}/event/${id}`;
+export const userEvents = (id) => `${host}/user/event/${id}`;
 export const updateEvent = (id) => `${host}/event/${id}/update`;
 export const deleteEvent = (id) => `${host}/event/${id}/delete`;
 export const chatMessages = (id) => `${host}/event/${id}/chat`;
