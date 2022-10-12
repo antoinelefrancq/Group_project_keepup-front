@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
 function Event({ event }) {
+  console.log(event);
+  console.log('hello');
   return (
     <div className="bg-[#FFFFFF] rounded-lg w-full p-0.5 flex items-center">
       <div className="bg-blue rounded-l-lg flex items-center pr-[6px] h-[110px]">

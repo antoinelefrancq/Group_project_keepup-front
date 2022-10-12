@@ -3,6 +3,7 @@ import { openModale } from '../../../redux/reducer/userReducer';
 import type { RootState, AppDispatch } from '../../../redux/store';
 import { useAuth } from '../../App/ProtectedRoute';
 import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 
 function ButtonMenu() {
   const {user} = useAppSelector((state:RootState)=>state);
@@ -26,7 +27,9 @@ function ButtonMenu() {
     <nav className="fixed z-20 bottom-2 left-1/2 -translate-x-1/2 ">
       <div className="flex flex-row relative h-[56px]">
         <button onClick={() => console.log('bouton de gauche')} className="flex items-center w-[108px] bg-gradient-to-b from-red to-blue hover:from-pink-500 shadow shadow-black hover:to-yellow-500 bg-white text-gray-800 font-bold pr-6 rounded-l">
-          <img src='/img/Loupe.svg' alt="logo_loupe" className="flex py-4 translate-x-6"/>
+          <Link to='/events'>
+            <img src='/img/Loupe.svg' alt="logo_loupe" className="flex py-4 translate-x-6"/>
+          </Link>
           <button onClick={(event) => {
             event.stopPropagation();
             dispatch(openModale());
