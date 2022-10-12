@@ -21,6 +21,7 @@ import ProtectedRoute, { useAuth } from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
 import ButtonMenu from '../Globals/ButtonMenu';
 import KeepUpMap from '../Globals/Maps/KeepUpMap';
+import Test from './Test';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
@@ -30,11 +31,12 @@ const App = () => {
     <>
       <Header />
       <main className="relative">
-        {isAuth?.loggedIn && <ButtonMenu />} 
+        {isAuth?.loggedIn && <ButtonMenu />}
         {user.modaleIsOpen && <UserModale />}
         <Routes>
           <Route path="/loader" element={<Loader />} />
           <Route path="/" element={<Home />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/team" element={<Team />} />
           <Route element={<GuestRoute />}>
             <Route path="/login" element={<Login />} />
@@ -43,7 +45,15 @@ const App = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/event/:id" element={<MyEvent />} />
             <Route path="/event/:id/chat" element={<Chat />} />
-            <Route path="/profile/:userID" element={<><Myprofil /><ButtonMenu /></>} />
+            <Route
+              path="/profile/:userID"
+              element={
+                <>
+                  <Myprofil />
+                  <ButtonMenu />
+                </>
+              }
+            />
             <Route
               path="/profile"
               element={<Navigate to={`/profile/${isAuth?.user?._id}`} />}
