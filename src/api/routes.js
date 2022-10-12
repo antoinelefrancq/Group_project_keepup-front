@@ -103,6 +103,10 @@ export const getEventById = async (id) => {
   return await api.get(constant.eventById(id)).then((response) => response);
 };
 
+export const getEventFromUserId = async(id) =>{
+  return await api.get(constant.userEvents(id));
+};
+
 export const getMessageFromEventById = async (id) => {
   return await api.get(constant.chatMessages(id));
 };
