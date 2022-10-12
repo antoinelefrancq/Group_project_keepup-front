@@ -233,8 +233,8 @@ const Profil = () => {
   // Components
   return (
     <>
-      {isLoading===true && <Loader />}
-      {isLoading===false && 
+      {//isLoading===true && <Loader />}
+      //isLoading===false && 
         <div className="md:flex md:flex-col md:justify-center md:items-center">
           <div className="anchor pb-2"></div>
           <section
@@ -453,66 +453,76 @@ const Profil = () => {
               </p>
               <div className="flex flex-row p-2 border-t-2 border-[#E3E3E3] w-full"/>
               <div className="flex flex-row justify-center items-center pb-2 w-full my-2">
-                <div className="flex gap-2 mr-4">
-                  <select
-                    onChange={handleChangeSelectSport}
-                    className="w-2/3 text-blueCustom rounded-sm"
-                  >
-                    <option>🏈🏀⚽🏓🏐</option>
-                    {data.sports?.map((sport) => {
-                      return (
-                        <option
-                          key={sport._id}
-                          value={sport.sport}
-                          data-key={sport._id}
-                        >
-                          {sport.sport}
+                {isModifyingUser && (
+                  <div className="flex gap-2 mr-4">
+                    <select
+                      onChange={handleChangeSelectSport}
+                      className="w-2/3 text-blueCustom rounded-sm"
+                    >
+                      <option>🏈🏀⚽🏓🏐</option>
+                      {data.sports?.map((sport) => {
+                        return (
+                          <option
+                            key={sport._id}
+                            value={sport.sport}
+                            data-key={sport._id}
+                          >
+                            {sport.sport}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <select
+                      onChange={handleChangeSelectLevel}
+                      className="w-2/3 text-blueCustom rounded-sm"
+                    >
+                      <option>🥇🥈🥉🏅🏆</option>
+                      {data.level?.map((level) => (
+                        <option key={level} value={level}>
+                          {level}
                         </option>
-                      );
-                    })}
-                  </select>
-                  <select
-                    onChange={handleChangeSelectLevel}
-                    className="w-2/3 text-blueCustom rounded-sm"
-                  >
-                    <option>🥇🥈🥉🏅🏆</option>
-                    {data.level?.map((level) => (
-                      <option key={level} value={level}>
-                        {level}
-                      </option>
-                    ))}
-                  </select>
-                  <button
-                    onClick={() => dispatch(addSport(select))}
-                    type="button"
-                    className="justify-center items-center border-blueCustom rounded-full w-9 h-9"
-                  >
-                    <img src="/img/ep_circle-plus-filled.svg" alt="+" />
-                  </button>
-                </div>
+                      ))}
+                    </select>
+                    <button
+                      onClick={() => dispatch(addSport(select))}
+                      type="button"
+                      className="justify-center items-center border-blueCustom rounded-full w-9 h-9"
+                    >
+                      <img src="/img/ep_circle-plus-filled.svg" alt="+" />
+                    </button>
+                  </div>
+                )}
               </div>
-              {sportList.map((item, key) => {
-                return (
-                  <ul key={key}>
-                    <li className="flex flex-row mt-1">
-                      {/**
-                     * Sport name
-                     */}
-                      <div className="tagCard">
-                        <p className='border-b-2 m-2 text-center text-[15px] font-bold py-2 text-sm'>{item.level}</p>
-                        <p className='m-2 text-center text-[15px] font-bold text-sm'>{item.sport}</p>
-                      </div>
-                      <button
-                        onClick={() => dispatch(deleteSport({ id: item.id }))}
-                        type="button"
-                        className="w-5 h-5"
-                      >
-                        <img src="/img/Croix_pleine_rouge.svg" alt="+" />
-                      </button>
-                    </li>
-                  </ul>
-                );
-              })}
+              <div className="flex flex-wrap justify-center">
+                {sportList.map((item, key) => {
+                  return (
+                    <ul key={key}>
+                      <li className="flex flex-row mt-2 mx-2">
+                        {/**
+                       * Sport name
+                       */}
+                        <div className="tagCard">
+                          <p className='border-b-2 m-2 text-center text-[15px] font-bold py-2 text-sm'>{item.level}</p>
+                          <p className='m-2 text-center text-[15px] font-bold text-sm'>{item.sport}</p>
+                        </div>
+                        {isModifyingUser && (
+                          <button
+                            onClick={() => dispatch(deleteSport({ id: item.id }))}
+                            type="button"
+                            className="relative w-6 h-6"
+                          >
+                            <img 
+                              className='absolute bottom-1 right-2'
+                              src="/img/Croix_pleine_rouge.svg" 
+                              alt="+"
+                            />
+                          </button>
+                        )}
+                      </li>
+                    </ul>
+                  );
+                })}
+              </div>
             </div>
             {isModifyingUser && (
               <button
