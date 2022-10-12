@@ -4,23 +4,30 @@ import * as api from '../../api/routes';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getUserData, importLocalData } from '../../redux/reducer/userReducer';
+import { changePicture, getUserData, importLocalData } from '../../redux/reducer/userReducer';
 import { addSport, deleteSport } from '../../redux/reducer/formSignup';
 import { useAuth } from '../App/ProtectedRoute';
 import Loader from '../App/Loader';
 
+
+import axios from 'axios';
+import { storage } from './firebase.config';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+
+
+
 // Initial State
 const INITIAL_STATE = {
-  firstname: 'Romain',
-  lastname: 'Le Padre',
-  gender: 'Male Alpha',
-  email: 'romain@lepadre.fr',
-  password: 'Apero',
-  dob: '01/01/1950',
-  description: 'Je ne dors pas la nuit',
+  firstname: '',
+  lastname: '',
+  gender: '',
+  email: '',
+  password: '',
+  dob: '',
+  description: '',
   sports: [],
-  city: 'Boulogne-sur-Mer',
-  zipcode: '62200',
+  city: '',
+  zipcode: '',
 };
 
 //Function Component
@@ -35,6 +42,7 @@ const Profil = () => {
   const dispatch = useDispatch();
 
   const [isModifyingUser, setIsModifyingUser] = useState(false);
+  const [isChangingAvatar, setIsChangingAvatar] = useState(false);
   const [isModifyingSports, setIsModifyingSports] = useState(false);
   const [form, setForm] = useState(INITIAL_STATE);
   const [select, setSelect] = useState({
@@ -45,9 +53,14 @@ const Profil = () => {
   const [data, setData] = useState([]);
   const { sportList, sportToSend } = useSelector((state) => state.form);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [image,setImage] = useState();
   const { userData } = useSelector((state) => state.user);
   const {user} = useSelector((state)=> state.user);
   const {isLoading} = useSelector((state)=>state.user);
+  const [url, setUrl] = useState();
+  const [newImage,setNewImage] = useState();
+
+
   function dateFactorisation(dob) {
     const { date } = dob.split('_');
     [date[0], date[2]] = [date[2], date[0]];
@@ -118,10 +131,18 @@ const Profil = () => {
 
   const toggleModale = () => {
     setModalIsOpen(!modalIsOpen);
+    setIsChangingAvatar(false);
   };
 
   const hideModale = () => {
     setModalIsOpen(false);
+    setIsChangingAvatar(false);
+  };
+
+  const changeAvatar = () =>{
+    setIsChangingAvatar(true);
+    setModalIsOpen(false);
+    console.log(isChangingAvatar);
   };
 
   const buttonUserEdit = () => {
@@ -133,6 +154,82 @@ const Profil = () => {
     dispatch(importLocalData({ form }));
   };
 
+  const handleChangeImage = (event) => {
+    // const file = event.target.files[0];
+    // setImage(file);
+    getImageUrl(event.target.files[0]);
+  };
+
+  const cancelChange = () =>{
+    setNewImage(false);
+    setIsChangingAvatar(false);
+    setModalIsOpen(false);
+  };
+  /**
+   *                                    Get image url from firebase
+   */
+
+
+  function getImageUrl(file) {
+    // Create the file metadata
+    /** @type {any} */
+    // const metadata = {
+    //   contentType: "image/jpeg",
+    // };
+
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    const storageRef = ref(storage, 'avatar/' + Date.now());
+    const uploadTask = uploadBytesResumable(storageRef, file); // metadata
+
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+        }
+      },
+      (error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+
+          // ...
+
+        case 'storage/unknown':
+          // Unknown error occurred, inspect error.serverResponse
+          break;
+        }
+      },
+      () => {
+        // Upload completed successfully, now we can get the download URL
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log('File available at');
+          setNewImage(downloadURL);
+          setUrl(downloadURL);
+        });
+      }
+    );
+  }
+
+  console.log('________________');
+  console.log(url);
+  console.log('________________');
   // Components
   return (
     <>
@@ -145,36 +242,69 @@ const Profil = () => {
             className="signup flex flex-col items-center pt-[9px] pb-10 px-[10%] md:flex-row bg-[#F2EFEB] relative"
           >
             <button className="absolute top-3 right-4">
-              <img src="/img/bi_arrow-down-circle.svg" alt="flèche_du_bas" />
             </button>
             <div className="flex flex-col w-full justify-center items-center md:flex-row md:justify-around">
               <div className="md:w-1/2">
                 <div className="relative flex flex-col items-center">
                   <h1 className="text-blueCustom text-xl pb-2">Mon profil</h1>
-                  <button
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      toggleModale();
-                    }}
-                    type="button"
-                    name="button"
-                    className="relative"
-                  >
-                    <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10">
+                  <div className='flex'>
+                    <button
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        toggleModale();
+                      }}
+                      type="button"
+                      name="button"
+                      className="relative"
+                    >
+                      {!newImage && <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10">
+                        <img
+                          className="absolute w-1/2 z-20"
+                          src="/img/pencil.svg"
+                          alt="pencil"
+                        />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75" />
+                        <span className="relative inline-flex rounded-full h-5 w- bg-blueCustom" />
+                      </span>}
                       <img
-                        className="absolute w-1/2 z-20"
-                        src="/img/pencil.svg"
-                        alt="pencil"
+                        className="w-20 h-20 rounded-full transition-all hover:brightness-75"
+                        src={user?.image_url}
+                        alt="modifier mes coordonnées"
                       />
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75" />
-                      <span className="relative inline-flex rounded-full h-5 w- bg-blueCustom" />
-                    </span>
-                    <img
-                      className="w-20 h-20 rounded-full transition-all hover:brightness-75"
-                      src={user?.image_url}
-                      alt="modifier mes coordonnées"
-                    />
-                  </button>
+                    </button>
+                    {newImage && <div className='flex flex-row'>
+                      <img src='/img/Arrow_right.svg' alt='arrow-right' className='mx-5' />
+                      <div className='relative'>
+                        <button
+                          onClick={(event)=>{
+                            event.stopPropagation();
+                            console.log(event.target);}} 
+                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -right-2 bg-blueCustom rounded-full z-10 text-[#fff]">
+                          <img
+                            className="absolute w-1/2 z-20"
+                            src="/img/validate.svg"
+                            alt="validate"
+                          />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75" />
+                          <span className="relative inline-flex rounded-full h-8 bg-blueCustom" />
+                        </button>
+                        <button 
+                          onClick={(event)=>{
+                            event.stopPropagation();
+                            cancelChange();}}
+                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -left-2 bg-pinkCustom rounded-full z-10 text-[#fff]">
+                          <img
+                            className="absolute w-1/2 z-20"
+                            src="/img/x-mark.svg"
+                            alt="cancel"
+                          />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pinkCustom opacity-75" />
+                          <span className="relative inline-flex rounded-full h-8 bg-pinkCustom" />
+                        </button>
+                        <img src={newImage} alt='new image' className='w-20 h-20 rounded-full'></img>
+                      </div>
+                    </div>}
+                  </div>
                   <div
                     className={
                       modalIsOpen
@@ -183,7 +313,10 @@ const Profil = () => {
                     }
                   >
                     <button>
-                      <p className="p-2 w-40 border-b-2 border-b-blueCustom border-b-solid hover:text-pinkCustom hover:tracking-wider transition-all">
+                      <p onClick={(event)=>{
+                        event.stopPropagation();
+                        changeAvatar();}} 
+                      className="p-2 w-40 border-b-2 border-b-blueCustom border-b-solid hover:text-pinkCustom hover:tracking-wider transition-all">
                       Changer mon avatar
                       </p>
                     </button>
@@ -193,6 +326,25 @@ const Profil = () => {
                       </p>
                     </button>
                   </div>
+                  {isChangingAvatar && <div onClick={(event)=>{
+                    event.stopPropagation();
+                    changeAvatar();
+                  }} >
+                    <form>
+                      <label 
+                        htmlFor='avatar'
+                        className='cursor-pointer p-2 bg-blue rounded-xl w-28 text-white shadow-inner shadow-white'
+                      >Télécharge ta nouvelle photo d'avatar</label>
+                      <input 
+                        type='file'        
+                        id="avatar" 
+                        name="avatar"
+                        accept="image/png, image/jpeg" 
+                        className='opacity-0 -z-10 hidden'
+                        onChange={handleChangeImage}
+                      />
+                    </form>
+                  </div>}
                 </div>
               </div>
               {!isModifyingUser && (
@@ -346,7 +498,6 @@ const Profil = () => {
                       {/**
                      * Sport name
                      */}
-
                       <div className="tagCard">
                         <p className='border-b-2 m-2 text-center text-[15px] font-bold py-2 text-sm'>{item.level}</p>
                         <p className='m-2 text-center text-[15px] font-bold text-sm'>{item.sport}</p>

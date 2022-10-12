@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../App/ProtectedRoute';
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { closeModale } from '../../../redux/reducer/userReducer';
+import { useDispatch } from 'react-redux';
 
 function Header() {
   const {loggedIn: connected} = useAuth();
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
   const handleClick = () => {
     localStorage.removeItem('credentials');
+    dispatch(closeModale());
     navigate('/');
   };
 
