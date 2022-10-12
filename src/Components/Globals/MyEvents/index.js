@@ -8,7 +8,7 @@ import EventDone from '../Events/EventDone';
 function MyEvents() {
   // je récupère l'id depuis mon localStorage
   // const {_id} = useAuth().user;
-  const _id='6345266a5213ced3e99d5328';
+  const _id='6331760ae98d6c76841f590e';
   const days = ['dimanche','lundi','mardi','mercredi','jeudi', 'vendredi', 'samedi'];
   //j'initie mon state local
   const [events,setEvents]= useState([
@@ -32,7 +32,7 @@ function MyEvents() {
       _id:'63455bd1f6c227657bc8f5bf',
     }
   ]);
-
+  const [filterEvents, setFilterEvents] = useState({});
   // je récupère la date d'aujourd'hui
   const nowTimestamp = Math.floor(new Date().getTime() / 1000); 
 
@@ -41,7 +41,6 @@ function MyEvents() {
       .getEventFromUserId(_id)
       .then((response)=>{
         setEvents(response.data);
-        console.log(new Date(events[0].date));
       })
       .catch((error) => {
         console.log('_____');
@@ -49,13 +48,31 @@ function MyEvents() {
         console.log('_____');
       });
   },[]);
+    
+
+  useEffect(() => {
+
+    const eventsToCome = events.filter((event)=> (new Date(event.date) / 1000 ) > nowTimestamp);
+    const passedEvents = events.filter((event)=>(new Date(event.date) / 1000) < nowTimestamp);
+    
+    if(eventsToCome && passedEvents){
+      setFilterEvents({
+        passed: eventsToCome,
+        futur: passedEvents
+      });
+
+    }
+  }, [events]);
+ 
 
   return (
     <>
       {<div className="flex flex-col gap-3 p-2 overflow-y-hidden">
         <h2 className="text-center text-xl text-white">Mes sessions</h2>
-        <Event event={events[0]} />
-        <Event event={events[1]} />
+        {filterEvents.passed?.map((event)=>(
+          <Event key={event._id} event={event} />
+        ))}
+
       </div>}
       <div className="flex flex-col gap-3 p-2 overflow-y-auto">
         <h2 className="text-center text-xl text-white">Sessions terminées</h2>

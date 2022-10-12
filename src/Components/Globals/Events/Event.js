@@ -6,7 +6,7 @@ const month = ['janv', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 's
 const colors = {
   Débutant:'blue',
   Intermédaire:'orange',
-  Expert:'red', 
+  Expert:'red',
 };
 function Event({ event }) {
   const {user} = useSelector((state)=>state.user);
@@ -41,7 +41,7 @@ function Event({ event }) {
         </p>
         <p className="flex justify-start items-end gap-4 py-2 pr-3">
           <span className="bg-blue rounded-r-full text-white text-[12px] p-1">
-            {event?.participant?.length}/{event?.max} inscrit{event?.participant?.length>1?'s':''}
+            {event?.participant?.length + 1}/{event?.max} inscrit{event?.participant?.length>1?'s':''}
           </span>
           <span className="bg-blue rounded-full text-white text-[11px] px-2 py-0.5">
             {String(event?.period?.start).slice(0,-2) + ':' + String(event?.period?.start).slice(-2)}
