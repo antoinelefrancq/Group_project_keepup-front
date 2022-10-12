@@ -131,3 +131,10 @@ export const login = async (form) => {
       return { status: false, error };
     });
 };
+
+export const updateEvent = async (id, data) => {
+  return await api.post(constant.updateEvent(id), data);
+};
+export const deleteEvent = async (id) => {
+  return await api.delete(constant.deleteEvent(id));
+};

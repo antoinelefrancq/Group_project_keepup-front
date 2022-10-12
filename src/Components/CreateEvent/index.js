@@ -47,11 +47,11 @@ function CreateEvent() {
    * @param {Date} date Form date (dob)
    * @returns
    */
-  function dateFactorisation(dateChosen) {
-    const date = new Date(dateChosen);
-    const timestampSeconds = Math.floor(date.getTime() / 1000);
-    return String(timestampSeconds);
-  }
+  // function dateFactorisation(dateChosen) {
+  //   const date = new Date(dateChosen);
+  //   const timestampSeconds = Math.floor(date.getTime() / 1000);
+  //   return String(timestampSeconds);
+  // }
   
   const handleChangeSelectSport = (event) => {
     const { target } = event;
@@ -75,7 +75,9 @@ function CreateEvent() {
   };
 
   const onSubmit = async (data) => {
-    const dateChosen = dateFactorisation(data.date);
+    // const dateChosen = dateFactorisation(data.date);
+    const dateChosen = data.date;
+
     await api
       .postEvent({
         ...data,

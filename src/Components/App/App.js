@@ -20,6 +20,7 @@ import MyEvent from '../Globals/MyEvents/MyEvent';
 import ProtectedRoute, { useAuth } from './ProtectedRoute';
 import GuestRoute from './GuestRoute';
 import ButtonMenu from '../Globals/ButtonMenu';
+import KeepUpMap from '../Globals/Maps/KeepUpMap';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
           </Route>
           <Route element={<ProtectedRoute />}>
+            <Route path="/event/:id" element={<MyEvent />} />
             <Route path="/event/:id/chat" element={<Chat />} />
             <Route path="/profile/:userID" element={<><Myprofil /><ButtonMenu /></>} />
             <Route
@@ -51,7 +53,8 @@ const App = () => {
               path="/profile/:userID/events/:eventID"
               element={<MyEvent />}
             />
-            <Route path="/events" element={<><Events /><ButtonMenu /></>} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/maps" element={<KeepUpMap />} />
             <Route
               path="/account/password/reset/:id/:token"
               element={<ResetPassword />}
