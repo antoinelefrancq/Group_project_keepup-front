@@ -48,7 +48,6 @@
 
 @layer components{
     #root{
-        overflow:hidden;
         background: linear-gradient(179.94deg, rgba(10, 106, 191, 0.8) 0.05%, rgba(242, 34, 89, 0.8) 69.41%, rgba(242, 92, 5, 0.8) 120.57%), #FFFFFF;
         height:100vh;
     }
