@@ -16,6 +16,7 @@ export const socketio = 'https://keepup-oclock.herokuapp.com';
 export const createUser = host + '/create/user';
 export const signup = host + '/signup';
 export const profile = host + '/profile';
+export const updateProfile = (id) => `${host}/user/${id}/update`;
 export const createAnEvent = host + '/create/event';
 export const userById = (id) => `${host}/user/${id}`;
 export const eventById = (id) => `${host}/event/${id}`;

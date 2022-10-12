@@ -22,7 +22,7 @@ function ButtonMenu() {
             <img src='/img/Logo_menu.svg' alt="logo_menu" className='block'/>
           </span>
         </button>
-        <Link to={'create-event'} className="flex items-center w-[108px] bg-white shadow-inner shadow-greyPlaceholder rounded-r justify-end">
+        <Link to={'/create-event'} className="flex items-center w-[108px] bg-white shadow-inner shadow-greyPlaceholder rounded-r justify-end">
           <img src='/img/Plus.svg' alt="logo_plus" className="mr-6 block"/>
         </Link>
       </div>

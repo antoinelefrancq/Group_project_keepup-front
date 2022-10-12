@@ -13,6 +13,7 @@ import Loader from '../App/Loader';
 import axios from 'axios';
 import { storage } from './firebase.config';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import toast from 'react-hot-toast';
 
 
 
@@ -221,15 +222,24 @@ const Profil = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('File available at');
           setNewImage(downloadURL);
-          setUrl(downloadURL);
+          setUrl({image_url:downloadURL});
         });
       }
     );
   }
 
-  console.log('________________');
-  console.log(url);
-  console.log('________________');
+  const updatePic = async () => {
+    const response = await api.updateUser(useAuth().user._id,url);
+    if (response.status===200) {
+      dispatch(changePicture(url.image_url));
+      toast.success('Nouvel avatar dans la base de donnée');
+      cancelChange();
+    } else {
+      console.dir(response.error);
+      toast.error(response.error.response.data.error);
+    }
+  };
+
   // Components
   return (
     <>
@@ -257,13 +267,13 @@ const Profil = () => {
                       name="button"
                       className="relative"
                     >
-                      {!newImage && <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10">
+                      {!newImage && <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10 shadow-inner shadow-white">
                         <img
                           className="absolute w-1/2 z-20"
                           src="/img/pencil.svg"
                           alt="pencil"
                         />
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75 " />
                         <span className="relative inline-flex rounded-full h-5 w- bg-blueCustom" />
                       </span>}
                       <img
@@ -278,8 +288,8 @@ const Profil = () => {
                         <button
                           onClick={(event)=>{
                             event.stopPropagation();
-                            console.log(event.target);}} 
-                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -right-2 bg-blueCustom rounded-full z-10 text-[#fff]">
+                            updatePic();}} 
+                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -right-2 bg-blueCustom rounded-full z-10 text-[#fff] shadow-inner shadow-white">
                           <img
                             className="absolute w-1/2 z-20"
                             src="/img/validate.svg"
@@ -292,7 +302,7 @@ const Profil = () => {
                           onClick={(event)=>{
                             event.stopPropagation();
                             cancelChange();}}
-                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -left-2 bg-pinkCustom rounded-full z-10 text-[#fff]">
+                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -left-2 bg-pinkCustom rounded-full z-10 text-[#fff] shadow-inner shadow-white">
                           <img
                             className="absolute w-1/2 z-20"
                             src="/img/x-mark.svg"
@@ -333,8 +343,8 @@ const Profil = () => {
                     <form>
                       <label 
                         htmlFor='avatar'
-                        className='cursor-pointer p-2 bg-blue rounded-xl w-28 text-white shadow-inner shadow-white'
-                      >Télécharge ta nouvelle photo d'avatar</label>
+                        className='cursor-pointer p-2 bg-blue rounded-xl w-28 text-xs text-white shadow-inner shadow-white'
+                      >Choisis ton avatar</label>
                       <input 
                         type='file'        
                         id="avatar" 

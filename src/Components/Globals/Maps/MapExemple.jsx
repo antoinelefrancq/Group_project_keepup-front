@@ -142,7 +142,7 @@ export default function MapWrapper() {
       center={[47.329136016336555, 2.064689802683546]}
       zoom={13}
       scrollWheelZoom
-      style={{ height:'360px' }}
+      style={{ height:'360px', zIndex:0}}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
