@@ -77,9 +77,9 @@ function MyEvent() {
   return (
     authorization && (
       <div className="flex justify-center items-center w-full h-4/5 mt-3">
-        <div className="flex flex-row h-5/6 w-11/12 bg-white p-3 rounded-xl">
+        <div className="flex flex-row h-full w-11/12 bg-white p-3 rounded-xl">
           <div className="flex flex-col w-full h-full items-center">
-            <div className=" w-full">
+            <div className="w-full">
               <Event event={event} />
               <p className="text-[13px] text-white text-center py-1">
                 Vous participez à cette session
@@ -161,7 +161,7 @@ function MyEvent() {
               </div>
             )}
           </div>
-          <div className="none:w-full md:w-5/12 border-[5px] border-blue gradient-bg  none:hidden md:block">
+          <div className="none:w-full md:w-5/12 h-full border-[5px] border-blue gradient-bg  none:hidden md:block">
             <Chat />
           </div>
         </div>

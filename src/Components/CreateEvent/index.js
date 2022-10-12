@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import * as api from '../../api/routes';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useAuth } from '../App/ProtectedRoute';
 
 //================== Fonction Composant
 function CreateEvent() {
@@ -198,11 +199,13 @@ function CreateEvent() {
             />
             <div className="flex gap-2 w-full">
               <input
+                type='time'
                 placeholder="Début de session"
                 {...register('period.start')}
                 className="text-right w-1/2 px-1"
               />
               <input
+                type='time'
                 placeholder="Fin de session"
                 {...register('period.end')}
                 className="text-right w-1/2 px-1"

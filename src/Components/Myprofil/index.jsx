@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { changePicture, getUserData, importLocalData } from '../../redux/reducer/userReducer';
-import { addSport, deleteSport } from '../../redux/reducer/formSignup';
+import { addSport, deleteSport, updateLevel } from '../../redux/reducer/formSignup';
 import { useAuth } from '../App/ProtectedRoute';
 import Loader from '../App/Loader';
 
@@ -35,10 +35,7 @@ const INITIAL_STATE = {
 const Profil = () => {
   //
   const isAuth = useAuth();
-  console.log('pass');
-  console.log('_____________');
-  console.log(isAuth);
-  console.log('_____________');
+
 
   const dispatch = useDispatch();
 
@@ -60,7 +57,26 @@ const Profil = () => {
   const {isLoading} = useSelector((state)=>state.user);
   const [url, setUrl] = useState();
   const [newImage,setNewImage] = useState();
+  const [baseData, setBaseData] = useState(user);
 
+
+  useEffect(() => {
+    console.log(user);
+    setBaseData(user);
+
+    const sports = [];
+    const newObj = {
+      ...user,
+      sports
+    };
+    user?.sports?.forEach((item) => {
+      dispatch(addSport({
+        id: item.sport._id,
+        level: item.level,
+        sport: item.sport.sport
+      }));
+    });
+  }, [user]);
 
   function dateFactorisation(dob) {
     const { date } = dob.split('_');
@@ -83,11 +99,14 @@ const Profil = () => {
   }, []);
 
   useEffect(() => {
-    console.log('-------> here');
-    console.log(user);
     setForm(user);
   }, [user]);
 
+  useEffect(() => {
+
+    setBaseData((prevState) => ({...prevState, sports: sportList}));
+    console.log(baseData);
+  }, [sportList]);
 
   useEffect(() => {
     api
@@ -127,7 +146,17 @@ const Profil = () => {
 
   const handleChangeSelectLevel = (event) => {
     const { target } = event;
+
     setSelect((prevState) => ({ ...prevState, level: target.value }));
+  };
+
+  const handleChangeSelectLevelCard = (event) => {
+    const { target } = event;
+    const uniqueIdValue = target.parentElement.parentElement.parentElement.attributes['data-key'].value;
+    const uniqueSportValue = target.parentElement.parentElement.parentElement.attributes['data-sport'].value;
+    
+    dispatch(deleteSport({id: uniqueIdValue}));
+    dispatch(addSport({id: uniqueIdValue, level: target.value, sport: uniqueSportValue}));
   };
 
   const toggleModale = () => {
@@ -150,14 +179,23 @@ const Profil = () => {
     setIsModifyingUser(true);
   };
 
-  const buttonUserValidator = () => {
+  const buttonUserValidator = async () => {
+    console.log('pass');
     setIsModifyingUser(false);
-    dispatch(importLocalData({ form }));
+    const newObj = { ...form, sports: sportToSend};
+    console.log('_________________');
+    console.log(userID);
+    console.log('_________________');
+    await api.updateUser(userID, newObj).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.log(newObj);
+    });
+    
+    dispatch(importLocalData(newObj));
   };
 
   const handleChangeImage = (event) => {
-    // const file = event.target.files[0];
-    // setImage(file);
     getImageUrl(event.target.files[0]);
   };
 
@@ -467,7 +505,7 @@ const Profil = () => {
                   <div className="flex gap-2 mr-4">
                     <select
                       onChange={handleChangeSelectSport}
-                      className="w-2/3 text-blueCustom rounded-sm"
+                      className="w-2/3 text-blueCustom rounded-sm appearance-none cursor-zoom-in text-center text-[13px]"
                     >
                       <option>🏈🏀⚽🏓🏐</option>
                       {data.sports?.map((sport) => {
@@ -484,7 +522,7 @@ const Profil = () => {
                     </select>
                     <select
                       onChange={handleChangeSelectLevel}
-                      className="w-2/3 text-blueCustom rounded-sm"
+                      className="w-2/3 text-blueCustom rounded-sm appearance-none cursor-zoom-in text-center text-[13px]"
                     >
                       <option>🥇🥈🥉🏅🏆</option>
                       {data.level?.map((level) => (
@@ -505,15 +543,33 @@ const Profil = () => {
               </div>
               <div className="flex flex-wrap justify-center">
                 {sportList.map((item, key) => {
+                  console.log(item);
                   return (
-                    <ul key={key}>
+                    <ul key={key} data-key={item.id} data-sport={item.sport}>
                       <li className="flex flex-row mt-2 mx-2">
                         {/**
                        * Sport name
                        */}
                         <div className="tagCard">
-                          <p className='border-b-2 m-2 text-center text-[15px] font-bold py-2 text-sm'>{item.level}</p>
-                          <p className='m-2 text-center text-[15px] font-bold text-sm'>{item.sport}</p>
+                          {isModifyingUser ? 
+                            <select
+                              defaultValue={item.level} 
+                              onChange={handleChangeSelectLevelCard}
+                              className="bg-blueCustom w-5/6 appearance-none cursor-zoom-in border-b-2 m-2 text-center font-bold py-2 text-[13px]"
+                            >
+                              {/**
+                               *                                      SELECT
+                               */}
+                              {data.level?.map((level) => {
+                                // console.log(level);
+                                return <option key={level} value={level} data-key={level}>
+                                  {level}
+                                </option>;
+                              })}
+                            </select> :
+                            <p>{item.level}</p>
+                          }
+                          <p className='m-2 text-center text-[12px] font-bold text-sm'>{item.sport}</p>
                         </div>
                         {isModifyingUser && (
                           <button
@@ -537,7 +593,7 @@ const Profil = () => {
             {isModifyingUser && (
               <button
                 onClick={() => buttonUserValidator()}
-                className="bg-blueCustom text-white rounded-lg p-2 md:mt-20"
+                className="bg-blueCustom text-white rounded-lg p-2 md:mt-20 text-[15px]"
               >
               Appliquer les modifications
               </button>
@@ -548,3 +604,5 @@ const Profil = () => {
   );
 };
 export default Profil;
+
+//'border-b-2 m-2 text-center text-[15px] font-bold py-2 text-sm'
