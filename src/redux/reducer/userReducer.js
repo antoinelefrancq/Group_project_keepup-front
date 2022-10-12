@@ -38,6 +38,9 @@ export const userSlice = createSlice({
     openModale: (state) => {
       state.modaleIsOpen = true;
     },
+    toggleModale:(state)=>{
+      state.modaleIsOpen=!state.modaleIsOpen;
+    },
     closeModale: (state) => {
       state.modaleIsOpen = false;
     },
@@ -49,6 +52,9 @@ export const userSlice = createSlice({
       );
       state.user = localKeys;
     },
+    changePicture:(state,actions)=>{
+      state.user.image_url=actions.payload;
+    }
   },
   extraReducers: {
     /**
@@ -71,4 +77,4 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { openModale, closeModale, importLocalData } = userSlice.actions;
+export const { openModale,toggleModale, closeModale, importLocalData, changePicture } = userSlice.actions;

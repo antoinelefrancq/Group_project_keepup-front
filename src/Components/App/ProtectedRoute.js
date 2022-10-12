@@ -25,7 +25,6 @@ export const useAuth = () => {
 const ProtectedRoute = () => {
   const { loggedIn, user } = useAuth();
   const dispatch = useDispatch();
-  console.log(loggedIn);
   useEffect(() => {
     if (loggedIn) {
       dispatch(getUserData({ id: user._id }));
