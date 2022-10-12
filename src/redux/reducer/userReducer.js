@@ -45,11 +45,15 @@ export const userSlice = createSlice({
       state.modaleIsOpen = false;
     },
     importLocalData: (state, actions) => {
+      // console.log(actions.payload);
       const localKeys = Object.fromEntries(
         Object.entries(actions.payload.form).filter(
           ([key]) => key !== 'password' && key !== 'sports'
         )
       );
+      console.log('****************');
+      console.log(localKeys);
+      console.log('****************');
       state.user = localKeys;
     },
     changePicture:(state,actions)=>{
