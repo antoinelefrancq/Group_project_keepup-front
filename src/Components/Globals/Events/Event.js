@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { useSelector } from 'react-redux';
 const days = ['dimanche','lundi','mardi','mercredi','jeudi', 'vendredi', 'samedi'];
+const month = ['janv', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'];
 const colors = {
   Débutant:'blue',
   Intermédaire:'orange',
@@ -14,7 +15,7 @@ function Event({ event }) {
       <div className="bg-blue rounded-l-lg flex items-center pr-[6px] h-[110px]">
         <div className="flex flex-col align-center justify-center w-[66px] px-2">
           <div className="text-white border-b-2 w-full text-center text-[15px] font-bold pb-1">
-            <p>{days[new Date(event.date).getDay()]}</p>
+            <p>{month[new Date(event.date).getMonth()]}</p>
             <p>{new Date(event.date).getDate()}</p>
           </div>
           <div className="flex flex-col justify-center items-center pt-2 bg-blue">
