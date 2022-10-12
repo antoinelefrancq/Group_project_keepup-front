@@ -9,7 +9,7 @@ function ButtonMenu() {
 
     <nav className='fixed z-20 left-1/2 bottom-0 -translate-x-1/2'>
       <div className='flex flex-row relative h-14'>
-        <Link to={'/events'} className="flex items-center w-[108px] bg-gradient-to-b from-red to-blue shadow shadow-black rounded-l">
+        <Link to={'/events'} className="flex items-center w-[108px] bg-gradient-to-b from-red to-blue shadow-inner shadow-greyPlaceholder rounded-l">
           <img src='/img/Loupe.svg' alt="logo_loupe" className="ml-6 block"/>
         </Link>
         <button 
@@ -22,7 +22,7 @@ function ButtonMenu() {
             <img src='/img/Logo_menu.svg' alt="logo_menu" className='block'/>
           </span>
         </button>
-        <Link to={'create-event'} className="flex items-center w-[108px] bg-white shadow-black rounded-r justify-end">
+        <Link to={'create-event'} className="flex items-center w-[108px] bg-white shadow-inner shadow-greyPlaceholder rounded-r justify-end">
           <img src='/img/Plus.svg' alt="logo_plus" className="mr-6 block"/>
         </Link>
       </div>

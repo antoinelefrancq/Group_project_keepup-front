@@ -17,20 +17,21 @@ const UserModale = () => {
   };
 
   return (
-    <section id='modale' className="h-1/2 w-full fixed bottom-0 z-10 rounded-t-[10px] bg-white flex flex-col items-center">
+    <section id='modale' className="h-1/2 w-full fixed bottom-0 z-10 rounded-t-[10px] bg-white flex flex-col items-center shadow-inner shadow-greyPlaceholder">
       <button 
         onClick={()=>{
           dispatch(closeModale());
         }}
-        className='absolute top-3 right-4 w-6 h-6'>
+        className='absolute top-3 right-4 w-10 h-10'>
         <img src="/img/bi_arrow-down-circle.svg" alt="flèche_du_bas" />
       </button>
       <Link to={`/profile/${isAuth?.user?._id}`} onClick={()=>{dispatch(closeModale());}}>
-        <img className="w-[56px] h-[56px] rounded-full mt-[33px] mb-[45px]" src={user?.image_url} alt="photo de profil" />
+        <img className="w-20 h-20 rounded-full mt-[33px] mb-4 shadow-lg shadow-greyPlaceholder" src={user?.image_url} alt="photo de profil" />
       </Link>
-      <Link to={`/profile/${isAuth?.user?._id}`} onClick={()=>{dispatch(closeModale());}} className='mb-[18px]'>Mon profil</Link>
-      <a className='mb-[18px]'>Mes sessions <span>3</span></a>
-      <button onClick={handleClick}><p className='mt-[12px] pt-[14px] w-full border-t-[#E3E3E3] border-t-4 border-solid mb-[18px] text-center'>Se Déconnecter</p></button>
+      <Link to={`/profile/${isAuth?.user?._id}`} onClick={()=>{dispatch(closeModale());}} className='mb-2'>Mon profil</Link>
+      <Link to={`/profile/${isAuth?.user?._id}/events`} className='mb-2'>Mes sessions <span>3</span></Link>
+      <div className="w-36 h-1 bg-[#E3E3E3] mt-3" />
+      <button onClick={handleClick}><p className='pt-[14px] w-full text-center'>Se Déconnecter</p></button>
     </section>
   );};
 export default UserModale;
