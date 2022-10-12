@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { changePicture, getUserData, importLocalData } from '../../redux/reducer/userReducer';
-import { addSport, deleteSport } from '../../redux/reducer/formSignup';
+import { addSport, deleteSport, updateLevel } from '../../redux/reducer/formSignup';
 import { useAuth } from '../App/ProtectedRoute';
 import Loader from '../App/Loader';
 
@@ -35,10 +35,7 @@ const INITIAL_STATE = {
 const Profil = () => {
   //
   const isAuth = useAuth();
-  console.log('pass');
-  console.log('_____________');
-  console.log(isAuth);
-  console.log('_____________');
+
 
   const dispatch = useDispatch();
 
@@ -60,7 +57,26 @@ const Profil = () => {
   const {isLoading} = useSelector((state)=>state.user);
   const [url, setUrl] = useState();
   const [newImage,setNewImage] = useState();
+  const [baseData, setBaseData] = useState(user);
 
+
+  useEffect(() => {
+    console.log(user);
+    setBaseData(user);
+
+    const sports = [];
+    const newObj = {
+      ...user,
+      sports
+    };
+    user?.sports?.forEach((item) => {
+      dispatch(addSport({
+        id: item.sport._id,
+        level: item.level,
+        sport: item.sport.sport
+      }));
+    });
+  }, [user]);
 
   function dateFactorisation(dob) {
     const { date } = dob.split('_');
@@ -83,11 +99,14 @@ const Profil = () => {
   }, []);
 
   useEffect(() => {
-    console.log('-------> here');
-    console.log(user);
     setForm(user);
   }, [user]);
 
+  useEffect(() => {
+
+    setBaseData((prevState) => ({...prevState, sports: sportList}));
+    console.log(baseData);
+  }, [sportList]);
 
   useEffect(() => {
     api
@@ -127,7 +146,17 @@ const Profil = () => {
 
   const handleChangeSelectLevel = (event) => {
     const { target } = event;
+
     setSelect((prevState) => ({ ...prevState, level: target.value }));
+  };
+
+  const handleChangeSelectLevelCard = (event) => {
+    const { target } = event;
+    const uniqueIdValue = target.parentElement.parentElement.parentElement.attributes['data-key'].value;
+    const uniqueSportValue = target.parentElement.parentElement.parentElement.attributes['data-sport'].value;
+    
+    dispatch(deleteSport({id: uniqueIdValue}));
+    dispatch(addSport({id: uniqueIdValue, level: target.value, sport: uniqueSportValue}));
   };
 
   const toggleModale = () => {
@@ -150,12 +179,19 @@ const Profil = () => {
     setIsModifyingUser(true);
   };
 
-  const buttonUserValidator = () => {
+  const buttonUserValidator = async () => {
+    console.log('pass');
     setIsModifyingUser(false);
-    const newObj = { ...form, sport: select};
-    console.log('////////////////////');
-    console.log(newObj);
-    console.log('////////////////////');
+    const newObj = { ...form, sports: sportToSend};
+    console.log('_________________');
+    console.log(userID);
+    console.log('_________________');
+    await api.updateUser(userID, newObj).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.log(newObj);
+    });
+    
     dispatch(importLocalData(newObj));
   };
 
@@ -509,24 +545,29 @@ const Profil = () => {
                 {sportList.map((item, key) => {
                   console.log(item);
                   return (
-                    <ul key={key}>
+                    <ul key={key} data-key={item.id} data-sport={item.sport}>
                       <li className="flex flex-row mt-2 mx-2">
                         {/**
                        * Sport name
                        */}
                         <div className="tagCard">
-                          {isModifyingUser ? <select
-                            onChange={handleChangeSelectLevel}
-                            className="bg-blueCustom w-5/6 appearance-none cursor-zoom-in border-b-2 m-2 text-center font-bold py-2 text-[13px]"
-                          >
-                            {data.level?.map((level) => (
-                              <option key={level} value={level}>
-                                {level}
-                              </option>
-                            ))}
-                          </select> :
-                            <p className='m-2 text-center text-[12px] font-bold text-sm'>{item.level}</p>
-
+                          {isModifyingUser ? 
+                            <select
+                              defaultValue={item.level} 
+                              onChange={handleChangeSelectLevelCard}
+                              className="bg-blueCustom w-5/6 appearance-none cursor-zoom-in border-b-2 m-2 text-center font-bold py-2 text-[13px]"
+                            >
+                              {/**
+                               *                                      SELECT
+                               */}
+                              {data.level?.map((level) => {
+                                // console.log(level);
+                                return <option key={level} value={level} data-key={level}>
+                                  {level}
+                                </option>;
+                              })}
+                            </select> :
+                            <p>{item.level}</p>
                           }
                           <p className='m-2 text-center text-[12px] font-bold text-sm'>{item.sport}</p>
                         </div>
