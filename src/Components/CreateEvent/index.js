@@ -126,8 +126,8 @@ function CreateEvent() {
 
     if (response.status === 200) {
       newObj.location.coordinates = [
-        response.data[0].lat,
-        response.data[0].lon,
+        Number(response.data[0].lat),
+        Number(response.data[0].lon),
       ];
     }
     console.log(newObj);
