@@ -26,8 +26,11 @@ function CreateEvent() {
   const { register, handleSubmit } = useForm();
 
   const [sports, setSports] = useState([]);
+  const [sport, setSport] = useState([]);
   const [levels, setLevels] = useState([]);
   const [genders, setGenders] = useState([]);
+
+  const isAuth = useAuth();
 
   //================== Appel API
   useEffect(() => {
@@ -61,7 +64,7 @@ function CreateEvent() {
   //   return String(timestampSeconds);
   // }
 
-  const handleChangeSelectSport = (event) => {
+  const handleChangeSport = (event) => {
     const { target } = event;
     const selectedIndex = target.options.selectedIndex;
     const id = target.options[selectedIndex].getAttribute('data-key');
@@ -69,25 +72,36 @@ function CreateEvent() {
       id,
       sport: target.value,
     };
-    setSelect((prevState) => ({ ...prevState, ...newObj }));
-  };
-
-  const handleChangeSelectLevel = (event) => {
-    const { target } = event;
-    setSelect((prevState) => ({ ...prevState, level: target.value }));
-  };
-
-  const handleChangeSelectGender = (event) => {
-    const { target } = event;
-    setSelect((prevState) => ({ ...prevState, gender: target.value }));
+    setSport((prevState) => ({ ...prevState, ...newObj }));
   };
 
   const onSubmit = async (data) => {
     console.log(data);
     // const dateChosen = dateFactorisation(data.date);
-
+    // sport: Joi.objectId().required(),
+    // level: Joi.string(),
+    // gender: Joi.string(),
+    // max: Joi.number().integer(),
+    // date: Joi.date().required(),
+    // period: Joi.object().keys({
+    //   start: Joi.string().required(),
+    //   end: Joi.string().required(),
+    // }),
+    // admin: Joi.string().required(),
+    // country: Joi.string(),
+    // address: Joi.string().required(),
+    // city: Joi.string(),
+    // zipcode: Joi.number(),
+    // location: Joi.object().keys({
+    //   type: Joi.string(),
+    //   coordinates: Joi.array()
+    //     .items(Joi.number(), Joi.number())
+    //     .required(),
+    // }),
     const newObj = {
       ...data,
+      sport: sport.id,
+      admin: isAuth.user._id,
       location: {
         type: 'Point',
         coordinates: [],
@@ -117,16 +131,16 @@ function CreateEvent() {
       ];
     }
     console.log(newObj);
-    // await api
-    //   .postEvent(newObj)
-    //   .then((response) => {
-    //     console.log(response);
-    //     toast.success('Votre évenement a été créé');
-    //   })
-    //   .catch((error) => {
-    //     console.dir(error);
-    //     toast.error(error.response.data.error);
-    //   });
+    await api
+      .postEvent(newObj)
+      .then((response) => {
+        console.log(response);
+        toast.success('Votre évenement a été créé');
+      })
+      .catch((error) => {
+        console.dir(error);
+        toast.error(error.response.data.error);
+      });
   };
 
   //================== Components
@@ -141,7 +155,7 @@ function CreateEvent() {
           >
             <input
               placeholder="Titre"
-              {...register('title')}
+              {...register('name')}
               className="text-right px-1 w-full"
             />
             <textarea
@@ -151,8 +165,7 @@ function CreateEvent() {
             />
             <select
               className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
-              onChange={handleChangeSelectSport}
-              {...register('sport')}
+              onChange={handleChangeSport}
             >
               <option disabled={true}>🏈🏀⚽🏓🏐</option>
               {sports?.map((sport) => {
@@ -169,7 +182,6 @@ function CreateEvent() {
             </select>
             <select
               {...register('level')}
-              onChange={handleChangeSelectLevel}
               className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
             >
               <option disabled={true}>🥇🥈🥉🏅🏆</option>
@@ -181,7 +193,6 @@ function CreateEvent() {
             </select>
             <select
               {...register('gender')}
-              onChange={handleChangeSelectGender}
               className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
             >
               <option disabled={true}>👩👨👽👾</option>
@@ -199,13 +210,13 @@ function CreateEvent() {
             />
             <div className="flex gap-2 w-full">
               <input
-                type='time'
+                type="time"
                 placeholder="Début de session"
                 {...register('period.start')}
                 className="text-right w-1/2 px-1"
               />
               <input
-                type='time'
+                type="time"
                 placeholder="Fin de session"
                 {...register('period.end')}
                 className="text-right w-1/2 px-1"
