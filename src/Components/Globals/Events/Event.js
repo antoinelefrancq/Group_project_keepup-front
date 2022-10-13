@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link, Navigate } from 'react-router-dom';
 const days = [
   'dimanche',
   'lundi',
@@ -29,10 +30,28 @@ const colors = {
   Intermédaire: 'orange',
   Expert: 'red',
 };
-function Event({ event }) {
+function Event({ event, userId }) {
   const { user } = useSelector((state) => state.user);
+  // const [modaleIsOpen, setModaleIsOpen] = useState(false); 
+  // const handleclick = () =>{
+  //   if(event.participant.find(userId)){
+  //     Navigate(`/profile/${userId}/events/${event._id}`);
+  //   }else{
+  //     setModaleIsOpen(true);
+  //   }
+  // };
+  // to={`/profile/${userId}/events/${event._id}`}
+
   return (
-    <div className="bg-[#FFFFFF] rounded-lg w-full p-0.5 flex items-center">
+    <Link 
+      to={`/profile/${userId}/events/${event?._id}`}
+      className="bg-[#FFFFFF] rounded-lg w-full p-0.5 flex items-center relative"
+    >
+      {/**!modaleIsOpen && <div className="absolute bg-whiteCustom shadow-inner shadow-greyPlaceholder rounded-lg p-3">
+        <p>Souhaites-tu joindre la session ?</p>
+        <button>Oui</button>
+        <button>Non</button>
+      </div>*/}
       <div className="bg-blue rounded-l-lg flex items-center pr-[6px] h-[110px]">
         <div className="flex flex-col align-center justify-center w-[66px] px-2">
           <div className="text-white border-b-2 w-full text-center text-[15px] font-bold pb-1">
@@ -76,11 +95,12 @@ function Event({ event }) {
           </span>
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
 export default Event;
 Event.propTypes = {
   event: PropTypes.object,
+  userId:PropTypes.string,
 };

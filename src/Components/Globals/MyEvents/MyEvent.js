@@ -7,19 +7,20 @@ import { useAuth } from '../../App/ProtectedRoute';
 import toast from 'react-hot-toast';
 
 function MyEvent() {
-  const { id } = useParams();
+  const { eventID } = useParams();
   const [event, setEvent] = useState(null);
   const [authorization, setAutorization] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const isAuth = useAuth();
   const navigate = useNavigate();
-
+  console.log(isAuth);
   useEffect(() => {
     api
-      .getEventById(id)
-      .then((respose) => {
-        setEvent(respose.data);
+      .getEventById(eventID)
+      .then((response) => {
+        console.log(response);
+        setEvent(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -28,9 +29,11 @@ function MyEvent() {
 
   useEffect(() => {
     if (event) {
+      console.log(event);
       const isInside = event?.participant?.find(
         (user) => user._id === isAuth.user._id
       );
+      console.log(isInside);
       if (isInside || event?.admin?._id === isAuth.user._id) {
         setAutorization(true);
       } else {
@@ -48,7 +51,7 @@ function MyEvent() {
     if (deleteConfirm) {
       console.log('pass');
       await api
-        .deleteEvent(id)
+        .deleteEvent(eventID)
         .then((response) => {
           if (response.status === 200) {
             toast.success('Votre event a été supprimé');
