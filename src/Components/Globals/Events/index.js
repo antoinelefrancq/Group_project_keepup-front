@@ -1,7 +1,27 @@
 import Event from './Event';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { applyMiddleware } from '@reduxjs/toolkit';
+import * as api from '../../../api/routes';
 
 function Events() {
+
+  useEffect(() => {
+    api.getEventById('6345dc7121333f91d85e5f1d')
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log('_____');
+        console.log(error);
+        console.log('_____');
+      });
+
+  });
+
+
+  
   return (
     <>
       <Link to='/events/maps'> <button className="fixed right-0 inset-y-1/2">
