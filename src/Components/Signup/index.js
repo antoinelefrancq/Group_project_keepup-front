@@ -113,7 +113,7 @@ const Signup = () => {
 
     if (response.status) {
       const id = useAuth().user._id;
-      // navigate(`/profile/${id}`);
+      navigate(`/profile/${id}`);
       toast.success('Votre compte a été crée');
     } else {
       console.dir(response.error);
