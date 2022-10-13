@@ -8,7 +8,7 @@ import axios from 'axios';
 
 function MyEvents() {
   // je récupère l'id depuis mon localStorage
-  const { isAuth } = useAuth().user;
+  const isAuth = useAuth().user;
   // const _id = '6331760ae98d6c76841f590e';
   const days = [
     'dimanche',
@@ -23,7 +23,7 @@ function MyEvents() {
   const [events, setEvents] = useState([
     {
       address: '2 rue de horloge',
-      admin: isAuth.user.id,
+      admin: isAuth._id,
       city: 'Nimes',
       country: 'France',
       created_at: '2022-10-11T12:04:33.933Z',
@@ -38,7 +38,7 @@ function MyEvents() {
         '63467ccc979c8d6ce7a98fae')
       ],
       name: 'De la randonné ca vous dit ?',
-      participant: [isAuth.user.id],
+      participant: [isAuth._id],
       period: { start: 1665058293, end: 1665663093 },
       sport: {
         _id: '63315c7e03beff9752dd8e3f',
@@ -58,7 +58,7 @@ function MyEvents() {
 
   useEffect(() => {
     api
-      .getEventFromUserId(isAuth.user.id)
+      .getEventFromUserId(isAuth._id)
       .then((response) => {
         setEvents(response.data);
       })
