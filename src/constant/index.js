@@ -24,8 +24,11 @@ export const userEvents = (id) => `${host}/user/event/${id}`;
 export const updateEvent = (id) => `${host}/event/${id}/update`;
 export const deleteEvent = (id) => `${host}/event/${id}/delete`;
 export const chatMessages = (id) => `${host}/event/${id}/chat`;
+export const joinEvent = (eventID, userID) =>
+  `${host}/event/${eventID}/add/participant/${userID}`;
 export const deleteOneMessage = (id) => `${host}/message/${id}/delete`;
 export const forgetPassword = (email) => `${host}/auth/password/${email}`;
+export const getNearestEvent = `${host}/events`;
 export const confirmChangePassword = ({ id }) =>
   `${host}/auth/password/${id}/confirm`;
 export const login = `${host}/auth/login`;
