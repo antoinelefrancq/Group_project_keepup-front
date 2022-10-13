@@ -49,7 +49,7 @@ function Header() {
               event.stopPropagation();
               dispatch(toggleModale());
             }}
-            className='h-8 w-8 flex items-center justify-center rounded-full'>
+            className='h-8 w-8 flex items-center justify-center rounded-full hidden md:block'>
             <span className='rounded-full flex justify-center items-center'>
               <img src={user?.image_url} alt="profile_picture" className='block'/>
             </span>
