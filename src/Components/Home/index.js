@@ -12,15 +12,16 @@ function Home() {
           <p>Trouve-toi le partenaire sportif idéal to <span className="text-blue">Keep</span><span className="text-red">'Up</span> !</p>
         </div> 
       </section> 
-      <section className="flex flex-col text-center pt-56 pb-10 vsm:pt-60">
+      <section className="flex flex-col text-center pt-56 pb-10 vsm:pt-60 ">
         <Link to="/signup"><button type="button" className="focus:outline-none rounded-full py-3 px-8 text-2xl bg-gradient-to-b from-red to-blue hover:from-pink-500 hover:to-yellow-500 text-white">Lance toi</button></Link>
         <Link to="/login" className="pt-[11px] text-white hover:underline">déjà inscrit ?</Link>
       </section>
-      <div className="bg-vector bg-no-repeat flex flex-col items-center justify-center pt-16 pb-10 px-5 gap-20 vsm:hidden">
+      <div className="relative flex flex-col items-center justify-center pt-16 pb-10 px-5 gap-20 md:hidden z-0 h-[360px]">
+        <img src="/img/Vector_mobile.svg" alt="" className='absolute w-full h-full'/>
         <img src='./img/Arrow.svg' alt="flèche blanche" className="animate-bounce w-5 h-20"/>
-        <p className="px-auto text-2xl text-center font-pangram text-white">Rejoins ou créer une activité pour connecter avec d'autres sportifs !</p>
+        <p className="px-auto text-2xl text-center font-pangram text-white z-10">Rejoins ou créer une activité pour connecter avec d'autres sportifs !</p>
       </div>
-      <div className="flex flex-col items-center gap-10 py-10 h-screen bg-gradient-to-b from-red to-white vsm:hidden">
+      <div className="flex flex-col items-center gap-10 py-10 h-screen bg-gradient-to-b from-red to-white md:hidden z-20">
         <EventsExample />
       </div>
       {/* <img src='./img/Motif.svg' alt="motif_point" className="w-screen fill-red-300 vsm:hidden"/> */}
