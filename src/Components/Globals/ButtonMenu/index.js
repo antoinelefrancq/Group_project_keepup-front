@@ -7,7 +7,7 @@ function ButtonMenu() {
  
   return (
 
-    <nav className='fixed z-20 left-1/2 bottom-0 -translate-x-1/2'>
+    <nav className='fixed z-20 left-1/2 bottom-0 -translate-x-1/2 md:hidden'>
       <div className='flex flex-row relative h-14'>
         <Link to={'/events'} className="flex items-center w-[108px] bg-gradient-to-b from-red to-blue shadow-inner shadow-greyPlaceholder rounded-l">
           <img src='/img/Loupe.svg' alt="logo_loupe" className="ml-6 block"/>
