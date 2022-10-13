@@ -7,6 +7,9 @@ import {useNavigate} from 'react-router-dom';
 import { closeModale } from '../../../redux/reducer/userReducer';
 import { useDispatch } from 'react-redux';
 
+import { toggleModale } from '../../../redux/reducer/userReducer';
+import { useSelector } from 'react-redux';
+
 function Header() {
   const {loggedIn: connected} = useAuth();
   const navigate = useNavigate();
@@ -16,7 +19,8 @@ function Header() {
     dispatch(closeModale());
     navigate('/');
   };
-
+  const {user} = useSelector((state) => state.user);
+  console.log(user);
 
   return (
     <div className="bg-whiteCustom header text-[36px] flex items-end justify-between ">
@@ -33,7 +37,23 @@ function Header() {
         connected && 
         <div className="flex flex-col items-center font-bold text-blue text-[14px] pb-[28px] pr-10 sm:flex-row sm:text-[24px] sm:gap-5 ">
           <Link to="/team"><button className='group block hover:text-red focus:outline-none'><span className='group-focus:text-red group-focus:underline'>About</span></button></Link>
-          <button onClick={handleClick} className='group block hover:text-red focus:outline-none'><span className='group-focus:text-red group-focus:underline'>Déconnexion</span></button>
+          <button onClick={handleClick} className='group block hover:text-red focus:outline-none md:hidden'><span className='group-focus:text-red group-focus:underline'>Déconnexion</span></button>
+          <Link to={'/events/maps'} className="flex items-center justify-end hidden md:block">
+            Voir la carte
+          </Link>
+          <Link to={'/create-event'} className="flex items-center justify-end hidden md:block">
+            Créer une session
+          </Link>
+          <button 
+            onClick={(event) => {
+              event.stopPropagation();
+              dispatch(toggleModale());
+            }}
+            className='h-8 w-8 flex items-center justify-center rounded-full hidden md:block'>
+            <span className='rounded-full flex justify-center items-center'>
+              <img src={user?.image_url} alt="profile_picture" className='block'/>
+            </span>
+          </button>
         </div>
       }
       {/**

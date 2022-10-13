@@ -120,8 +120,8 @@ function CreateEvent() {
   //================== Components
   return (
     <>
-      <div className="h-full flex flex-col justify-center items-center">
-        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] md:w-1/2">
+      <div className="h-full flex flex-col justify-end items-center">
+        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] my-auto md:w-1/2">
           <div className="text-blueCustom">Créer une session</div>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -141,7 +141,7 @@ function CreateEvent() {
               className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
               onChange={handleChangeSport}
             >
-              <option disabled={true}>🏈🏀⚽🏓🏐</option>
+              <option>🏈🏀⚽🏓🏐</option>
               {sports?.map((sport) => {
                 return (
                   <option
@@ -158,7 +158,7 @@ function CreateEvent() {
               {...register('level')}
               className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
             >
-              <option disabled={true}>🥇🥈🥉🏅🏆</option>
+              <option>🥇🥈🥉🏅🏆</option>
               {levels?.map((level) => (
                 <option key={level} value={level}>
                   {level}
@@ -169,7 +169,7 @@ function CreateEvent() {
               {...register('gender')}
               className="bg-[#ffffff] text-greyPlaceholder p-1 w-full"
             >
-              <option disabled={true}>👩👨👽👾</option>
+              <option>👩👨👽👾</option>
               {genders?.map((gender) => (
                 <option key={gender} value={gender}>
                   {gender}
