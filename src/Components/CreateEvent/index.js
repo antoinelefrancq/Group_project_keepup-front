@@ -7,22 +7,6 @@ import { useAuth } from '../App/ProtectedRoute';
 
 //================== Fonction Composant
 function CreateEvent() {
-  //================== State local
-  const [select, setSelect] = useState({
-    id: '',
-    sport: '',
-    level: '',
-    gender: '',
-    city: '',
-    address: '',
-    date: '',
-
-    session: {
-      start: '',
-      end: '',
-    },
-    max: '',
-  });
   const { register, handleSubmit } = useForm();
 
   const [sports, setSports] = useState([]);
@@ -76,37 +60,28 @@ function CreateEvent() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
-    // const dateChosen = dateFactorisation(data.date);
-    // sport: Joi.objectId().required(),
-    // level: Joi.string(),
-    // gender: Joi.string(),
-    // max: Joi.number().integer(),
-    // date: Joi.date().required(),
-    // period: Joi.object().keys({
-    //   start: Joi.string().required(),
-    //   end: Joi.string().required(),
-    // }),
-    // admin: Joi.string().required(),
-    // country: Joi.string(),
-    // address: Joi.string().required(),
-    // city: Joi.string(),
-    // zipcode: Joi.number(),
-    // location: Joi.object().keys({
-    //   type: Joi.string(),
-    //   coordinates: Joi.array()
-    //     .items(Joi.number(), Joi.number())
-    //     .required(),
-    // }),
+    // const from = new Date(`${data.date.from.date} ${data.date.from.hour}`);
+    // const to = new Date(`${data.date.to.date} ${data.date.to.hour}`);
+
     const newObj = {
       ...data,
       sport: sport.id,
       admin: isAuth.user._id,
-      location: {
-        type: 'Point',
-        coordinates: [],
-      },
+      max: Number(data.max),
+      gender: 'Non précisé',
+      date: new Date(data.date).getTime(),
+      period: { start: data.period.start, end: data.period.end },
+      location: { type: 'Point', coordinates: [] },
     };
+    // const newObj = {
+    //   ...data,
+    //   sport: sport.id,
+    //   admin: isAuth.user._id,
+    //   location: {
+    //     type: 'Point',
+    //     coordinates: [],
+    //   },
+    // };
     const address =
       newObj.address + '%20' + newObj.city + '%20' + newObj.zipcode;
     const url = `https://nominatim.openstreetmap.org/search?q=${address}&format=json`;
@@ -118,7 +93,6 @@ function CreateEvent() {
       return;
     }
 
-    // const [] = response.data[0].
     console.log('***********');
     console.log(response.data[0]);
 
@@ -202,22 +176,24 @@ function CreateEvent() {
                 </option>
               ))}
             </select>
-            <input
-              placeholder="Date"
-              {...register('date')}
-              type="date"
-              className="text-right px-1 text-greyPlaceholder  w-full"
-            />
             <div className="flex gap-2 w-full">
               <input
-                type="time"
-                placeholder="Début de session"
+                placeholder="Date"
+                {...register('date')}
+                type="date"
+                className="text-right px-1 text-greyPlaceholder  w-full"
+              />
+            </div>
+            <div className="flex gap-2 w-full">
+              <input
+                placeholder="Date"
                 {...register('period.start')}
-                className="text-right w-1/2 px-1"
+                type="time"
+                className="text-right px-1 text-greyPlaceholder  w-1/2"
               />
               <input
                 type="time"
-                placeholder="Fin de session"
+                placeholder="Début de session"
                 {...register('period.end')}
                 className="text-right w-1/2 px-1"
               />
