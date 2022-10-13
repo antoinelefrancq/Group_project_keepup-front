@@ -63,18 +63,57 @@ const Signup = () => {
       });
   }, []);
 
+  async function getCoordinate({ city, zipcode }) {
+    const addressComplete = city + '%20' + zipcode;
+
+    const url = `https://nominatim.openstreetmap.org/search?q=${addressComplete}&format=json`;
+
+    const response = await axios.get(url);
+
+    if (response.lenght < 0 || response.status !== 200) {
+      console.log('rien trouvé');
+      return;
+    }
+
+    console.log('***********');
+    console.log(response.data[0]);
+    console.log('***********');
+
+    if (response.status === 200) {
+      return (location.coordinates = [
+        Number(response.data[0].lat),
+        Number(response.data[0].lon),
+      ]);
+    } else {
+      return false;
+    }
+  }
+
   const onSubmit = async (data) => {
     const dob = await dateFactorisation(data.dob);
+
+    const location = await getCoordinate({
+      city: data.city,
+      zipcode: data.zipcode,
+    });
+    console.log(location);
+    if (!location) {
+      return console.log('invalid address');
+    }
+
     const response = await api.postSignup({
       ...data,
       dob,
       sports: sportToSend,
       handicap: true,
       zipcode: Number(data.zipcode),
+      latitude: location[0],
+      longitude: location[1],
     });
+
     if (response.status) {
-      const id= useAuth().user._id;
-      navigate(`/profile/${id}`);
+      const id = useAuth().user._id;
+      // navigate(`/profile/${id}`);
       toast.success('Votre compte a été crée');
     } else {
       console.dir(response.error);
@@ -299,7 +338,6 @@ const Signup = () => {
                       key={sport._id}
                       value={sport.sport}
                       data-key={sport._id}
-            
                     >
                       {sport.sport}
                     </option>

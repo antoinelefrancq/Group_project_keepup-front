@@ -146,3 +146,11 @@ export const updateEvent = async (id, data) => {
 export const deleteEvent = async (id) => {
   return await api.delete(constant.deleteEvent(id));
 };
+
+export const getNearestEvent = async (filter) => {
+  return await api.post(constant.getNearestEvent, filter);
+};
+
+export const joinEvent = async (eventID, userID) => {
+  return await api.put(constant.joinEvent(eventID, userID));
+};

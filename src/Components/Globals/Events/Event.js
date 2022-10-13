@@ -32,7 +32,7 @@ const colors = {
 };
 function Event({ event, userId }) {
   const { user } = useSelector((state) => state.user);
-  // const [modaleIsOpen, setModaleIsOpen] = useState(false); 
+  // const [modaleIsOpen, setModaleIsOpen] = useState(false);
   // const handleclick = () =>{
   //   if(event.participant.find(userId)){
   //     Navigate(`/profile/${userId}/events/${event._id}`);
@@ -43,7 +43,7 @@ function Event({ event, userId }) {
   // to={`/profile/${userId}/events/${event._id}`}
 
   return (
-    <Link 
+    <Link
       to={`/profile/${userId}/events/${event?._id}`}
       className="bg-[#FFFFFF] rounded-lg w-full p-0.5 flex items-center relative"
     >
@@ -102,5 +102,6 @@ function Event({ event, userId }) {
 export default Event;
 Event.propTypes = {
   event: PropTypes.object,
-  userId:PropTypes.string,
+  userId: PropTypes.string,
+  data: PropTypes.any,
 };
