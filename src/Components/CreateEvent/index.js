@@ -147,7 +147,7 @@ function CreateEvent() {
   return (
     <>
       <div className="h-full flex flex-col justify-end items-center">
-        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] md:w-1/2">
+        <section className="session flex flex-col gap-5 justify-center items-center bg-[#F2EFEB] my-auto md:w-1/2">
           <div className="text-blueCustom">Créer une session</div>
           <form
             onSubmit={handleSubmit(onSubmit)}
