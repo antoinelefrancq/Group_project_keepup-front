@@ -27,7 +27,7 @@ export const chatMessages = (id) => `${host}/event/${id}/chat`;
 export const deleteOneMessage = (id) => `${host}/message/${id}/delete`;
 export const forgetPassword = (email) => `${host}/auth/password/${email}`;
 export const confirmChangePassword = ({ id }) =>
-  `${production}/auth/password/${id}/confirm`;
+  `${host}/auth/password/${id}/confirm`;
 export const login = `${host}/auth/login`;
 export const token = `${host}/auth/token`;
 export const baseUrl = host;
