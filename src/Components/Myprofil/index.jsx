@@ -284,316 +284,313 @@ const Profil = () => {
       {//isLoading===true && <Loader />}
       //isLoading===false && 
         <div className="md:flex md:flex-col md:justify-center md:items-center">
-          <div className="anchor pb-2"></div>
           <section
             onClick={() => hideModale()}
-            className="signup flex flex-col items-center pt-[9px] pb-10 px-[10%] md:flex-row bg-[#F2EFEB] relative"
+            className="signup flex flex-col items-center pt-[9px] pb-10 px-[10%] bg-[#F2EFEB] relative mt-2 md:px-4 md:w-5/6"
           >
-            <button className="absolute top-3 right-4">
-            </button>
-            <div className="flex flex-col w-full justify-center items-center md:flex-row md:justify-around">
-              <div className="md:w-1/2">
-                <div className="relative flex flex-col items-center">
-                  <h1 className="text-blueCustom text-xl pb-2">Mon profil</h1>
-                  <div className='flex'>
-                    <button
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        toggleModale();
-                      }}
-                      type="button"
-                      name="button"
-                      className="relative"
-                    >
-                      {!newImage && <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10 shadow-inner shadow-white">
-                        <img
-                          className="absolute w-1/2 z-20"
-                          src="/img/pencil.svg"
-                          alt="pencil"
-                        />
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75 " />
-                        <span className="relative inline-flex rounded-full h-5 w- bg-blueCustom" />
-                      </span>}
-                      <img
-                        className="w-20 h-20 rounded-full transition-all hover:brightness-75"
-                        src={user?.image_url}
-                        alt="modifier mes coordonnées"
-                      />
-                    </button>
-                    {newImage && <div className='flex flex-row'>
-                      <img src='/img/Arrow_right.svg' alt='arrow-right' className='mx-5' />
-                      <div className='relative'>
-                        <button
-                          onClick={(event)=>{
-                            event.stopPropagation();
-                            updatePic();}} 
-                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -right-2 bg-blueCustom rounded-full z-10 text-[#fff] shadow-inner shadow-white">
-                          <img
-                            className="absolute w-1/2 z-20"
-                            src="/img/validate.svg"
-                            alt="validate"
-                          />
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75" />
-                          <span className="relative inline-flex rounded-full h-8 bg-blueCustom" />
-                        </button>
-                        <button 
-                          onClick={(event)=>{
-                            event.stopPropagation();
-                            cancelChange();}}
-                          className="absolute flex items-center justify-center h-8 w-8 -top-2 -left-2 bg-pinkCustom rounded-full z-10 text-[#fff] shadow-inner shadow-white">
-                          <img
-                            className="absolute w-1/2 z-20"
-                            src="/img/x-mark.svg"
-                            alt="cancel"
-                          />
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pinkCustom opacity-75" />
-                          <span className="relative inline-flex rounded-full h-8 bg-pinkCustom" />
-                        </button>
-                        <img src={newImage} alt='new image' className='w-20 h-20 rounded-full'></img>
-                      </div>
-                    </div>}
-                  </div>
-                  <div
-                    className={
-                      modalIsOpen
-                        ? 'absolute flex flex-col items-center bg-[#fff] -bottom-16 text-xs text-blueCustom rounded-lg border-blueCustom border-solid border-2'
-                        : 'hidden'
-                    }
-                  >
-                    <button>
-                      <p onClick={(event)=>{
-                        event.stopPropagation();
-                        changeAvatar();}} 
-                      className="p-2 w-40 border-b-2 border-b-blueCustom border-b-solid hover:text-pinkCustom hover:tracking-wider transition-all">
-                      Changer mon avatar
-                      </p>
-                    </button>
-                    <button onClick={() => buttonUserEdit()}>
-                      <p className="p-2 w-40  hover:text-pinkCustom hover:tracking-wider transition-all">
-                      Éditer mon profil
-                      </p>
-                    </button>
-                  </div>
-                  {isChangingAvatar && <div onClick={(event)=>{
+            <div className="relative flex flex-col items-center">
+              <h1 className="text-blueCustom text-xl pb-2">Mon profil</h1>
+              <div className='flex'>
+                <button
+                  onClick={(event) => {
                     event.stopPropagation();
-                    changeAvatar();
-                  }} >
-                    <form>
-                      <label 
-                        htmlFor='avatar'
-                        className='cursor-pointer p-2 bg-blue rounded-xl w-28 text-xs text-white shadow-inner shadow-white'
-                      >Choisis ton avatar</label>
-                      <input 
-                        type='file'        
-                        id="avatar" 
-                        name="avatar"
-                        accept="image/png, image/jpeg" 
-                        className='opacity-0 -z-10 hidden'
-                        onChange={handleChangeImage}
+                    toggleModale();
+                  }}
+                  type="button"
+                  name="button"
+                  className="relative md:my-4"
+                >
+                  {!newImage && <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10 shadow-inner shadow-white">
+                    <img
+                      className="absolute w-1/2 z-20"
+                      src="/img/pencil.svg"
+                      alt="pencil"
+                    />
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75 " />
+                    <span className="relative inline-flex rounded-full h-5 w- bg-blueCustom" />
+                  </span>}
+                  <img
+                    className="w-20 h-20 rounded-full transition-all hover:brightness-75 md:w-28 md:h-28"
+                    src={user?.image_url}
+                    alt="modifier mes coordonnées"
+                  />
+                </button>
+                {newImage && <div className='flex flex-row'>
+                  <img src='/img/Arrow_right.svg' alt='arrow-right' className='mx-5' />
+                  <div className='relative'>
+                    <button
+                      onClick={(event)=>{
+                        event.stopPropagation();
+                        updatePic();}} 
+                      className="absolute flex items-center justify-center h-8 w-8 -top-2 -right-2 bg-blueCustom rounded-full z-10 text-[#fff] shadow-inner shadow-white">
+                      <img
+                        className="absolute w-1/2 z-20"
+                        src="/img/validate.svg"
+                        alt="validate"
                       />
-                    </form>
-                  </div>}
-                </div>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blueCustom opacity-75" />
+                      <span className="relative inline-flex rounded-full h-8 bg-blueCustom" />
+                    </button>
+                    <button 
+                      onClick={(event)=>{
+                        event.stopPropagation();
+                        cancelChange();}}
+                      className="absolute flex items-center justify-center h-8 w-8 -top-2 -left-2 bg-pinkCustom rounded-full z-10 text-[#fff] shadow-inner shadow-white">
+                      <img
+                        className="absolute w-1/2 z-20"
+                        src="/img/x-mark.svg"
+                        alt="cancel"
+                      />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pinkCustom opacity-75" />
+                      <span className="relative inline-flex rounded-full h-8 bg-pinkCustom" />
+                    </button>
+                    <img src={newImage} alt='new image' className='w-20 h-20 rounded-full'></img>
+                  </div>
+                </div>}
               </div>
-              {!isModifyingUser && (
-                <div className="w-full">
-                  <p className="text-center text-blueCustom pb-8">
-                    {user?.firstname} {user?.lastname}
+              <div
+                className={
+                  modalIsOpen
+                    ? 'absolute flex flex-col items-center bg-[#fff] -bottom-16 text-xs text-blueCustom rounded-lg border-blueCustom border-solid border-2 z-10'
+                    : 'hidden'
+                }
+              >
+                <button>
+                  <p onClick={(event)=>{
+                    event.stopPropagation();
+                    changeAvatar();}} 
+                  className="p-2 w-40 border-b-2 border-b-blueCustom border-b-solid hover:text-pinkCustom hover:tracking-wider transition-all">
+                      Changer mon avatar
                   </p>
-                  <p className="infos rounded-sm text-blueCustom">
-                    {user?.email}
+                </button>
+                <button onClick={() => buttonUserEdit()}>
+                  <p className="p-2 w-40  hover:text-pinkCustom hover:tracking-wider transition-all">
+                      Éditer mon profil
                   </p>
-                  <p className="infos rounded-sm text-blueCustom">
-                    {user?.dob}
-                  </p>
-                  <p className="infos rounded-sm text-blueCustom">
-                    {user?.gender}
-                  </p>
-                  <p className="infos rounded-sm text-blueCustom h-32">
-                    {user?.description}
-                  </p>
-                  <p className="infos rounded-sm text-blueCustom">
-                    {user?.city}
-                  </p>
-                  <p className="infos rounded-sm text-blueCustom">
-                    {user?.zipcode}
-                  </p>
-                </div>
-              )}
-              {/** le form s'affiche uniquement si l'on a cliqué sur l'image pour modifier les informations du profil.*/}
-              {isModifyingUser && (
-                <form className="text-blueCustom w-full text-right pt-2 flex flex-col items-center">
-                  <input
-                    onChange={handleChange}
-                    value={form.firstname}
-                    name="firstname"
-                    type="text"
-                    placeholder="Prenom"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <input
-                    onChange={handleChange}
-                    value={form.lastname}
-                    name="lastname"
-                    type="text"
-                    placeholder="Nom"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <input
-                    onChange={handleChange}
-                    value={form.email}
-                    name="email"
-                    type="text"
-                    placeholder="email"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <input
-                    onChange={handleChange}
-                    name="password"
-                    type="password"
-                    placeholder="mot de passe"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <input
-                    onChange={handleChange}
-                    value={form.dob}
-                    name="dob"
-                    placeholder="date"
-                    type="date"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <input
-                    onChange={handleChange}
-                    value={form.gender}
-                    placeholder="genre"
-                    name="gender"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <textarea
-                    onChange={handleChange}
-                    value={form.description}
-                    placeholder="description"
-                    name="description"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <input
-                    onChange={handleChange}
-                    value={form.city}
-                    type="text"
-                    name="city"
-                    placeholder="ville"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                  />
-                  <input
-                    onChange={handleChange}
-                    value={form.zipcode}
-                    type="number"
-                    name="zipcode"
-                    className="infos rounded-sm w-60 md:w-4/5"
-                    placeholder="code postal"
+                </button>
+              </div>
+              {isChangingAvatar && <div onClick={(event)=>{
+                event.stopPropagation();
+                changeAvatar();
+              }} >
+                <form>
+                  <label 
+                    htmlFor='avatar'
+                    className='cursor-pointer p-2 bg-blue rounded-xl w-28 text-xs text-white shadow-inner shadow-white'
+                  >Choisis ton avatar</label>
+                  <input 
+                    type='file'        
+                    id="avatar" 
+                    name="avatar"
+                    accept="image/png, image/jpeg" 
+                    className='opacity-0 -z-10 hidden'
+                    onChange={handleChangeImage}
                   />
                 </form>
-              )}
+              </div>}
             </div>
-            <div className="flex flex-col justify-center items-center pb-6">
-              <p className="text-center w-full pb-6 pt-6 text-blueCustom">
-              Sport pratiqués :
-              </p>
-              <div className="flex flex-row p-2 border-t-2 border-[#E3E3E3] w-full"/>
-              <div className="flex flex-row justify-center items-center pb-2 w-full my-2">
-                {isModifyingUser && (
-                  <div className="flex gap-2 mr-4">
-                    <select
-                      onChange={handleChangeSelectSport}
-                      className="w-2/3 text-blueCustom rounded-sm appearance-none cursor-zoom-in text-center text-[13px]"
-                    >
-                      <option>🏈🏀⚽🏓🏐</option>
-                      {data.sports?.map((sport) => {
-                        return (
-                          <option
-                            key={sport._id}
-                            value={sport.sport}
-                            data-key={sport._id}
-                          >
-                            {sport.sport}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <select
-                      onChange={handleChangeSelectLevel}
-                      className="w-2/3 text-blueCustom rounded-sm appearance-none cursor-zoom-in text-center text-[13px]"
-                    >
-                      <option>🥇🥈🥉🏅🏆</option>
-                      {data.level?.map((level) => (
-                        <option key={level} value={level}>
-                          {level}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      onClick={() => dispatch(addSport(select))}
-                      type="button"
-                      className="justify-center items-center border-blueCustom rounded-full w-9 h-9"
-                    >
-                      <img src="/img/ep_circle-plus-filled.svg" alt="+" />
-                    </button>
+            <div className="md:flex md:flex-row md:w-full">
+              <div className="flex flex-col w-full justify-center items-center md:flex-row md:justify-around md:w-1/2">
+                {!isModifyingUser && (
+                  <div className="w-full relative md:pt-12 md:w-5/6 md:pl-6">
+                    <p className="text-center text-blueCustom pb-8 md:absolute md:top-0 md:-right-[108px] md:text-lg">
+                      {user?.firstname} {user?.lastname}
+                    </p>
+                    <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
+                      {user?.email}
+                    </p>
+                    <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
+                      {user?.dob}
+                    </p>
+                    <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
+                      {user?.gender}
+                    </p>
+                    <p className="infos rounded-sm text-blueCustom h-32 md:text-lg md:mb-4 md:py-1">
+                      {user?.description}
+                    </p>
+                    <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
+                      {user?.city}
+                    </p>
+                    <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
+                      {user?.zipcode}
+                    </p>
                   </div>
                 )}
+                {/** le form s'affiche uniquement si l'on a cliqué sur l'image pour modifier les informations du profil.*/}
+                {isModifyingUser && (
+                  <form className="text-blueCustom w-full text-right pt-2 flex flex-col items-center">
+                    <input
+                      onChange={handleChange}
+                      value={form.firstname}
+                      name="firstname"
+                      type="text"
+                      placeholder="Prenom"
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                    />
+                    <input
+                      onChange={handleChange}
+                      value={form.lastname}
+                      name="lastname"
+                      type="text"
+                      placeholder="Nom"
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                    />
+                    <input
+                      onChange={handleChange}
+                      value={form.email}
+                      name="email"
+                      type="text"
+                      placeholder="email"
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                    />
+                    <input
+                      onChange={handleChange}
+                      name="password"
+                      type="password"
+                      placeholder="mot de passe"
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                    />
+                    <input
+                      onChange={handleChange}
+                      value={form.dob}
+                      name="dob"
+                      placeholder="date"
+                      type="date"
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                    />
+                    <input
+                      onChange={handleChange}
+                      value={form.gender}
+                      placeholder="genre"
+                      name="gender"
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                    />
+                    <textarea
+                      onChange={handleChange}
+                      value={form.description}
+                      placeholder="description"
+                      name="description"
+                      className="infos rounded-sm w-60 md:w-4/5"
+                    />
+                    <input
+                      onChange={handleChange}
+                      value={form.city}
+                      type="text"
+                      name="city"
+                      placeholder="ville" 
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                    />
+                    <input
+                      onChange={handleChange}
+                      value={form.zipcode}
+                      type="number"
+                      name="zipcode"
+                      className="infos rounded-sm w-60 md:w-4/5 md:text-lg"
+                      placeholder="code postal"
+                    />
+                  </form>
+                )}
               </div>
-              <div className="flex flex-wrap justify-center">
-                {sportList.map((item, key) => {
-                  console.log(item);
-                  return (
-                    <ul key={key} data-key={item.id} data-sport={item.sport}>
-                      <li className="flex flex-row mt-2 mx-2">
-                        {/**
-                       * Sport name
-                       */}
-                        <div className="tagCard">
-                          {isModifyingUser ? 
-                            <select
-                              defaultValue={item.level} 
-                              onChange={handleChangeSelectLevelCard}
-                              className="bg-blueCustom w-5/6 appearance-none cursor-zoom-in border-b-2 m-2 text-center font-bold py-2 text-[13px]"
+              <div className="flex flex-col justify-center items-center pb-6 md:w-1/2 md:justify-start">
+                <p className="text-center w-full pb-6 pt-6 text-blueCustom md:text-lg">
+                Sport pratiqués :
+                </p>
+                <div className="flex flex-row p-2 border-t-2 border-[#E3E3E3] w-full"/>
+                <div className="flex flex-row justify-center items-center pb-2 w-full my-2 md:w-full">
+                  {isModifyingUser && (
+                    <div className="flex gap-2 mr-4 md:w-full">
+                      <select
+                        onChange={handleChangeSelectSport}
+                        className="w-2/3 text-blueCustom rounded-sm appearance-none cursor-zoom-in text-center text-[13px] pl-2 md:text-lg md:w-1/2"
+                      >
+                        <option>🏈🏀⚽🏓🏐</option>
+                        {data.sports?.map((sport) => {
+                          return (
+                            <option
+                              key={sport._id}
+                              value={sport.sport}
+                              data-key={sport._id}
                             >
-                              {/**
-                               *                                      SELECT
-                               */}
-                              {data.level?.map((level) => {
-                                // console.log(level);
-                                return <option key={level} value={level} data-key={level}>
-                                  {level}
-                                </option>;
-                              })}
-                            </select> :
-                            <p>{item.level}</p>
-                          }
-                          <p className='m-2 text-center text-[12px] font-bold text-sm'>{item.sport}</p>
-                        </div>
-                        {isModifyingUser && (
-                          <button
-                            onClick={() => dispatch(deleteSport({ id: item.id }))}
-                            type="button"
-                            className="relative w-6 h-6"
-                          >
-                            <img 
-                              className='absolute bottom-1 right-2'
-                              src="/img/Croix_pleine_rouge.svg" 
-                              alt="+"
-                            />
-                          </button>
-                        )}
-                      </li>
-                    </ul>
-                  );
-                })}
+                              {sport.sport}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <select
+                        onChange={handleChangeSelectLevel}
+                        className="w-2/3 text-blueCustom rounded-sm appearance-none cursor-zoom-in text-center text-[13px] pl-2 md:text-lg md:w-1/2"
+                      >
+                        <option>🥇🥈🥉🏅🏆</option>
+                        {data.level?.map((level) => (
+                          <option key={level} value={level}>
+                            {level}
+                          </option>
+                        ))}
+                      </select>
+                      <button
+                        onClick={() => dispatch(addSport(select))}
+                        type="button"
+                        className="justify-center items-center border-blueCustom rounded-full w-9 h-9"
+                      >
+                        <img src="/img/ep_circle-plus-filled.svg" alt="+" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-wrap justify-center">
+                  {sportList.map((item, key) => {
+                    console.log(item);
+                    return (
+                      <ul key={key} data-key={item.id} data-sport={item.sport}>
+                        <li className="flex flex-row mt-2 mx-2">
+                          {/**
+                         * Sport name
+                         */}
+                          <div className="tagCard md:h-36 flex flex-col">
+                            {isModifyingUser ? 
+                              <select
+                                defaultValue={item.level} 
+                                onChange={handleChangeSelectLevelCard}
+                                className="bg-blueCustom w-5/6 appearance-none cursor-zoom-in border-b-2 mx-2 text-center font-bold py-2 my-2 text-[13px] grow-0"
+                              >
+                                {/**
+                                 *                                      SELECT
+                                 */}
+                                {data.level?.map((level) => {
+                                  // console.log(level);
+                                  return <option key={level} value={level} data-key={level}>
+                                    {level}
+                                  </option>;
+                                })}
+                              </select> :
+                              <p className='py-2 border-b-2 w-full'>{item.level}</p>
+                            }
+                            <p className='text-center text-[12px] font-bold text-sm grow flex flex-col justify-center'>{item.sport}</p>
+                          </div>
+                          {isModifyingUser && (
+                            <button
+                              onClick={() => dispatch(deleteSport({ id: item.id }))}
+                              type="button"
+                              className="relative w-6 h-6"
+                            >
+                              <img 
+                                className='absolute bottom-1 right-2'
+                                src="/img/Croix_pleine_rouge.svg" 
+                                alt="+"
+                              />
+                            </button>
+                          )}
+                        </li>
+                      </ul>
+                    );
+                  })}
+                </div>
               </div>
             </div>
             {isModifyingUser && (
               <button
                 onClick={() => buttonUserValidator()}
-                className="bg-blueCustom text-white rounded-lg p-2 md:mt-20 text-[15px]"
+                className="bg-blueCustom text-white rounded-lg p-2 md:mt-10 text-[15px]"
               >
               Appliquer les modifications
               </button>
