@@ -57,7 +57,7 @@ function EventNearest({ event, userID }) {
     let isInside;
     if (event) {
       event?.participant.forEach((element) => {
-        if (element._id === user._id) {
+        if (element._id === user._id || event.admin._id === user._id) {
           isInside = true;
         }
       });
@@ -88,7 +88,11 @@ function EventNearest({ event, userID }) {
             </div>
           </div>
           <div className="text-white text-center w-[66px]">
-            <img src={user?.image_url} alt="image_profil" className="w-full" />
+            <img
+              src={event?.admin?.image_url}
+              alt="image_profil"
+              className="w-full"
+            />
           </div>
         </div>
         <div className="text-blue">
