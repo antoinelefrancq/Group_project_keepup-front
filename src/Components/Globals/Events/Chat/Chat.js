@@ -11,6 +11,7 @@ import Messages from './Messages';
 import toast from 'react-hot-toast';
 import * as constant from '../../../../constant';
 import { useAuth } from '../../../App/ProtectedRoute';
+import PropTypes from 'prop-types';
 
 const local = localStorage.getItem('credentials');
 
@@ -20,9 +21,9 @@ export const socket = io(constant.socketio, {
   },
 });
 
-const Chat = () => {
+const Chat = ({ event_id }) => {
   const dispatch = useDispatch();
-  const { id: event_id } = useParams();
+  const { id } = useParams();
 
   const {
     chat: { isLoading, messages },
@@ -32,11 +33,12 @@ const Chat = () => {
     user: state.user,
   }));
 
-  console.log(user);
-  console.log(messages);
+  console.log('___________');
+  console.log(event_id);
+  console.log('___________');
 
   useEffect(() => {
-    dispatch(fetchMessages({ id: event_id }));
+    dispatch(fetchMessages({ id: event_id || id }));
   }, []);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const Chat = () => {
   }, [isLoading]);
 
   const notification = {
-    event_id: event_id,
+    event_id: event_id || id,
     firstname: user.firstname,
   };
 
@@ -92,9 +94,13 @@ const Chat = () => {
 
   return (
     <>
-      <Messages user={user} event_id={event_id} socket={socket} />
+      <Messages user={user} event_id={event_id || id} socket={socket} />
     </>
   );
 };
 
 export default Chat;
+
+Chat.propTypes = {
+  event_id: PropTypes.any,
+};

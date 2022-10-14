@@ -125,7 +125,7 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: rgba(10, 106, 191, 0.8);
   transition: background-color #E9E9E9;
 }
-
+   
 
     .borderCustom{
         @apply border-blueCustom rounded-full border w-10 h-10;

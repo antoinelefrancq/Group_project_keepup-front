@@ -5,6 +5,7 @@ import * as api from '../../../api/routes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../App/ProtectedRoute';
 import toast from 'react-hot-toast';
+import KeepUpMap from '../Maps/KeepUpMap';
 
 function MyEvent() {
   const { eventID } = useParams();
@@ -136,7 +137,7 @@ function MyEvent() {
               </div>
             </div>
             <div className="h-full w-[95%] border-[5px] border-blue gradient-bg ">
-              Carte
+              <KeepUpMap />
             </div>
             {event?.admin?._id === isAuth.user._id && (
               <div className="flex gap-10">
@@ -165,7 +166,7 @@ function MyEvent() {
             )}
           </div>
           <div className="none:w-full md:w-5/12 h-full border-[5px] border-blue gradient-bg  none:hidden md:block">
-            <Chat />
+            <Chat event_id={eventID} />
           </div>
         </div>
       </div>

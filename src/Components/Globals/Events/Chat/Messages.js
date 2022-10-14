@@ -58,7 +58,7 @@ const Chat = ({ user, socket, event_id }) => {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col-reverse overflow-scroll">
+      <div className="w-full h-[calc(100%-75px)] flex flex-col-reverse overflow-y-scroll hide-scroll">
         {chat.messages.map((item, key) => {
           let param = {};
           switch (item.sender._id) {

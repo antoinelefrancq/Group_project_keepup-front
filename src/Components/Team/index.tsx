@@ -10,7 +10,7 @@ function Team() {
               <div className="flex flex-col gap-5 justify-center items-center w-11/12">
                 <div className="flex justify-around items-center w-11/12">
                   <div className="w-25 flex flex-col justify-center items-center gap-2">
-                    <img src="/img/Franck.jpeg" alt="photo_Franck" className="w-20 h-20 rounded-lg object-cover bg-center" />
+                    <img src="/img/Franck1.jpg" alt="photo_Franck" className="w-20 h-20 rounded-lg object-cover bg-center" />
                     <div className="w-25 text-center"><p className="text-red">Franck</p><p className="text-blueCustom">Product Owner</p></div>
                   </div>
                   <div className="w-25 flex flex-col justify-center items-center gap-2">
