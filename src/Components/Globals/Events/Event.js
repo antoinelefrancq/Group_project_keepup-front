@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 const days = [
   'dimanche',
   'lundi',
@@ -32,19 +32,9 @@ const colors = {
 };
 function Event({ event, userId }) {
   const { user } = useSelector((state) => state.user);
-  // const [modaleIsOpen, setModaleIsOpen] = useState(false);
-  // const handleclick = () =>{
-  //   if(event.participant.find(userId)){
-  //     Navigate(`/profile/${userId}/events/${event._id}`);
-  //   }else{
-  //     setModaleIsOpen(true);
-  //   }
-  // };
-  // to={`/profile/${userId}/events/${event._id}`}
-
   return (
     <Link
-      to={`/profile/${userId}/events/${event?._id}`}
+      to={`/profile/${user._id}/events/${event?._id}`}
       className="bg-[#FFFFFF] rounded-lg w-full p-0.5 flex items-center relative"
     >
       {/**!modaleIsOpen && <div className="absolute bg-whiteCustom shadow-inner shadow-greyPlaceholder rounded-lg p-3">

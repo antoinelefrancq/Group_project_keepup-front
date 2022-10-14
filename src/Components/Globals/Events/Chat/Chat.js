@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import {
   disconnectUser,
@@ -23,7 +23,7 @@ export const socket = io(constant.socketio, {
 
 const Chat = ({ event_id }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { chatID } = useParams();
 
   const {
     chat: { isLoading, messages },
@@ -32,13 +32,13 @@ const Chat = ({ event_id }) => {
     chat: state.chat,
     user: state.user,
   }));
-
+  const navigate = useNavigate();
   console.log('___________');
   console.log(event_id);
   console.log('___________');
 
   useEffect(() => {
-    dispatch(fetchMessages({ id: event_id || id }));
+    dispatch(fetchMessages({ id: event_id || chatID }));
   }, []);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const Chat = ({ event_id }) => {
   }, [isLoading]);
 
   const notification = {
-    event_id: event_id || id,
+    event_id: event_id || chatID,
     firstname: user.firstname,
   };
 
@@ -91,10 +91,16 @@ const Chat = ({ event_id }) => {
       dispatch(disconnectUser({ payload }));
     });
   }, []);
-
+  console.log(chatID);
   return (
     <>
-      <Messages user={user} event_id={event_id || id} socket={socket} />
+      <img
+        src="/img/Arrow_right.svg"
+        alt=""
+        className=" rotate-180 absolute z-30  "
+        onClick={() => navigate(`/profile/${user._id}/events/${chatID}`)}
+      />
+      <Messages user={user} event_id={event_id || chatID} socket={socket} />
     </>
   );
 };

@@ -22,58 +22,159 @@ import GuestRoute from './GuestRoute';
 import ButtonMenu from '../Globals/ButtonMenu';
 import KeepUpMap from '../Globals/Maps/KeepUpMap';
 import Test from './Test';
+import MenuContainer from './MenuContainer';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
   const isAuth = useAuth();
-
+  // ButtonMenu
   return (
     <>
       <Header />
       <main className="relative">
-        {isAuth?.loggedIn && <ButtonMenu />}
         {user.modaleIsOpen && <UserModale />}
         <Routes>
-          <Route path="/loader" element={<Loader />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/team" element={<Team />} />
+          <Route
+            path="/loader"
+            element={
+              <>
+                <ButtonMenu />
+                <Loader />
+              </>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                <Home />
+                <ButtonMenu />
+              </>
+            }
+          />
+          <Route
+            path="/test"
+            element={
+              <>
+                <ButtonMenu />
+                <Test />
+              </>
+            }
+          />
+          <Route
+            path="/team"
+            element={
+              <>
+                <ButtonMenu />
+                <Team />
+              </>
+            }
+          />
           <Route element={<GuestRoute />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Route>
-          <Route element={<ProtectedRoute />}>
-            <Route path="/event/:id" element={<MyEvent />} />
-            <Route path="/event/:id/chat" element={<Chat />} />
             <Route
-              path="/profile/:userID"
+              path="/login"
               element={
                 <>
-                  <Myprofil />
+                  <Login />
                   <ButtonMenu />
                 </>
               }
             />
             <Route
-              path="/profile"
-              element={<Navigate to={`/profile/${isAuth?.user?._id}`} />}
+              path="/signup"
+              element={
+                <>
+                  <ButtonMenu />
+                  <Signup />
+                </>
+              }
             />
-            <Route path="/profile/:userID/events" element={<MyEvents />} />
+          </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route
+              path="/event/:chatID/chat"
+              element={
+                <>
+                  <Chat />
+                </>
+              }
+            />
+            <Route path="/event/:id" element={<MyEvent />} />
+            <Route
+              path="/profile/:userID"
+              element={
+                <>
+                  <ButtonMenu />
+                  <Myprofil />
+                </>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <>
+                  <Navigate to={`/profile/${isAuth?.user?._id}`} />
+                  <ButtonMenu />
+                </>
+              }
+            />
+            <Route
+              path="/profile/:userID/events"
+              element={
+                <>
+                  <ButtonMenu />
+                  <MyEvents />
+                </>
+              }
+            />
             <Route
               path="/profile/:userID/events/:eventID"
-              element={<MyEvent />}
+              element={
+                <>
+                  <MyEvent />
+                  <ButtonMenu isActiv={true} />
+                </>
+              }
             />
-            <Route path="/events" element={<Events />} />
-            <Route path="/events/maps" element={<KeepUpMap />} />
+            <Route
+              path="/events"
+              element={
+                <>
+                  <ButtonMenu />
+                  <Events />
+                </>
+              }
+            />
+            <Route
+              path="/events/maps"
+              element={
+                <>
+                  <KeepUpMap /> <ButtonMenu />
+                </>
+              }
+            />
             <Route
               path="/account/password/reset/:id/:token"
-              element={<ResetPassword />}
+              element={
+                <>
+                  <ButtonMenu />
+                  <ResetPassword />
+                </>
+              }
             />
-            <Route path="/create-event" element={<CreateEvent />} />
+            <Route
+              path="/create-event"
+              element={
+                <>
+                  <ButtonMenu />
+                  <CreateEvent />
+                </>
+              }
+            />
           </Route>
         </Routes>
         <Toaster />
-      </main> 
+      </main>
     </>
   );
 };

@@ -9,8 +9,7 @@ function MyEvents() {
   // je récupère l'id depuis mon localStorage
   const isAuth = useAuth().user;
   //j'initie mon state local
-  const [events, setEvents] = useState([
-  ]);
+  const [events, setEvents] = useState([]);
   const [filterEvents, setFilterEvents] = useState({});
   // je récupère la date d'aujourd'hui
   const nowTimestamp = Math.floor(new Date().getTime() / 1000);
@@ -40,27 +39,26 @@ function MyEvents() {
     if (eventsToCome && passedEvents) {
       setFilterEvents({
         futur: eventsToCome,
-        passed: passedEvents
+        passed: passedEvents,
       });
     }
   }, [events]);
 
   return (
     <>
-      {<div className="flex flex-col gap-3 p-2 overflow-y-hidden">
+      <div className="flex flex-col gap-3 p-2 overflow-y-hidden">
         <h2 className="text-center text-xl text-white">Mes sessions</h2>
-        {filterEvents.futur?.map((event)=>(
+        {filterEvents.futur?.map((event) => (
           <Event key={event._id} event={event} userId={isAuth._id} />
         ))}
-
-      </div>}
+      </div>
       <div className="flex flex-col gap-3 p-2 overflow-y-auto">
         <h2 className="text-center text-xl text-white">Sessions terminées</h2>
-        {filterEvents.passed?.map((event)=>(
+        {filterEvents.passed?.map((event) => (
           <EventDone key={event._id} event={event} />
         ))}
       </div>
-      <ButtonMenu />
+      {/* <ButtonMenu /> */}
     </>
   );
 }
