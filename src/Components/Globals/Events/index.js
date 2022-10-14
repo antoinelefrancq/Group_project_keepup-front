@@ -48,7 +48,7 @@ function Events() {
   return (
     <>
       <Link to="/events/maps">
-        <button className="fixed right-0 inset-y-1/2">
+        <button className="fixed right-0 inset-y-1/2 z-10">
           <img
             src="./img/Logo_Map.svg"
             alt="logo_map"

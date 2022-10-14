@@ -4,8 +4,8 @@ const development = 'http://localhost:8001/api/v1';
 const host = development;
 // export const socketio = 'ws://qaonjev.cluster030.hosting.ovh.net';
 // export const socketio = 'ws://keepup-oclock.herokuapp.com';
-// export const socketio = 'http://localhost:8001';
-export const socketio = 'https://keepup-oclock.herokuapp.com';
+export const socketio = 'http://localhost:8001';
+// export const socketio = 'https://keepup-oclock.herokuapp.com';
 
 /**
  *  Api endpoint:
