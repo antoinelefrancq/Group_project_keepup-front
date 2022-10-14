@@ -72,6 +72,6 @@ function ButtonMenu({ isActiv, hidded }) {
 
 export default ButtonMenu;
 
-ButtonMenu.PropTypes = {
+ButtonMenu.propTypes = {
   isActiv: PropTypes.bool,
 };
