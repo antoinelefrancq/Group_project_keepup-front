@@ -136,7 +136,7 @@ function MyEvent() {
                 </ul>
               </div>
             </div>
-            <div className="h-full w-[95%] border-[5px] border-blue gradient-bg ">
+            <div className="h-full w-[95%] gradient-bg rounded-md mt-5">
               <KeepUpMap />
             </div>
             {event?.admin?._id === isAuth.user._id && (
@@ -165,7 +165,7 @@ function MyEvent() {
               </div>
             )}
           </div>
-          <div className="none:w-full md:w-5/12 h-full border-[5px] border-blue gradient-bg  none:hidden md:block">
+          <div className="none:w-full md:w-5/12 h-full border-[5px] border-blue gradient-bg none:hidden md:block bg-gradient">
             <Chat event_id={eventID} />
           </div>
         </div>
