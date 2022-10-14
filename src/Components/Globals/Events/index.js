@@ -19,7 +19,10 @@ function Events() {
         sport: null,
         level: null,
         gender: 'Non précisé',
-        date: { from: Date.now(), to: Date.now() * 10 },
+        date: {
+          from: new Date(1665525600000).getTime(),
+          to: new Date(1665525600000).getTime() + 365 * 24 * 60 * 60 * 1000 * 2,
+        },
         period: { start: '8:00', end: '12:00' },
         location: {
           type: 'Point',
@@ -31,10 +34,12 @@ function Events() {
       api
         .getNearestEvent(filter)
         .then((response) => {
+          console.log(response);
           console.log(response.data);
           setEvents(response.data);
         })
         .catch((error) => {
+          console.log(error);
           toast.error('Aucun event au alentour trouvé');
         });
     }
