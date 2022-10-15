@@ -1,9 +1,9 @@
 .hello {
     position: absolute;
-    top: 30%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20vw;
+    transform: translateX(-50%);
+    font-size: 4.5rem;
     -webkit-animation-name: wave;
             animation-name: wave;
     -webkit-animation-iteration-count: infinite;
@@ -57,10 +57,10 @@
 
   .hello-more {
     position: absolute;
-    top: 40%;
+    top: 65%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20vw;
+    transform: translateX(-50%);
+    font-size: 4.5rem;
     -webkit-animation-name: wave;
             animation-name: wave;
     -webkit-animation-iteration-count: infinite;
