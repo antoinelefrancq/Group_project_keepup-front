@@ -23,6 +23,7 @@ import ButtonMenu from '../Globals/ButtonMenu';
 import KeepUpMap from '../Globals/Maps/KeepUpMap';
 import Test from './Test';
 import MenuContainer from './MenuContainer';
+import ErrorPage from './Error';
 
 const App = () => {
   const { user } = useAppSelector((state) => state);
@@ -34,6 +35,7 @@ const App = () => {
       <main className="relative">
         {user.modaleIsOpen && <UserModale />}
         <Routes>
+          <Route path='/error' element={<ErrorPage />} />
           <Route
             path="/loader"
             element={
