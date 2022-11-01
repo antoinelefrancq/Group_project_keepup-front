@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import * as api from '../../api/routes';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { changePicture, getUserData, importLocalData } from '../../redux/reducer/userReducer';
 import { addSport, deleteSport, updateLevel } from '../../redux/reducer/formSignup';
 import { useAuth } from '../App/ProtectedRoute';
@@ -36,9 +36,9 @@ const Profil = () => {
   //
   const isAuth = useAuth();
 
-
+  const params = useParams();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [isModifyingUser, setIsModifyingUser] = useState(false);
   const [isChangingAvatar, setIsChangingAvatar] = useState(false);
   const [isModifyingSports, setIsModifyingSports] = useState(false);
@@ -59,9 +59,38 @@ const Profil = () => {
   const [newImage,setNewImage] = useState();
   const [baseData, setBaseData] = useState(user);
 
+  const [userAccount, setUserAccount] = useState(undefined);
+  const [userProfile, setUserProfile] = useState({});
+  const [deleteAccount, setDeleteAccount] = useState(false);
+  const [error, setError] = useState(false);
+
+
+  console.log(params);
+  useEffect(() => {
+    if(user._id === isAuth.user._id && params.userID === user._id && isAuth.user._id === params.userID){
+      console.log('true');
+      setUserAccount(true);
+    }else{
+      console.log('false');
+
+      setUserAccount(false);
+    }
+  }, [user]);
 
   useEffect(() => {
-    console.log(user);
+    api.getUserById(params.userID).then((response) => {
+      console.log('fetch');
+      setUserProfile(response.data.user);
+
+    }).catch((err) => {
+      // eslint-disable-next-line quotes
+      toast.error(`Aucun profil n'a été trouvé`);
+      setError(true);
+    });
+  }, [params.userID]);
+
+
+  useEffect(() => {
     setBaseData(user);
 
     const sports = [];
@@ -105,7 +134,6 @@ const Profil = () => {
   useEffect(() => {
 
     setBaseData((prevState) => ({...prevState, sports: sportList}));
-    console.log(baseData);
   }, [sportList]);
 
   useEffect(() => {
@@ -172,7 +200,6 @@ const Profil = () => {
   const changeAvatar = () =>{
     setIsChangingAvatar(true);
     setModalIsOpen(false);
-    console.log(isChangingAvatar);
   };
 
   const buttonUserEdit = () => {
@@ -180,16 +207,12 @@ const Profil = () => {
   };
 
   const buttonUserValidator = async () => {
-    console.log('pass');
     setIsModifyingUser(false);
     const newObj = { ...form, sports: sportToSend};
-    console.log('_________________');
-    console.log(userID);
-    console.log('_________________');
     await api.updateUser(userID, newObj).then((response) => {
       console.log(response);
     }).catch((err) => {
-      console.log(newObj);
+      console.log(err);
     });
     
     dispatch(importLocalData(newObj));
@@ -278,6 +301,25 @@ const Profil = () => {
     }
   };
 
+
+  const handleDeleteAccount = () => {
+    api.deleteUser(isAuth.user._id).then((response) => {
+      
+
+      toast.success('Votre compte a été supprimé');
+      localStorage.clear();
+      navigate('/');
+    }).catch(() => {
+      toast.error('La suppression a échoué veuillez réessayer plus tard');
+    });
+  };
+
+  if(error){
+    return <div className='w-full h-full flex justify-center items-center'>
+      <span className=' text-7xl'>404</span>
+    </div>;
+  }
+
   // Components
   return (
     <>
@@ -294,13 +336,16 @@ const Profil = () => {
                 <button
                   onClick={(event) => {
                     event.stopPropagation();
-                    toggleModale();
+                    if(userAccount){
+                      toggleModale();
+                    }
                   }}
                   type="button"
                   name="button"
                   className="relative md:my-4"
                 >
-                  {!newImage && <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10 shadow-inner shadow-white">
+                  {(!newImage && userAccount) && 
+                  <span className="absolute flex items-center justify-center h-5 w-5 top-1 right-1 bg-blueCustom rounded-full z-10 shadow-inner shadow-white">
                     <img
                       className="absolute w-1/2 z-20"
                       src="/img/pencil.svg"
@@ -311,7 +356,7 @@ const Profil = () => {
                   </span>}
                   <img
                     className="w-20 h-20 rounded-full transition-all hover:brightness-75 md:w-28 md:h-28"
-                    src={user?.image_url}
+                    src={userProfile?.image_url}
                     alt="modifier mes coordonnées"
                   />
                 </button>
@@ -394,25 +439,25 @@ const Profil = () => {
                 {!isModifyingUser && (
                   <div className="w-full relative md:pt-12 md:w-5/6 md:pl-6">
                     <p className="text-center text-blueCustom pb-8 md:absolute md:top-0 md:-right-[108px] md:text-lg">
-                      {user?.firstname} {user?.lastname}
+                      {userProfile?.firstname} {userProfile?.lastname}
                     </p>
                     <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
-                      {user?.email}
+                      {userProfile?.email}
                     </p>
                     <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
-                      {user?.dob}
+                      {userProfile?.dob}
                     </p>
                     <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
-                      {user?.gender}
+                      {userProfile?.gender}
                     </p>
                     <p className="infos rounded-sm text-blueCustom h-32 md:text-lg md:mb-4 md:py-1">
-                      {user?.description}
+                      {userProfile?.description}
                     </p>
                     <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
-                      {user?.city}
+                      {userProfile?.city}
                     </p>
                     <p className="infos rounded-sm text-blueCustom md:text-lg md:mb-4 md:py-1">
-                      {user?.zipcode}
+                      {userProfile?.zipcode}
                     </p>
                   </div>
                 )}
@@ -492,6 +537,21 @@ const Profil = () => {
                 )}
               </div>
               <div className="flex flex-col justify-center items-center pb-6 md:w-1/2 md:justify-start">
+               
+                {isModifyingUser && ( 
+                  <div>
+                    <button onClick={() => setDeleteAccount(true)} className='bg-red px-2 py-1 rounded-xl'>
+                      {deleteAccount ? (
+                        <>
+                          <span className='text-blue'>Etes vous sûr ?</span>
+                          <span className='px-2 text-white' onClick={handleDeleteAccount}>Supprimer</span>
+                          <span className='text-blue' onClick={(ev) => {ev.stopPropagation(); setDeleteAccount(false);}}>Annuler</span>
+                        </>
+                      ) : <span>Supprimer mon compte</span>}
+                    </button>
+                
+                  </div>)}
+               
                 <p className="text-center w-full pb-6 pt-6 text-blueCustom md:text-lg">
                 Sport pratiqués :
                 </p>
@@ -539,7 +599,6 @@ const Profil = () => {
                 </div>
                 <div className="flex flex-wrap justify-center">
                   {sportList.map((item, key) => {
-                    console.log(item);
                     return (
                       <ul key={key} data-key={item.id} data-sport={item.sport}>
                         <li className="flex flex-row mt-2 mx-2">
@@ -557,7 +616,6 @@ const Profil = () => {
                                  *                                      SELECT
                                  */}
                                 {data.level?.map((level) => {
-                                  // console.log(level);
                                   return <option key={level} value={level} data-key={level}>
                                     {level}
                                   </option>;

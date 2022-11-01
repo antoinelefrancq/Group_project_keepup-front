@@ -88,7 +88,10 @@ export const postSignup = async (data) => {
 };
 
 export const getUserById = async (id) => {
-  return await api.get(constant.userById(id));
+
+  if(id){
+    return await api.get(constant.userById(id));
+  }
 };
 
 export const updateUser = async (id, data) => {
@@ -141,7 +144,7 @@ export const login = async (form) => {
 };
 
 export const updateEvent = async (id, data) => {
-  return await api.post(constant.updateEvent(id), data);
+  return await api.put(constant.updateEvent(id), data);
 };
 export const deleteEvent = async (id) => {
   return await api.delete(constant.deleteEvent(id));
@@ -153,4 +156,12 @@ export const getNearestEvent = async (filter) => {
 
 export const joinEvent = async (eventID, userID) => {
   return await api.put(constant.joinEvent(eventID, userID));
+};
+
+export const leaveEvent = async (eventID, userID) => {
+  return await api.delete(constant.leaveEvent(eventID, userID));
+};
+
+export const deleteUser = async (id) => {
+  return await api.delete(constant.deleteUser(id));
 };

@@ -10,12 +10,19 @@ import toast from 'react-hot-toast';
 
 function Events() {
   const [events, setEvents] = useState([]);
+  const [filter, setFilter] = useState({
+    radius: 50,
+  });
 
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
+    searchEvents();
+  }, [user]);
+
+  function searchEvents() {
     if (user) {
-      const filter = {
+      const filterOptions = {
         sport: null,
         level: null,
         gender: 'Non précisé',
@@ -26,16 +33,14 @@ function Events() {
         period: { start: '8:00', end: '12:00' },
         location: {
           type: 'Point',
-          radius: 50,
+          radius: filter.radius,
           coordinates: [user.latitude, user.longitude],
         },
       };
 
       api
-        .getNearestEvent(filter)
+        .getNearestEvent(filterOptions)
         .then((response) => {
-          console.log(response);
-          console.log(response.data);
           setEvents(response.data);
         })
         .catch((error) => {
@@ -43,11 +48,15 @@ function Events() {
           toast.error('Aucun event au alentour trouvé');
         });
     }
-  }, [user]);
+  }
+
+  const handleChangeFilter = (event) => {
+    setFilter((s) => ({ ...s, radius: Number(event.target.value) }));
+  };
 
   return (
     <>
-      <Link to="/events/maps">
+      <Link to="/events/maps" state={filter}>
         <button className="fixed right-0 inset-y-1/2 z-10">
           <img
             src="./img/Logo_Map.svg"
@@ -57,6 +66,28 @@ function Events() {
         </button>
       </Link>
       <div className="flex flex-col gap-3 p-2 overflow-y-auto">
+        <form
+          className="w-full bg-white flex flex-col items-center justify-center"
+          onSubmit={(event) => {
+            event.preventDefault();
+            searchEvents();
+          }}
+        >
+          <div>
+            <input
+              onChange={handleChangeFilter}
+              type="range"
+              name="meter"
+              id="meter"
+              defaultValue={filter.radius}
+              min={5}
+              max={1500}
+              step={5}
+            />
+            <span>{filter.radius}km</span>
+          </div>
+          <button type="submit">Rechercher</button>
+        </form>
         {events.map((item, index) => {
           return (
             <EventNearest

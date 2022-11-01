@@ -52,7 +52,7 @@ function EventNearest({ event, userID }) {
         console.log(error);
       });
   };
-  console.log(event);
+
   useEffect(() => {
     let isInside;
     if (event) {

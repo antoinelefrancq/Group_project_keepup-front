@@ -1,0 +1,6 @@
+.leaflet-popup-content-wrapper{
+    padding: 0;
+}
+.leaflet-container a.leaflet-popup-close-button{
+    top: 10px;
+}

@@ -42,7 +42,10 @@ const UserModale = () => {
       >
         <img
           className="w-20 h-20 rounded-full mt-[33px] mb-4 shadow-lg shadow-greyPlaceholder"
-          src={user?.image_url}
+          src={
+            user?.image_url ||
+            'http://image.noelshack.com/fichiers/2022/38/4/1663838623-default-user-image.png'
+          }
           alt="photo de profil"
         />
       </Link>
