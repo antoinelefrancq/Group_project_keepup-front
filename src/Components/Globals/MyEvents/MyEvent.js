@@ -12,6 +12,7 @@ function MyEvent() {
   const [event, setEvent] = useState(null);
   const [authorization, setAutorization] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [modify, setModify] = useState(false);
 
   const isAuth = useAuth();
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ function MyEvent() {
     api
       .getEventById(eventID)
       .then((response) => {
-        console.log(response);
         setEvent(response.data);
       })
       .catch((error) => {
@@ -30,11 +30,9 @@ function MyEvent() {
 
   useEffect(() => {
     if (event) {
-      console.log(event);
       const isInside = event?.participant?.find(
         (user) => user._id === isAuth.user._id
       );
-      console.log(isInside);
       if (isInside || event?.admin?._id === isAuth.user._id) {
         setAutorization(true);
       } else {
@@ -43,14 +41,32 @@ function MyEvent() {
     }
   }, [event]);
 
-  const handleUpdate = async () => {
-    //
+  const handleLeave = async (participant, admin) => {
+    api
+      .leaveEvent(event._id, participant)
+      .then((response) => {
+        console.log(response);
+        if (response.status !== 200) {
+          toast.error('Erreur: veuillez réessayer plus tard');
+          return;
+        }
+        if (admin) {
+          // eslint-disable-next-line quotes
+          toast.success(`Le participant a été renvoyé`);
+        } else {
+          // eslint-disable-next-line quotes
+          toast.success("Vous avez quitter l'event");
+          return navigate(`/profile/${isAuth.user._id}/events`);
+        }
+      })
+      .catch((err) => {
+        toast.error('Erreur: veuillez réessayer plus tard');
+      });
   };
 
   const handleDelete = async () => {
     console.log(deleteConfirm);
     if (deleteConfirm) {
-      console.log('pass');
       await api
         .deleteEvent(eventID)
         .then((response) => {
@@ -78,6 +94,20 @@ function MyEvent() {
     );
   }
 
+  const handleModify = (ev) => {
+    ev.preventDefault();
+    api
+      .updateEvent(event._id, { name: ev.target[0].value })
+      .then(() => {
+        event.name = ev.target[0].value;
+        toast.success('L"event a été modifié');
+        setModify(false);
+      })
+      .catch((err) => {
+        toast.error('L"event n"a pas pu etre modifié');
+      });
+  };
+
   return (
     authorization && (
       <div className="flex justify-center items-center w-full h-4/5 mt-3">
@@ -102,6 +132,10 @@ function MyEvent() {
                 {event?.participant?.map((participant) => {
                   return (
                     <img
+                      onDoubleClick={() =>
+                        event?.admin?._id === isAuth?.user?._id &&
+                        handleLeave(participant?._id, true)
+                      }
                       className="h-5 w-5 rounded-full"
                       key={participant?._id}
                       src={participant?.image_url}
@@ -111,9 +145,16 @@ function MyEvent() {
                 })}
               </div>
               <div>
-                <p className="text-[15px] text-blue bg-white py-1 pl-[14px] leading-none">
-                  Petit tournois 2v2 de street basket ce samedi 24 à Gratte-Ciel
-                </p>
+                {!modify ? (
+                  <p className="text-[15px] text-blue bg-white py-1 pl-[14px] leading-none">
+                    {event?.name}
+                  </p>
+                ) : (
+                  <form onSubmit={handleModify}>
+                    <input type="text" placeholder={event?.name} />
+                    <button>Modifier</button>
+                  </form>
+                )}
               </div>
               <div className="bg-white">
                 <ul className="flex text-[13px] text-[#A5A5A5] bg-[#E9E9E9] my-1 py-1 pl-[14px] leading-none w-24 rounded-r-lg">
@@ -139,7 +180,8 @@ function MyEvent() {
             <div className="h-full w-[95%] gradient-bg rounded-md mt-5">
               <KeepUpMap />
             </div>
-            {event?.admin?._id === isAuth.user._id && (
+
+            {event?.admin?._id === isAuth.user._id ? (
               <div className="flex gap-10">
                 {deleteConfirm ? (
                   <div className="flex gap-2">
@@ -155,13 +197,36 @@ function MyEvent() {
                     </button>
                   </div>
                 ) : (
-                  <span onClick={handleDelete} className="cursor-pointer">
-                    annuler cette session
-                  </span>
+                  <>
+                    <span onClick={handleDelete} className="cursor-pointer">
+                      annuler cette session
+                    </span>
+                    <span
+                      onClick={() => setModify(true)}
+                      className="cursor-pointer"
+                    >
+                      {modify ? (
+                        <span
+                          onClick={(ev) => {
+                            ev.stopPropagation();
+                            setModify(false);
+                          }}
+                        >
+                          Arreter de modifier
+                        </span>
+                      ) : (
+                        <span>Modifier cette session</span>
+                      )}
+                    </span>
+                  </>
                 )}
-                <span onClick={handleUpdate} className="cursor-pointer">
+                {/* <span onClick={handleUpdate} className="cursor-pointer">
                   modifier cette session
-                </span>
+                </span> */}
+              </div>
+            ) : (
+              <div>
+                <button onClick={handleLeave}>Quitter la session</button>
               </div>
             )}
           </div>
