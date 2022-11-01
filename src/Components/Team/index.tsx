@@ -34,7 +34,7 @@ function Team() {
               <p className="text-lg text-blueCustom font-bold">Développeurs Back</p>
               <div className="flex justify-around items-center w-11/12">
                 <div className="w-25 flex flex-col justify-center items-center gap-2">
-                  <img src="/img/nathan.jpg" alt="photo_Nathan" className="w-20 h-20 rounded-lg object-cover bg-center"/>
+                  <img src="/img/Nathan1.jpg" alt="photo_Nathan" className="w-20 h-20 rounded-lg object-cover bg-center"/>
                   <div className="w-25 text-center"><p className="text-red">Nathan</p><p className="text-blueCustom">Lead Back</p></div>
                 </div>
                 <div className="w-25 flex flex-col justify-center items-center gap-2">
